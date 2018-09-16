@@ -1,26 +1,43 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using IdleLikeAdventureServer.Handler;
+using NetData.Message;
+using NetData.OpCode;
+using NetData.Tools;
 using Photon.SocketServer;
-using PhotonHostRuntimeInterfaces;
+using System.Collections.Generic;
 
 namespace IdleLikeAdventureServer
 {
     public class ClientPeer : Photon.SocketServer.ClientPeer
     {
-        public ClientPeer(InitRequest ir) : base(ir) { }
+        public float x, y, z;
+        public string username;
 
-        //该客户端断开连接
-        protected override void OnDisconnect(DisconnectReason reasonCode, string reasonDetail)
+
+        public ClientPeer(InitRequest initRequest) : base(initRequest)
         {
 
         }
 
-        //该客户端出操作请求
+        //处理客户端断开链接的后续工作
+        protected override void OnDisconnect(PhotonHostRuntimeInterfaces.DisconnectReason reasonCode, string reasonDetail)
+        {
+            MyGameServer.Instance.peerList.Remove(this);
+        }
+
+        //处理客户端的请求
         protected override void OnOperationRequest(OperationRequest operationRequest, SendParameters sendParameters)
         {
-
+            BaseHandler handler = null;
+            Dictionary<byte, BaseHandler> handlerDic;
+            MyGameServer.Instance.handlers.TryGetValue((OpCodeModule)operationRequest.OperationCode, out handlerDic);
+            foreach (var item in operationRequest.Parameters)
+            {
+                bool isContains = handlerDic.TryGetValue(item.Key, out handler);
+                if (isContains)
+                {
+                    handler.OnOperationRequest((BaseMsgData)item.Value, sendParameters, this);
+                }
+            }
         }
     }
 }

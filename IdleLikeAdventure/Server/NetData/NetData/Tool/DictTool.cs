@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Common.Tools
+namespace NetData.Tools
 {
     public class DictTool
     {
