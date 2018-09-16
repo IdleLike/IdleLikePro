@@ -61,6 +61,8 @@
   <ItemGroup>
     <Compile Include="ClientPeer.cs" />
     <Compile Include="Handler\BaseHandler.cs" />
+    <Compile Include="Handler\LoginHandler.cs" />
+    <Compile Include="Handler\RegisterHandler.cs" />
     <Compile Include="MyGameServer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
