@@ -1,0 +1,19 @@
+﻿<Properties StartupConfiguration="{F883EDF6-FC97-4700-8799-3337D874A194}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="../../Src/StaticDataTool.cs">
+    <Files>
+      <File FileName="../../Src/StaticDataTool.cs" Line="228" Column="6" />
+      <File FileName="../../Src/XmlFile.cs" Line="37" Column="1" />
+      <File FileName="../../Src/XmlSheet.cs" Line="30" Column="1" />
+      <File FileName="../../Src/XmlSheet_Strings.cs" Line="20" Column="1" />
+      <File FileName="../../Src/StaticDataMgrTemplate_C.txt" Line="12" Column="1" />
+      <File FileName="../../Src/StaticDataMgrTemplate_S.txt" Line="15" Column="30" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.StaticDataTool PreferredExecutionTarget="MonoDevelop.Default" />
+</Properties>

@@ -1,0 +1,281 @@
+<?xml version="1.0"?>
+<?mso-application progid="Excel.Sheet"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:o="urn:schemas-microsoft-com:office:office"
+ xmlns:x="urn:schemas-microsoft-com:office:excel"
+ xmlns:dt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882"
+ xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:html="http://www.w3.org/TR/REC-html40">
+ <DocumentProperties xmlns="urn:schemas-microsoft-com:office:office">
+  <Author>FtpDown</Author>
+  <LastAuthor>罗冲</LastAuthor>
+  <Created>2006-09-25T02:49:12Z</Created>
+  <LastSaved>2018-01-18T09:48:29Z</LastSaved>
+  <Company>www.ftpdown.com</Company>
+  <Version>12.00</Version>
+ </DocumentProperties>
+ <CustomDocumentProperties xmlns="urn:schemas-microsoft-com:office:office">
+  <KSOProductBuildVer dt:dt="string">2052-10.1.0.6135</KSOProductBuildVer>
+ </CustomDocumentProperties>
+ <OfficeDocumentSettings xmlns="urn:schemas-microsoft-com:office:office">
+  <AllowPNG/>
+ </OfficeDocumentSettings>
+ <ExcelWorkbook xmlns="urn:schemas-microsoft-com:office:excel">
+  <WindowHeight>11460</WindowHeight>
+  <WindowWidth>23256</WindowWidth>
+  <WindowTopX>0</WindowTopX>
+  <WindowTopY>0</WindowTopY>
+  <ProtectStructure>False</ProtectStructure>
+  <ProtectWindows>False</ProtectWindows>
+ </ExcelWorkbook>
+ <Styles>
+  <Style ss:ID="Default" ss:Name="Normal">
+   <Alignment ss:Vertical="Bottom"/>
+   <Borders/>
+   <Font ss:FontName="宋体" x:CharSet="134" ss:Size="12"/>
+   <Interior/>
+   <NumberFormat/>
+   <Protection/>
+  </Style>
+  <Style ss:ID="s62">
+   <Alignment ss:Vertical="Bottom"/>
+   <Font ss:FontName="宋体" x:CharSet="134" ss:Size="9"/>
+  </Style>
+  <Style ss:ID="s63">
+   <Alignment ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Font ss:FontName="宋体" x:CharSet="134" ss:Size="9"/>
+  </Style>
+  <Style ss:ID="s64">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Font ss:FontName="宋体" x:CharSet="134" ss:Size="9"/>
+   <Interior ss:Color="#99CCFF" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="s65">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Bottom"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Font ss:FontName="宋体" x:CharSet="134" ss:Size="9"/>
+   <Interior ss:Color="#C0C0C0" ss:Pattern="Solid"/>
+  </Style>
+ </Styles>
+ <Worksheet ss:Name="strings">
+  <Names>
+   <NamedRange ss:Name="_FilterDatabase" ss:RefersTo="=strings!#REF!" ss:Hidden="1"/>
+  </Names>
+  <Table ss:ExpandedColumnCount="4" ss:ExpandedRowCount="28" x:FullColumns="1"
+   x:FullRows="1" ss:StyleID="s62" ss:DefaultColumnWidth="0"
+   ss:DefaultRowHeight="11.25">
+   <Column ss:StyleID="s62" ss:AutoFitWidth="0" ss:Width="54"/>
+   <Column ss:StyleID="s62" ss:AutoFitWidth="0" ss:Width="123"/>
+   <Column ss:StyleID="s62" ss:Width="110.4"/>
+   <Column ss:StyleID="s62" ss:Width="125.4"/>
+   <Row ss:AutoFitHeight="0" ss:Height="10.95" ss:StyleID="s63">
+    <Cell ss:StyleID="s64"><Data ss:Type="String">id</Data></Cell>
+    <Cell ss:StyleID="s64"><Data ss:Type="String">等级</Data><Comment ss:Author="罗冲"><ss:Data
+       xmlns="http://www.w3.org/TR/REC-html40"><B><Font html:Size="9"
+         html:Color="#000000">罗冲:</Font></B><Font html:Size="9" html:Color="#000000">&#10;其他表格中引用字符串时，写这个</Font></ss:Data></Comment></Cell>
+    <Cell ss:StyleID="s64"><Data ss:Type="String">升到下一级所需经验</Data></Cell>
+    <Cell ss:StyleID="s64"><Data ss:Type="String">升到本级所需的总经验</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="16.05">
+    <Cell ss:StyleID="s65"><Data ss:Type="String">uint|ID</Data></Cell>
+    <Cell ss:StyleID="s65"><Data ss:Type="String">ushort|Level</Data></Cell>
+    <Cell ss:StyleID="s65"><Data ss:Type="String">uint|NextLevelNeedExp</Data></Cell>
+    <Cell ss:StyleID="s65"><Data ss:Type="String">uint|CurrentLevelNeedExp</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="10.95">
+    <Cell ss:StyleID="s65"><Data ss:Type="String">both</Data></Cell>
+    <Cell ss:StyleID="s65"><Data ss:Type="String">both</Data></Cell>
+    <Cell ss:StyleID="s65"><Data ss:Type="String">both</Data></Cell>
+    <Cell ss:StyleID="s65"><Data ss:Type="String">both</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="Number">100</Data></Cell>
+    <Cell><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Number">200</Data></Cell>
+    <Cell ss:Formula="=R[-1]C[-1]+R[-1]C"><Data ss:Type="Number">100</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell><Data ss:Type="Number">3</Data></Cell>
+    <Cell><Data ss:Type="Number">3</Data></Cell>
+    <Cell><Data ss:Type="Number">300</Data></Cell>
+    <Cell ss:Formula="=R[-1]C[-1]+R[-1]C"><Data ss:Type="Number">300</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell><Data ss:Type="Number">4</Data></Cell>
+    <Cell><Data ss:Type="Number">4</Data></Cell>
+    <Cell><Data ss:Type="Number">400</Data></Cell>
+    <Cell ss:Formula="=R[-1]C[-1]+R[-1]C"><Data ss:Type="Number">600</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell><Data ss:Type="Number">5</Data></Cell>
+    <Cell><Data ss:Type="Number">5</Data></Cell>
+    <Cell><Data ss:Type="Number">500</Data></Cell>
+    <Cell ss:Formula="=R[-1]C[-1]+R[-1]C"><Data ss:Type="Number">1000</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell><Data ss:Type="Number">6</Data></Cell>
+    <Cell><Data ss:Type="Number">6</Data></Cell>
+    <Cell><Data ss:Type="Number">600</Data></Cell>
+    <Cell ss:Formula="=R[-1]C[-1]+R[-1]C"><Data ss:Type="Number">1500</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell><Data ss:Type="Number">7</Data></Cell>
+    <Cell><Data ss:Type="Number">7</Data></Cell>
+    <Cell><Data ss:Type="Number">700</Data></Cell>
+    <Cell ss:Formula="=R[-1]C[-1]+R[-1]C"><Data ss:Type="Number">2100</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell><Data ss:Type="Number">8</Data></Cell>
+    <Cell><Data ss:Type="Number">8</Data></Cell>
+    <Cell><Data ss:Type="Number">800</Data></Cell>
+    <Cell ss:Formula="=R[-1]C[-1]+R[-1]C"><Data ss:Type="Number">2800</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell><Data ss:Type="Number">9</Data></Cell>
+    <Cell><Data ss:Type="Number">9</Data></Cell>
+    <Cell><Data ss:Type="Number">900</Data></Cell>
+    <Cell ss:Formula="=R[-1]C[-1]+R[-1]C"><Data ss:Type="Number">3600</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell><Data ss:Type="Number">10</Data></Cell>
+    <Cell><Data ss:Type="Number">10</Data></Cell>
+    <Cell><Data ss:Type="Number">1000</Data></Cell>
+    <Cell ss:Formula="=R[-1]C[-1]+R[-1]C"><Data ss:Type="Number">4500</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell><Data ss:Type="Number">11</Data></Cell>
+    <Cell><Data ss:Type="Number">11</Data></Cell>
+    <Cell><Data ss:Type="Number">1100</Data></Cell>
+    <Cell ss:Formula="=R[-1]C[-1]+R[-1]C"><Data ss:Type="Number">5500</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell><Data ss:Type="Number">12</Data></Cell>
+    <Cell><Data ss:Type="Number">12</Data></Cell>
+    <Cell><Data ss:Type="Number">1200</Data></Cell>
+    <Cell ss:Formula="=R[-1]C[-1]+R[-1]C"><Data ss:Type="Number">6600</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell><Data ss:Type="Number">13</Data></Cell>
+    <Cell><Data ss:Type="Number">13</Data></Cell>
+    <Cell><Data ss:Type="Number">1300</Data></Cell>
+    <Cell ss:Formula="=R[-1]C[-1]+R[-1]C"><Data ss:Type="Number">7800</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell><Data ss:Type="Number">14</Data></Cell>
+    <Cell><Data ss:Type="Number">14</Data></Cell>
+    <Cell><Data ss:Type="Number">1400</Data></Cell>
+    <Cell ss:Formula="=R[-1]C[-1]+R[-1]C"><Data ss:Type="Number">9100</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell><Data ss:Type="Number">15</Data></Cell>
+    <Cell><Data ss:Type="Number">15</Data></Cell>
+    <Cell><Data ss:Type="Number">1500</Data></Cell>
+    <Cell ss:Formula="=R[-1]C[-1]+R[-1]C"><Data ss:Type="Number">10500</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell><Data ss:Type="Number">16</Data></Cell>
+    <Cell><Data ss:Type="Number">16</Data></Cell>
+    <Cell><Data ss:Type="Number">1600</Data></Cell>
+    <Cell ss:Formula="=R[-1]C[-1]+R[-1]C"><Data ss:Type="Number">12000</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell><Data ss:Type="Number">17</Data></Cell>
+    <Cell><Data ss:Type="Number">17</Data></Cell>
+    <Cell><Data ss:Type="Number">1700</Data></Cell>
+    <Cell ss:Formula="=R[-1]C[-1]+R[-1]C"><Data ss:Type="Number">13600</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell><Data ss:Type="Number">18</Data></Cell>
+    <Cell><Data ss:Type="Number">18</Data></Cell>
+    <Cell><Data ss:Type="Number">1800</Data></Cell>
+    <Cell ss:Formula="=R[-1]C[-1]+R[-1]C"><Data ss:Type="Number">15300</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell><Data ss:Type="Number">19</Data></Cell>
+    <Cell><Data ss:Type="Number">19</Data></Cell>
+    <Cell><Data ss:Type="Number">1900</Data></Cell>
+    <Cell ss:Formula="=R[-1]C[-1]+R[-1]C"><Data ss:Type="Number">17100</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell><Data ss:Type="Number">20</Data></Cell>
+    <Cell><Data ss:Type="Number">20</Data></Cell>
+    <Cell><Data ss:Type="Number">2000</Data></Cell>
+    <Cell ss:Formula="=R[-1]C[-1]+R[-1]C"><Data ss:Type="Number">19000</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell><Data ss:Type="Number">21</Data></Cell>
+    <Cell><Data ss:Type="Number">21</Data></Cell>
+    <Cell><Data ss:Type="Number">2100</Data></Cell>
+    <Cell ss:Formula="=R[-1]C[-1]+R[-1]C"><Data ss:Type="Number">21000</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell><Data ss:Type="Number">22</Data></Cell>
+    <Cell><Data ss:Type="Number">22</Data></Cell>
+    <Cell><Data ss:Type="Number">2200</Data></Cell>
+    <Cell ss:Formula="=R[-1]C[-1]+R[-1]C"><Data ss:Type="Number">23100</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell><Data ss:Type="Number">23</Data></Cell>
+    <Cell><Data ss:Type="Number">23</Data></Cell>
+    <Cell><Data ss:Type="Number">2300</Data></Cell>
+    <Cell ss:Formula="=R[-1]C[-1]+R[-1]C"><Data ss:Type="Number">25300</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell><Data ss:Type="Number">24</Data></Cell>
+    <Cell><Data ss:Type="Number">24</Data></Cell>
+    <Cell><Data ss:Type="Number">2400</Data></Cell>
+    <Cell ss:Formula="=R[-1]C[-1]+R[-1]C"><Data ss:Type="Number">27600</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell><Data ss:Type="Number">25</Data></Cell>
+    <Cell><Data ss:Type="Number">25</Data></Cell>
+    <Cell><Data ss:Type="Number">0</Data></Cell>
+    <Cell ss:Formula="=R[-1]C[-1]+R[-1]C"><Data ss:Type="Number">30000</Data></Cell>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <PageSetup>
+    <Header x:Margin="0.51180555555555596"/>
+    <Footer x:Margin="0.51180555555555596"/>
+    <PageMargins x:Bottom="0.75" x:Left="0.7" x:Right="0.7" x:Top="0.75"/>
+   </PageSetup>
+   <Unsynced/>
+   <Print>
+    <ValidPrinterInfo/>
+    <PaperSizeIndex>9</PaperSizeIndex>
+    <HorizontalResolution>600</HorizontalResolution>
+    <VerticalResolution>600</VerticalResolution>
+   </Print>
+   <Zoom>131</Zoom>
+   <PageBreakZoom>100</PageBreakZoom>
+   <Selected/>
+   <Panes>
+    <Pane>
+     <Number>3</Number>
+     <ActiveRow>17</ActiveRow>
+     <ActiveCol>2</ActiveCol>
+    </Pane>
+   </Panes>
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+   <x:PageLayoutZoom>0</x:PageLayoutZoom>
+  </WorksheetOptions>
+ </Worksheet>
+</Workbook>

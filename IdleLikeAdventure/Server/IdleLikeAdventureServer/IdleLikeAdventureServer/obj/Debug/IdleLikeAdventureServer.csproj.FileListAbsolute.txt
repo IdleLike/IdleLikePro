@@ -1,0 +1,7 @@
+D:\Photon\Photon-OnPremise-Server-SDK_v4-0-29-11263\deploy\IdleLikeAdventureServer\IdleLikeAdventureServer.dll
+D:\Photon\Photon-OnPremise-Server-SDK_v4-0-29-11263\deploy\IdleLikeAdventureServer\IdleLikeAdventureServer.pdb
+D:\U3D\IdleLikeAdventureServer\IdleLikeAdventureServer\obj\Debug\IdleLikeAdventureServer.csproj.CoreCompileInputs.cache
+D:\U3D\IdleLikeAdventureServer\IdleLikeAdventureServer\obj\Debug\IdleLikeAdventureServer.csproj.CopyComplete
+D:\U3D\IdleLikeAdventureServer\IdleLikeAdventureServer\obj\Debug\IdleLikeAdventureServer.dll
+D:\U3D\IdleLikeAdventureServer\IdleLikeAdventureServer\obj\Debug\IdleLikeAdventureServer.pdb
+D:\Photon\Photon-OnPremise-Server-SDK_v4-0-29-11263\deploy\IdleLikeAdventureServer\log4net.config

@@ -1,0 +1,18 @@
+﻿{
+  "ConfigInfo": [
+    { "Key": "本配置文件说明" },
+
+    {
+      "Key": "HOMEPAGE",
+      "Value": "HomePage"
+    },
+    {
+      "Key": "CreateCharacter",
+      "Value": "CreateCharacterPanel"
+    },
+    {
+      "Key": "BattleRoom",
+      "Value": "BattleRoomPanel"
+    }
+  ]
+}

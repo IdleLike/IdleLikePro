@@ -1,0 +1,111 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1353c24926d8a474abcf67e9ead78e2a, type: 3}
+  m_Name: TestData
+  m_EditorClassIdentifier: 
+  CareerDatas: []
+  CareerAbilityDatas: []
+  LevelDatas: []
+  MultilingualDatas: []
+  RaceAbilityDatas:
+  - ID: 10001
+    AbilityName: "\u5927\u5409\u5927\u5229"
+    AbilityDescribe: "\u5403\u9E21"
+  - ID: 10002
+    AbilityName: "\u5927\u5403\u516B\u65B9"
+    AbilityDescribe: "\u5403\u8D27"
+  RaceDatas:
+  - ID: 10001
+    Name: "\u4EBA\u7C7B"
+    Describe: "\u4EBA\u7C7B\u4EBA\u7C7B\u4EBA\u7C7B\u4EBA\u7C7B"
+    InitHP: 11
+    InitPow: 11
+    InitDex: 11
+    InitCon: 11
+    HPGrowth: 11
+    PowGrowth: 11
+    DexGrowth: 11
+    ConGrowth: 11
+    AbilityOneID: "\u5927\u6740\u56DB\u65B9"
+    AbilityTwoID: "\u6740\u6C14\u817E\u817E"
+  - ID: 10002
+    Name: "\u4F8F\u5112"
+    Describe: "\u4F8F\u5112\u4F8F\u5112\u4F8F\u5112"
+    InitHP: 33
+    InitPow: 33
+    InitDex: 33
+    InitCon: 33
+    HPGrowth: 33
+    PowGrowth: 33
+    DexGrowth: 33
+    ConGrowth: 33
+    AbilityOneID: "\u6740\u6740\u6740"
+    AbilityTwoID: "\u54C7\u5494\u5494"
+  - ID: 10003
+    Name: "\u7CBE\u7075"
+    Describe: "\u7CBE\u7075\u7CBE\u7075\u7CBE\u7075"
+    InitHP: 12
+    InitPow: 22
+    InitDex: 22
+    InitCon: 22
+    HPGrowth: 22
+    PowGrowth: 22
+    DexGrowth: 22
+    ConGrowth: 22
+    AbilityOneID: "\u7C73\u7C73\u7C73\u5C3C\u7C73\u7C73\u7C73"
+    AbilityTwoID: "\u5566\u5566\u5566\u5566\u5566"
+  BattleCharacterModel:
+  - ID: 0
+    Name: "\u8303\u59DD\u6167"
+    RocaName: "\u4EBA\u7C7B"
+    Career: "\u5251\u58EB"
+    Level: 1
+    CurrentHP: 20
+    MaxHP: 50
+    MaxMP_Txt: 100
+    CurrentMP_Txt: 50
+  - ID: 2
+    Name: "\u8D3E\u6811\u52C7"
+    RocaName: "\u7CBE\u7075"
+    Career: "\u5C04\u624B"
+    Level: 3
+    CurrentHP: 80
+    MaxHP: 95
+    MaxMP_Txt: 90
+    CurrentMP_Txt: 80
+  - ID: 4
+    Name: "\u54C7\u5494\u5494"
+    RocaName: "\u4F8F\u5112"
+    Career: "\u6218\u58EB"
+    Level: 8
+    CurrentHP: 14
+    MaxHP: 15
+    MaxMP_Txt: 70
+    CurrentMP_Txt: 50
+  BattleEnemyModel:
+  - ID: 1
+    Name: "\u654C\u4EBA1"
+    Level: 1
+    CurrentHP: 10
+    MaxHP: 24
+    Ability_sprite: {fileID: 21300000, guid: 4292419acc98a4443a0210604d680075, type: 3}
+  - ID: 3
+    Name: "\u654C\u4EBA2"
+    Level: 2
+    CurrentHP: 20
+    MaxHP: 35
+    Ability_sprite: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+  - ID: 5
+    Name: "\u654C\u4EBA3"
+    Level: 3
+    CurrentHP: 30
+    MaxHP: 46
+    Ability_sprite: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
