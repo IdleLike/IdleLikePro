@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace NetData.OpCode
 {
+    /// <summary>
+    /// 二级协议：用户模块
+    /// </summary>
     public enum OpCodeUserOperation : byte
     {
         Register,

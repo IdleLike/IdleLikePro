@@ -1,0 +1,6 @@
+D:\U3D\IdleLikeAdventure\IdleLikePro\IdleLikeAdventure\Server\NetData\NetData\obj\Debug\NetData.csproj.CoreCompileInputs.cache
+D:\U3D\IdleLikeAdventure\IdleLikePro\IdleLikeAdventure\Client\Assets\Plugins\NetData.dll
+D:\U3D\IdleLikeAdventure\IdleLikePro\IdleLikeAdventure\Client\Assets\Plugins\NetData.pdb
+D:\U3D\IdleLikeAdventure\IdleLikePro\IdleLikeAdventure\Server\NetData\NetData\obj\Debug\NetData.dll
+D:\U3D\IdleLikeAdventure\IdleLikePro\IdleLikeAdventure\Server\NetData\NetData\obj\Debug\NetData.pdb
+D:\U3D\IdleLikeAdventure\IdleLikePro\IdleLikeAdventure\Server\NetData\NetData\obj\Debug\NetData.csprojAssemblyReference.cache
