@@ -1,12 +1,20 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using Net;
+using NetData.OpCode;
+using NetData.Message;
+using UnityEngine;
 
 namespace Service
 {
     public class GameService : ClassSingleton<GameService>
     {
+
         private UserService userService;                //用户服务
         private ActorService actorService;              //角色服务
         private BattleService battleService;            //战斗服务
+        private NetService NetService;                  //网络服务类
 
         public void Initialize()
         {
@@ -22,6 +30,17 @@ namespace Service
         public void Login()
         {
             userService.Login();
+        }
+
+        /// <summary>
+        /// 发送网络消息
+        /// </summary>
+        /// <param name="opCodeModule">Op code module.</param>
+        /// <param name="opCodeOperation">Op code operation.</param>
+        /// <param name="msg">Message.</param>
+        public void SendNetMsg(OpCodeModule opCodeModule, byte opCodeOperation, BaseMsgData msg)
+        {
+            NetService.SendNetMsg(opCodeModule, opCodeOperation, msg);
         }
     }
 }

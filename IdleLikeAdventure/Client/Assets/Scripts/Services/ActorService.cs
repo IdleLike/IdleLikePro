@@ -2,14 +2,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using Entity;
+using NetData.OpCode;
 using StaticData;
 using StaticData.Data;
 using UnityEngine;
 
 namespace Service
 {
-    public class ActorService : BaseService
+    public class ActorService : BaseService<NetData.OpCode.OpCodeActorOperation>
     {
+        protected override OpCodeModule ServiceOpCode
+        {
+            get
+            {
+                return OpCodeModule.Actor;
+            }
+        }
+
         /// <summary>
         /// 创建英雄
         /// </summary>

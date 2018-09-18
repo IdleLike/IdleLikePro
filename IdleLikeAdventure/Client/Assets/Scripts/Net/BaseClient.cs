@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using ExitGames.Client.Photon;
-using Net.NetEnum;
+using NetData.OpCode;
+using NetData.Message;
 
 namespace Net
 {
@@ -13,7 +14,7 @@ namespace Net
         public abstract void OnOperationResponse(OperationResponse operationResponse);
         public abstract void OnStatusChanged(StatusCode statusCode);
 
-        //public abstract void Send(OpCodeEnum opCode, Dictionary<byte, object> parameters);
+        public abstract bool SendMessage(OpCodeModule opCode, Dictionary<byte, object> parameters);
     }
 }
 

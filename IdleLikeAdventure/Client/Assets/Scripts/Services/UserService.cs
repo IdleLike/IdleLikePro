@@ -5,15 +5,24 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Entity;
 using UI.Panel;
+using NetData.OpCode;
 
 namespace Service
 {
     
-    public class UserService : BaseService
+    public class UserService : BaseService<NetData.OpCode.OpCodeUserOperation>
     {
         //ViewModel
         private CreateCharacterModel createCharacterModel;
         private BattleRoomModel battleRoomModel;
+
+        protected override OpCodeModule ServiceOpCode
+        {
+            get
+            {
+                return OpCodeModule.User;
+            }
+        }
 
         internal void Login()
         {

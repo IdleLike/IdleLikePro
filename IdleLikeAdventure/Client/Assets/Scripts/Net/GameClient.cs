@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using ExitGames.Client.Photon;
-using Net.NetEnum;
+using NetData.Message;
+using NetData.OpCode;
 
 namespace Net
 {
@@ -11,6 +12,7 @@ namespace Net
         private ClientState clientState = ClientState.DisConnect;
         private static PhotonPeer photonPeer = null;
         private static GameClient instance = null;
+        private Action<OpCodeModule, Dictionary<byte, object>> handler;
         //private static 
 
         /// <summary>
@@ -44,11 +46,7 @@ namespace Net
             {
                 photonPeer.Service();
             }
-            Dictionary<byte, object> dict = new Dictionary<byte, object>();
-            dict.Add(1, "username");
-            dict.Add(2, "password");
             //向服务端发送请求
-            photonPeer.OpCustom(1, dict, true);
             while (true)
             {
                 photonPeer.Service();
@@ -70,7 +68,10 @@ namespace Net
 
         public override void OnOperationResponse(OperationResponse operationResponse)
         {
-
+            if(handler != null)
+            {
+                handler((OpCodeModule)operationResponse.OperationCode, operationResponse.Parameters);
+            }
         }
 
         public override void OnStatusChanged(StatusCode statusCode)
@@ -88,7 +89,10 @@ namespace Net
             }
         }
 
-
+        public override bool SendMessage(OpCodeModule opCode, Dictionary<byte, object> parameters)
+        {
+            return photonPeer.OpCustom((byte)opCode, parameters, true);
+        }
     }
 }
 
