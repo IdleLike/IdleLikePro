@@ -8,11 +8,15 @@ using NetData.OpCode;
 
 namespace Net
 {
-    public class GameClient : MonoSingleton<GameClient>, IPhotonPeerListener
+    public class GameClient : MonoSingleton<GameClient>, IClient
     {
+        [SerializeField] private string m_Serverhost = "127.0.0.1:4530";
+        [SerializeField] private string m_ServerName = "ChatServer";
+
         private ClientState m_ClientState = ClientState.DisConnect;
         private PhotonPeer m_PhotonPeer = null;
         private Action<OpCodeModule, Dictionary<byte, object>> m_Handler;
+        private Coroutine m_ReceiverCoroutine;
         //private static 
 
         /// <summary>
@@ -20,24 +24,26 @@ namespace Net
         /// </summary>
         /// <param name="localhost">Localhost.</param>
         /// <param name="seerverName">Seerver name.</param>
-        public void StartClient(string localhost, string seerverName)
+        public IClient StartClient()
         {
             if(instance != null)
             {
                 Debug.Log("客户端已经创建");
-                return;
+                return null;
             }
 
             //参数检查
             this.m_ClientState = ClientState.DisConnect;
             m_PhotonPeer = new PhotonPeer(this, ConnectionProtocol.Tcp);
-            m_PhotonPeer.Connect(localhost, seerverName);     //链接服务器
+            m_PhotonPeer.Connect(m_Serverhost, m_ServerName);     //链接服务器
             Debug.Log("连接服务器中......");
 
 
             //启动异步客户端服务
-            StartCoroutine(StartReceive());
+            m_ReceiverCoroutine = StartCoroutine(StartReceive());
 
+
+            return this;
         }
 
 

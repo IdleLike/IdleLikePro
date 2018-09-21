@@ -13,12 +13,10 @@ namespace Service
     /// </summary>
     public class NetService : BaseService<NetData.OpCode.OpCodeActorOperation>
     {
-        private BaseClient client;                                                          //客户端
+        private IClient client;                                                          //客户端
         private Dictionary<byte, object> netMsgDataDic = new Dictionary<byte, object>();    //网络消息参数
         private Dictionary<OpCodeModule, Action<Dictionary<byte, object>>> responsers = new Dictionary<OpCodeModule, Action<Dictionary<byte, object>>>();
 
-        private string localhost = "127.0.0.1:4530";
-        private string serverName = "ChatServer";
 
         protected override OpCodeModule ServiceOpCode
         {
@@ -30,9 +28,8 @@ namespace Service
 
         public override void Init()
         {
-            //创建客户端
-            GameClient.instance.StartClient(localhost, serverName);
-
+            //初始化客户端
+            client = GameClient.instance.StartClient();
         }
 
         /// <summary>

@@ -7,14 +7,10 @@ using NetData.Message;
 
 namespace Net
 {
-    public abstract class BaseClient : IPhotonPeerListener
+    public interface IClient : IPhotonPeerListener
     {
-        public abstract void DebugReturn(DebugLevel level, string message);
-        public abstract void OnEvent(EventData eventData);
-        public abstract void OnOperationResponse(OperationResponse operationResponse);
-        public abstract void OnStatusChanged(StatusCode statusCode);
 
-        public abstract bool SendMessage(OpCodeModule opCode, Dictionary<byte, object> parameters);
+        bool SendMessage(OpCodeModule opCode, Dictionary<byte, object> parameters);
     }
 }
 
