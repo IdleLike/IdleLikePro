@@ -13,7 +13,7 @@ namespace IdleLikeAdventureServer.Handler
         public RegisterHandler()
         {
             OpCode = OpCodeModule.User;
-            OpCodeOperation = (byte)OpCodeUserOperation.Login;
+            OpCodeOperation = (byte)OpCodeUserOperation.Register;
         }
 
         public override void OnOperationRequest(BaseMsgData baseMsgData, SendParameters sendParameters, ClientPeer peer)

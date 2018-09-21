@@ -92,7 +92,7 @@ namespace StaticDataTool
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine(e.ToString());
+                    //Console.WriteLine(e.ToString());
                 }
                 var data = byteList.ToArray();
 
@@ -145,7 +145,7 @@ namespace StaticDataTool
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine(e.ToString());
+                    //Console.WriteLine(e.ToString());
                 }
                 var data = byteList.ToArray();
 
@@ -157,12 +157,12 @@ namespace StaticDataTool
             }
             catch (CryptographicException e)
             {
-                Console.WriteLine("A Cryptographic error occurred: " + e.ToString());
+                //Console.WriteLine("A Cryptographic error occurred: " + e.ToString());
                 return null;
             }
             catch (UnauthorizedAccessException e)
             {
-                Console.WriteLine("A file error occurred: " + e.ToString());
+                //Console.WriteLine("A file error occurred: " + e.ToString());
                 return null;
             }
         }
