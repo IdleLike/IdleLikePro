@@ -18,7 +18,7 @@ namespace Service
         private Dictionary<OpCodeModule, Action<Dictionary<byte, object>>> responsers = new Dictionary<OpCodeModule, Action<Dictionary<byte, object>>>();
 
         private string localhost = "127.0.0.1:4530";
-        private string seerverName = "ChatServer";
+        private string serverName = "ChatServer";
 
         protected override OpCodeModule ServiceOpCode
         {
@@ -31,8 +31,7 @@ namespace Service
         public override void Init()
         {
             //创建客户端
-
-            //
+            GameClient.instance.StartClient(localhost, serverName);
 
         }
 

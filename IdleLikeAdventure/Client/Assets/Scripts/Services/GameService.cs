@@ -19,9 +19,12 @@ namespace Service
         public void Initialize()
         {
             //初始化所有服务类
+            NetService = new NetService();
             userService = new UserService();
             actorService = new ActorService();
             battleService = new BattleService();
+
+            NetService.Init();
         }
 
         /// <summary>

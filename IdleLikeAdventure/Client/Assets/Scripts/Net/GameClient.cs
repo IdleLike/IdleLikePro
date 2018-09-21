@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using ExitGames.Client.Photon;
@@ -7,12 +8,11 @@ using NetData.OpCode;
 
 namespace Net
 {
-    public class GameClient : BaseClient
+    public class GameClient : MonoSingleton<GameClient>, IPhotonPeerListener
     {
-        private ClientState clientState = ClientState.DisConnect;
-        private static PhotonPeer photonPeer = null;
-        private static GameClient instance = null;
-        private Action<OpCodeModule, Dictionary<byte, object>> handler;
+        private ClientState m_ClientState = ClientState.DisConnect;
+        private PhotonPeer m_PhotonPeer = null;
+        private Action<OpCodeModule, Dictionary<byte, object>> m_Handler;
         //private static 
 
         /// <summary>
@@ -20,7 +20,7 @@ namespace Net
         /// </summary>
         /// <param name="localhost">Localhost.</param>
         /// <param name="seerverName">Seerver name.</param>
-        public static void CreateClient(string localhost, string seerverName)
+        public void StartClient(string localhost, string seerverName)
         {
             if(instance != null)
             {
@@ -29,68 +29,64 @@ namespace Net
             }
 
             //参数检查
-
-
-            GameClient listener = new GameClient();
-            listener.clientState = ClientState.DisConnect;
-            photonPeer = new PhotonPeer(listener, ConnectionProtocol.Tcp);
-            photonPeer.Connect(localhost, seerverName);     //链接服务器
+            this.m_ClientState = ClientState.DisConnect;
+            m_PhotonPeer = new PhotonPeer(this, ConnectionProtocol.Tcp);
+            m_PhotonPeer.Connect(localhost, seerverName);     //链接服务器
             Debug.Log("连接服务器中......");
 
 
             //启动异步客户端服务
+            StartCoroutine(StartReceive());
 
-            while (listener.clientState == ClientState.DisConnect)
-            {
-                photonPeer.Service();
-            }
-            //向服务端发送请求
-            while (true)
-            {
-                photonPeer.Service();
-            }
-
-            
         }
 
 
-        public override void DebugReturn(DebugLevel level, string message)
+        public void DebugReturn(DebugLevel level, string message)
         {
 
         }
 
-        public override void OnEvent(EventData eventData)
+        public void OnEvent(EventData eventData)
         {
 
         }
 
-        public override void OnOperationResponse(OperationResponse operationResponse)
+        public void OnOperationResponse(OperationResponse operationResponse)
         {
-            if(handler != null)
+            if(m_Handler != null)
             {
-                handler((OpCodeModule)operationResponse.OperationCode, operationResponse.Parameters);
+                m_Handler((OpCodeModule)operationResponse.OperationCode, operationResponse.Parameters);
             }
         }
 
-        public override void OnStatusChanged(StatusCode statusCode)
+        public void OnStatusChanged(StatusCode statusCode)
         {
             switch (statusCode)
             {
                 case StatusCode.Connect:
-                    clientState = ClientState.Connect;
+                    m_ClientState = ClientState.Connect;
                     break;
                 case StatusCode.Disconnect:
-                    clientState = ClientState.DisConnect;
+                    m_ClientState = ClientState.DisConnect;
                     break;
                 default:
                     break;
             }
         }
 
-        public override bool SendMessage(OpCodeModule opCode, Dictionary<byte, object> parameters)
+        public bool SendMessage(OpCodeModule opCode, Dictionary<byte, object> parameters)
         {
-            return photonPeer.OpCustom((byte)opCode, parameters, true);
+            return m_PhotonPeer.OpCustom((byte)opCode, parameters, true);
+        }
+
+        private IEnumerator StartReceive()
+        {
+            while(true)
+            {
+                m_PhotonPeer.Service();
+                yield return 0;
+            }
+
         }
     }
 }
-
