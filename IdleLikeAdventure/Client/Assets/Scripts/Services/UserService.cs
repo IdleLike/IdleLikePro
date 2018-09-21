@@ -158,6 +158,11 @@ namespace Service
             }
 
         }
+
+        public override void Init()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 

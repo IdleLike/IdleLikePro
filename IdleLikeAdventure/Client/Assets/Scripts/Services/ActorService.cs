@@ -80,6 +80,12 @@ namespace Service
             }
             return hero;
         }
+
+        public override void Init()
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         /// 获取成长值
         /// </summary>

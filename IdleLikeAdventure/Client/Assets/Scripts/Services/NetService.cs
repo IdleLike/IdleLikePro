@@ -17,6 +17,9 @@ namespace Service
         private Dictionary<byte, object> netMsgDataDic = new Dictionary<byte, object>();    //网络消息参数
         private Dictionary<OpCodeModule, Action<Dictionary<byte, object>>> responsers = new Dictionary<OpCodeModule, Action<Dictionary<byte, object>>>();
 
+        private string localhost = "127.0.0.1:4530";
+        private string seerverName = "ChatServer";
+
         protected override OpCodeModule ServiceOpCode
         {
             get
@@ -25,9 +28,11 @@ namespace Service
             }
         }
 
-        public void Init()
+        public override void Init()
         {
+            //创建客户端
 
+            //
 
         }
 
@@ -91,6 +96,7 @@ namespace Service
                 Debug.LogError(GetType() + "/OnOperationResponse()/ 不能处理的消息类型： " + opCodeModule);
             }
         }
+
     }
 }
 

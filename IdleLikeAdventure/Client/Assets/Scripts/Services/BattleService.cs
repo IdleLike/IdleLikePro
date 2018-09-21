@@ -13,6 +13,11 @@ namespace Service
                 return OpCodeModule.Battle;
             }
         }
+
+        public override void Init()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
 

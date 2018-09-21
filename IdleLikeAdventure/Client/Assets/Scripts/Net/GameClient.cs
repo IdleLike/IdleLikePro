@@ -28,8 +28,6 @@ namespace Net
                 return;
             }
 
-            localhost = "127.0.0.1:4530";
-            seerverName = "ChatServer";
             //参数检查
 
 
