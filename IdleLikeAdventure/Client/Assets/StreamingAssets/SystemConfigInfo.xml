@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- 游戏项目整体配置核心参数 -->
+<SystemConfigInfo>
+	<!-- Log 日志核心参数 -->
+	<!-- 日志路径 -->
+  <LogPath>Log.txt</LogPath>
+  <!-- 日志的状态：开发模式 Develop/指定代码输出模式 Speacial/部署模式 Deploy/停止模式 Stop -->
+  <LogState>Develop</LogState>
+  <!-- 日志最大容量 -->
+  <LogMaxCapacity>100</LogMaxCapacity>
+  <!-- 日志的缓存数量 -->
+  <LogBufferNumber>1</LogBufferNumber>
+  
+  <!-- 其他系统核心参数 -->
+</SystemConfigInfo>

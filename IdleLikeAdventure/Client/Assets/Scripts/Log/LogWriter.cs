@@ -2,6 +2,7 @@
 using System.Collections;
 using System;
 using System.IO;
+using Log;
 
 /// <summary>
 /// Debug输出写入本地硬件方法
@@ -24,6 +25,7 @@ public class LogWriter
     /// <param name="logName"></param>
     private void GetLogPath ( string logName )
     {
+        TLog.LogInput("进入", Level.Special, Logtype.debug);
         switch ( Application.platform )
         {
             case RuntimePlatform.Android:
@@ -38,6 +40,7 @@ public class LogWriter
                 break;
             case RuntimePlatform.WindowsPlayer:
                 m_logPath = string.Format ( "{0}/../{1}.txt" , Application.dataPath , logName );
+                TLog.LogInput("进入",Level.Special,Logtype.debug);
                 break;
             case RuntimePlatform.WindowsEditor:
                 m_logPath = string.Format ( "{0}/../{1}.txt" , Application.dataPath , logName );
@@ -62,7 +65,7 @@ public class LogWriter
         try
         {
             /// 注册事件，当Debug调用时，就会调用：
-            Application.logMessageReceived += OnLogCallBack;
+            //Application.logMessageReceived += OnLogCallBack;
             OutputSystemInfo ( );
         }
         catch ( System.Exception ex )
