@@ -18,7 +18,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace kernal
+namespace Log
 {
     public class KernalParameter 
     {
@@ -146,7 +146,7 @@ namespace kernal
         {
             string strReturnXMLRootNodeName = null;
 
-            strReturnXMLRootNodeName = "Log";//"SystemConfigInfo";
+            strReturnXMLRootNodeName = "SystemConfigInfo";
             return strReturnXMLRootNodeName;
         }
 

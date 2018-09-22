@@ -43,7 +43,7 @@ public class Console : MonoBehaviour
     /// </summary>  
     public int maxLogs = 99999999;
 
-    public string logFile = "log";
+    public string logFile = "Log";
     public bool writeLogFile = true;
     #endregion
 

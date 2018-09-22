@@ -25,7 +25,7 @@ using System;
 using System.IO;
 using System.Threading;  //多线程
 
-namespace kernal
+namespace Log
 {
     public static class TLog
     {
@@ -39,10 +39,27 @@ namespace kernal
                 case Logtype.writeFile:
                     Log.Write(message, level);
                     break;
+                case Logtype.console:
+                    TConsole.ConsoleLog(message, level);
+                    break;
                 default:
                     break;
             }
         }
+    }
+    public interface IConfigManager
+    {
+        /// <summary>
+        /// 属性：应用设置
+        /// </summary>
+        Dictionary<string, string> AppSetting { get; }
+
+        /// <summary>
+        /// 得到AppSetting的最大数量
+        /// </summary>
+        int GetAppSettingMaxNumber();
+
+
     }
     public static class Log
     {
@@ -154,25 +171,24 @@ namespace kernal
             _LiLogArray = new List<string>();
 
 #if UNITY_STANDALONE_WIN || UNITY_EDITOR
-
             //日志文件路径
-            //IConfigManager configMgr = new ConfigManager(KernalParameter.GetDungesonFighterLogPath(), KernalParameter.GetLogRootNodeName());
-            ////_LogPath =  configMgr.AppSetting[XML_CONFIG_LOG_PATH];
+            IConfigManager configMgr = new ConfigManager(KernalParameter.GetLogPath(), KernalParameter.GetLogRootNodeName());
+            _LogPath =  configMgr.AppSetting[XML_CONFIG_LOG_PATH];
 
-            ////日志状态(部署模式)
-            //strLogState = configMgr.AppSetting[XML_CONFIG_LOG_STATE];
+            //日志状态(部署模式)
+            strLogState = configMgr.AppSetting[XML_CONFIG_LOG_STATE];
 
-            ////日志最大容量
-            //strLogMaxCapacity = configMgr.AppSetting[XML_CONFIG_LOG_MAX_CAPACITY];
+            //日志最大容量
+            strLogMaxCapacity = configMgr.AppSetting[XML_CONFIG_LOG_MAX_CAPACITY];
 
             //日志缓存最大容量
-            //strLogBufferNumber = configMgr.AppSetting[XML_CONFIG_LOG_BUFFER_NUMBER];        
-            //日志文件路径            
-            //if (string.IsNullOrEmpty(_LogPath))
-            //{
+            strLogBufferNumber = configMgr.AppSetting[XML_CONFIG_LOG_BUFFER_NUMBER];
+            //日志文件路径
+            if (string.IsNullOrEmpty(_LogPath))
+            {
                 _LogPath = KernalParameter.GetDungesonFighterLogPath() + XML_CONFIG_LOG_DEFAULT_PATH;
             TDebug.DebugLog(_LogPath,Level.Low);
-            //}
+            }
             //创建文件
             if (!File.Exists(_LogPath))//不存在指定路径的文件
             {
@@ -275,7 +291,7 @@ namespace kernal
         /// <param name="level">重要等级级别</param>
         public static void Write(string writeFileDate,Level level)
         {
-            AppendDateToFile(writeFileDate);
+            //AppendDateToFile(writeFileDate);
             TDebug.DebugLog("写数据到文件中", Level.Low);
             //参数检查
             if (_LogState == State.Stop)
@@ -293,7 +309,7 @@ namespace kernal
             if (!string.IsNullOrEmpty(writeFileDate))
             {
                 //增加日期与时间
-                writeFileDate = XML_CONFIG_LOG_STATE + "：" + _LogState.ToString() + "/" + DateTime.Now.ToString() + "/" + writeFileDate;
+                writeFileDate = XML_CONFIG_LOG_STATE + "：" + _LogState.ToString() + "/" + System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:ffff") + "/" + writeFileDate;
 
                 //对于不同的"日志状态"，分特定情形写入文件
                 if (level == Level.High)
@@ -437,7 +453,8 @@ namespace kernal
     public enum Logtype
     {
         debug,
-        writeFile
+        writeFile,
+        console
     }
 }
 
