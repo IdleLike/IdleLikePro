@@ -48,7 +48,7 @@ namespace Log
         /// <param name="message">Message.</param>
         /// <param name="level">Level.</param>
         /// <param name="logtype">Logtype.</param>
-        static public void LogInput(string message,Level level,Logtype logtype, bool isAlwaysInput)
+        static public void LogInput(string message,Level level,Logtype logtype, bool isAlwaysInput = false)
         {
             if(!isAlwaysInput && !LogEnable) return;
 
