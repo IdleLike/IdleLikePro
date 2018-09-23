@@ -12,3 +12,4 @@ D:\U3D\IdleLikeAdventure\IdleLikePro\IdleLikeAdventure\Photon\Photon-OnPremise-S
 D:\U3D\IdleLikeAdventure\IdleLikePro\IdleLikeAdventure\Photon\Photon-OnPremise-Server-SDK_v4-0-29-11263\deploy\IdleLikeAdventureServer\IdleLikeAdventureServer.dll
 D:\U3D\IdleLikeAdventure\IdleLikePro\IdleLikeAdventure\Photon\Photon-OnPremise-Server-SDK_v4-0-29-11263\deploy\IdleLikeAdventureServer\IdleLikeAdventureServer.pdb
 D:\U3D\IdleLikeAdventure\IdleLikePro\IdleLikeAdventure\Server\IdleLikeAdventureServer\IdleLikeAdventureServer\obj\Debug\IdleLikeAdventureServer.csproj.CopyComplete
+D:\Photon\Photon-OnPremise-Server-SDK_v4-0-29-11263\deploy\IdleLikeAdventureServer\IdleLikeAdventureServer.dll.config

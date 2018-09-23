@@ -5,13 +5,15 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{807756E1-FD77-42BD-93DD-E7C0ADF9C705}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>IdleLikeAdventureServer</RootNamespace>
     <AssemblyName>IdleLikeAdventureServer</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -30,31 +32,46 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ExitGames.Logging.Log4Net">
-      <HintPath>..\..\..\..\..\..\..\Photon\Photon-OnPremise-Server-SDK_v4-0-29-11263\lib\ExitGames.Logging.Log4Net.dll</HintPath>
+    <Reference Include="ExitGames.Logging.Log4Net, Version=1.0.4.0, Culture=neutral, PublicKeyToken=eac0edd9746a4aa0, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Pluglns\ExitGames.Logging.Log4Net.dll</HintPath>
     </Reference>
-    <Reference Include="ExitGamesLibs">
-      <HintPath>..\..\..\..\..\..\..\Photon\Photon-OnPremise-Server-SDK_v4-0-29-11263\lib\ExitGamesLibs.dll</HintPath>
+    <Reference Include="ExitGamesLibs, Version=1.0.4.0, Culture=neutral, PublicKeyToken=eac0edd9746a4aa0, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Pluglns\ExitGamesLibs.dll</HintPath>
     </Reference>
-    <Reference Include="log4net">
-      <HintPath>..\..\..\..\..\..\..\Photon\Photon-OnPremise-Server-SDK_v4-0-29-11263\lib\log4net.dll</HintPath>
+    <Reference Include="log4net, Version=1.2.13.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Pluglns\log4net.dll</HintPath>
     </Reference>
     <Reference Include="NetData, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\Client\Assets\Plugins\NetData.dll</HintPath>
     </Reference>
-    <Reference Include="Photon.SocketServer">
-      <HintPath>..\..\..\..\..\..\..\Photon\Photon-OnPremise-Server-SDK_v4-0-29-11263\lib\Photon.SocketServer.dll</HintPath>
+    <Reference Include="Photon.SocketServer, Version=4.0.28.11245, Culture=neutral, PublicKeyToken=48c2fa3b6988090e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Pluglns\Photon.SocketServer.dll</HintPath>
     </Reference>
-    <Reference Include="PhotonHostRuntimeInterfaces">
-      <HintPath>..\..\..\..\..\..\..\Photon\Photon-OnPremise-Server-SDK_v4-0-29-11263\lib\PhotonHostRuntimeInterfaces.dll</HintPath>
+    <Reference Include="PhotonHostRuntimeInterfaces, Version=3.58.0.0, Culture=neutral, PublicKeyToken=6cb1467adaa73020, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\..\Pluglns\PhotonHostRuntimeInterfaces.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.SQLite, Version=1.0.109.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\SQLite32\2008\bin\System.Data.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SQLite.Linq, Version=1.0.109.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\SQLite32\2008\bin\System.Data.SQLite.Linq.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
@@ -65,11 +82,24 @@
     <Compile Include="Handler\RegisterHandler.cs" />
     <Compile Include="MyGameServer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SQLite\SQLiteConnect.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="log4net.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\System.Data.SQLite.Core.1.0.109.1\build\net20\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.109.1\build\net20\System.Data.SQLite.Core.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>这台计算机上缺少此项目引用的 NuGet 程序包。使用“NuGet 程序包还原”可下载这些程序包。有关更多信息，请参见 http://go.microsoft.com/fwlink/?LinkID=322105。缺少的文件是 {0}。</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\System.Data.SQLite.Core.1.0.109.1\build\net20\System.Data.SQLite.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\System.Data.SQLite.Core.1.0.109.1\build\net20\System.Data.SQLite.Core.targets'))" />
+  </Target>
 </Project>
