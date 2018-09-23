@@ -29,8 +29,29 @@ namespace Log
 {
     public static class TLog
     {
-        static public void LogInput(string message,Level level,Logtype logtype)
+        public static Logtype DefaultType = Logtype.debug;
+        public static bool LogEnable = true; 
+
+        /// <summary>
+        /// 使用默认类型输出Log
+        /// </summary>
+        /// <param name="message">Message.</param>
+        /// <param name="level">Level.</param>
+        static public void LogInput(string message, Level level, bool isAlwaysInput)
         {
+            LogInput(message, level, DefaultType, isAlwaysInput);
+        }
+
+        /// <summary>
+        /// 输出LOG
+        /// </summary>
+        /// <param name="message">Message.</param>
+        /// <param name="level">Level.</param>
+        /// <param name="logtype">Logtype.</param>
+        static public void LogInput(string message,Level level,Logtype logtype, bool isAlwaysInput)
+        {
+            if(!isAlwaysInput && !LogEnable) return;
+
             switch (logtype)
             {
                 case Logtype.debug:

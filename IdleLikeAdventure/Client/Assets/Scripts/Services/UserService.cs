@@ -32,10 +32,10 @@ namespace Service
                 //TODO 创建新用户
                 //跳转主场景， 显示创建用户界面
                 //SceneManager.LoadScene(GameGlobal.SCENE_MAIN);
-                //SetCreateCharacterModel();
-                //OpenUIForm(GameGlobal.PANEL_CREATECHARACTER, createCharacterModel);
-                InitBattle();
-                OpenUIForm(GameGlobal.PANEL_BATTLEROOM, battleRoomModel);
+                SetCreateCharacterModel();
+                OpenUIForm(GameGlobal.PANEL_CREATECHARACTER, createCharacterModel);
+                //InitBattle();
+                //OpenUIForm(GameGlobal.PANEL_BATTLEROOM, battleRoomModel);
             }
             else
             {

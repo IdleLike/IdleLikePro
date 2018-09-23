@@ -10,12 +10,13 @@ namespace Net
 {
     public class GameClient : MonoSingleton<GameClient>, IClient
     {
-        [SerializeField] private string m_Serverhost = "127.0.0.1:4530";
-        [SerializeField] private string m_ServerName = "ChatServer";
+        [SerializeField] private string m_Serverhost = "192.168.199.1";
+        [SerializeField] private string m_ServerName = "IdleLikeAdventureServer";
 
         private ClientState m_ClientState = ClientState.DisConnect;
         private PhotonPeer m_PhotonPeer = null;
-        private Action<OpCodeModule, Dictionary<byte, object>> m_Handler;
+        private Action<OpCodeModule, Dictionary<byte, object>> m_ResponseHandler;
+        private Action<OpCodeModule, Dictionary<byte, object>> m_EventHandler;
         private Coroutine m_ReceiverCoroutine;
         //private static 
 
@@ -26,11 +27,6 @@ namespace Net
         /// <param name="seerverName">Seerver name.</param>
         public IClient StartClient()
         {
-            if(instance != null)
-            {
-                Debug.Log("客户端已经创建");
-                return null;
-            }
 
             //参数检查
             this.m_ClientState = ClientState.DisConnect;
@@ -59,9 +55,11 @@ namespace Net
 
         public void OnOperationResponse(OperationResponse operationResponse)
         {
-            if(m_Handler != null)
+            Debug.Log("++++++++++有消息");
+
+            if (m_ResponseHandler != null)
             {
-                m_Handler((OpCodeModule)operationResponse.OperationCode, operationResponse.Parameters);
+                m_ResponseHandler((OpCodeModule)operationResponse.OperationCode, operationResponse.Parameters);
             }
         }
 
@@ -71,6 +69,7 @@ namespace Net
             {
                 case StatusCode.Connect:
                     m_ClientState = ClientState.Connect;
+                    Debug.Log("++++++++++连接上");
                     break;
                 case StatusCode.Disconnect:
                     m_ClientState = ClientState.DisConnect;
