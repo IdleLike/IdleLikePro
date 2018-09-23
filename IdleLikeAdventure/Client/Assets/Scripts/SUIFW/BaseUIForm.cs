@@ -21,6 +21,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
+using Log;
 using UnityEngine;
 
 namespace SUIFW
@@ -192,7 +193,43 @@ namespace SUIFW
         /// <typeparam name="T">The 1st type parameter.</typeparam>
         protected T GetSingleParam<T>(){ return UIParams.GetSingleParam<T>();}
 
-	    #endregion
 
+
+        #endregion
+
+        #region Log
+
+        /// <summary>
+        /// 普通消息
+        /// </summary>
+        /// <param name="msg">Message.</param>
+        /// <param name="isAlwaysInput">If set to <c>true</c> 总会输出，即使设置禁用Log.</param>
+        protected void Log(string msg, bool isAlwaysInput = false)
+        {
+
+            TLog.LogInput(msg, Level.Low, isAlwaysInput);
+        }
+
+        /// <summary>
+        /// 警告消息
+        /// </summary>
+        /// <param name="msg">Message.</param>
+        /// <param name="isAlwaysInput">If set to <c>true</c> 总会输出，即使设置禁用Log</param>
+        protected void LogWarning(string msg, bool isAlwaysInput = false)
+        {
+            TLog.LogInput(msg, Level.Special, isAlwaysInput);
+        }
+
+        /// <summary>
+        /// 严重错误消息
+        /// </summary>
+        /// <param name="msg">Message.</param>
+        /// <param name="isAlwaysInput">If set to <c>true</c> 总会输出，即使设置禁用Log</param>
+        protected void LogError(string msg, bool isAlwaysInput = false)
+        {
+            TLog.LogInput(msg, Level.High, isAlwaysInput);
+        }
+
+        #endregion
     }
 }

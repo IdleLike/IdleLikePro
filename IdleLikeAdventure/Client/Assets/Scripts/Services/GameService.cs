@@ -5,6 +5,7 @@ using Net;
 using NetData.OpCode;
 using NetData.Message;
 using UnityEngine;
+using Log;
 
 namespace Service
 {
@@ -18,6 +19,10 @@ namespace Service
 
         public void Initialize()
         {
+            //初始化Log
+            TLog.LogEnable = true;
+
+
             //初始化所有服务类
             NetService = new NetService();
             userService = new UserService();

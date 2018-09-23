@@ -5,17 +5,19 @@ using UnityEngine;
 using ExitGames.Client.Photon;
 using NetData.Message;
 using NetData.OpCode;
+using Log;
 
 namespace Net
 {
     public class GameClient : MonoSingleton<GameClient>, IClient
     {
-        [SerializeField] private string m_Serverhost = "127.0.0.1:4530";
-        [SerializeField] private string m_ServerName = "ChatServer";
+        [SerializeField] private string m_Serverhost = "192.168.199.1";
+        [SerializeField] private string m_ServerName = "IdleLikeAdventureServer";
 
         private ClientState m_ClientState = ClientState.DisConnect;
         private PhotonPeer m_PhotonPeer = null;
-        private Action<OpCodeModule, Dictionary<byte, object>> m_Handler;
+        private Action<OpCodeModule, Dictionary<byte, object>> m_ResponseHandler;
+        private Action<OpCodeModule, Dictionary<byte, object>> m_EventHandler;
         private Coroutine m_ReceiverCoroutine;
         //private static 
 
@@ -26,17 +28,12 @@ namespace Net
         /// <param name="seerverName">Seerver name.</param>
         public IClient StartClient()
         {
-            if(instance != null)
-            {
-                Debug.Log("客户端已经创建");
-                return null;
-            }
 
             //参数检查
             this.m_ClientState = ClientState.DisConnect;
             m_PhotonPeer = new PhotonPeer(this, ConnectionProtocol.Tcp);
             m_PhotonPeer.Connect(m_Serverhost, m_ServerName);     //链接服务器
-            Debug.Log("连接服务器中......");
+            TLog.LogInput("连接服务器中", Level.Low, false);
 
 
             //启动异步客户端服务
@@ -59,9 +56,11 @@ namespace Net
 
         public void OnOperationResponse(OperationResponse operationResponse)
         {
-            if(m_Handler != null)
+            TLog.LogInput("接收到服务器处理的返回消息", Level.Low, false);
+
+            if (m_ResponseHandler != null)
             {
-                m_Handler((OpCodeModule)operationResponse.OperationCode, operationResponse.Parameters);
+                m_ResponseHandler((OpCodeModule)operationResponse.OperationCode, operationResponse.Parameters);
             }
         }
 
@@ -71,8 +70,10 @@ namespace Net
             {
                 case StatusCode.Connect:
                     m_ClientState = ClientState.Connect;
+                    TLog.LogInput("连接上服务器", Level.Low, false);
                     break;
                 case StatusCode.Disconnect:
+                    TLog.LogInput("与服务器断开连接", Level.High, false);
                     m_ClientState = ClientState.DisConnect;
                     break;
                 default:

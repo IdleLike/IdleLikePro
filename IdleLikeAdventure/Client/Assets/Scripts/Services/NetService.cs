@@ -11,18 +11,17 @@ namespace Service
     /// <summary>
     /// 网络服务类
     /// </summary>
-    public class NetService : BaseService<NetData.OpCode.OpCodeActorOperation>
+    public class NetService : BaseService<NetData.OpCode.OpCodeNetOperation>
     {
         private IClient client;                                                          //客户端
         private Dictionary<byte, object> netMsgDataDic = new Dictionary<byte, object>();    //网络消息参数
         private Dictionary<OpCodeModule, Action<Dictionary<byte, object>>> responsers = new Dictionary<OpCodeModule, Action<Dictionary<byte, object>>>();
 
-
         protected override OpCodeModule ServiceOpCode
         {
             get
             {
-                throw new NotImplementedException();
+                return OpCodeModule.Net;
             }
         }
 

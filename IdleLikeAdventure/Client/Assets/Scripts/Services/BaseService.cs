@@ -4,6 +4,7 @@ using NetData.OpCode;
 using NetData.Message;
 using System.Collections.Generic;
 using UnityEngine;
+using Log;
 
 namespace Service
 {
@@ -15,6 +16,7 @@ namespace Service
         public abstract void Init();
         public virtual void AddNetListener(){}
 
+        #region Message
         /// <summary>
         /// 发送消息
         /// </summary>
@@ -60,6 +62,9 @@ namespace Service
             baseUIForms.UpdatePanel(args);
            
         }
+        #endregion
+
+        #region Net
 
         /// <summary>
         /// 发送消息
@@ -105,6 +110,42 @@ namespace Service
                 handlers.Remove(tempOpCode);
             }
         }
+        #endregion
+
+        #region Log
+
+        /// <summary>
+        /// 普通消息
+        /// </summary>
+        /// <param name="msg">Message.</param>
+        /// <param name="isAlwaysInput">If set to <c>true</c> 总会输出，即使设置禁用Log.</param>
+        protected void Log(string msg,bool isAlwaysInput = false)
+        {
+
+            TLog.LogInput(msg, Level.Low, isAlwaysInput);
+        }
+
+        /// <summary>
+        /// 警告消息
+        /// </summary>
+        /// <param name="msg">Message.</param>
+        /// <param name="isAlwaysInput">If set to <c>true</c> 总会输出，即使设置禁用Log</param>
+        protected void LogWarning(string msg, bool isAlwaysInput = false)
+        {
+            TLog.LogInput(msg, Level.Special, isAlwaysInput);
+        }
+
+        /// <summary>
+        /// 严重错误消息
+        /// </summary>
+        /// <param name="msg">Message.</param>
+        /// <param name="isAlwaysInput">If set to <c>true</c> 总会输出，即使设置禁用Log</param>
+        protected void LogError(string msg, bool isAlwaysInput = false)
+        {
+            TLog.LogInput(msg, Level.High, isAlwaysInput);
+        }
+
+        #endregion
 
         /// <summary>
         /// 处理本模块网络消息
