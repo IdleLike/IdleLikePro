@@ -796,7 +796,7 @@ GameObject:
   - component: {fileID: 815470883}
   - component: {fileID: 815470884}
   m_Layer: 0
-  m_Name: Client
+  m_Name: _GameNetClient
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1020,7 +1020,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1361130436}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1087876315
 GameObject:
@@ -1287,8 +1287,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1082484408}
   - {fileID: 1573492095}
+  - {fileID: 1082484408}
   - {fileID: 815470883}
   m_Father: {fileID: 0}
   m_RootOrder: 2
@@ -1487,7 +1487,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1361130436}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1573492096
 MonoBehaviour:
@@ -1500,6 +1500,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 968044802d2364f82a9e7e4a7898e2f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_LogSetting:
+    LogEnable: 1
+    LogType: 0
 --- !u!1 &1627618603
 GameObject:
   m_ObjectHideFlags: 0
