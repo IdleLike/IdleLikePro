@@ -119,7 +119,7 @@ namespace Service
         /// </summary>
         /// <param name="msg">Message.</param>
         /// <param name="isAlwaysInput">If set to <c>true</c> 总会输出，即使设置禁用Log.</param>
-        public void Log(string msg,bool isAlwaysInput = false)
+        protected void Log(string msg,bool isAlwaysInput = false)
         {
 
             TLog.LogInput(msg, Level.Low, isAlwaysInput);
@@ -130,7 +130,7 @@ namespace Service
         /// </summary>
         /// <param name="msg">Message.</param>
         /// <param name="isAlwaysInput">If set to <c>true</c> 总会输出，即使设置禁用Log</param>
-        public void LogWarning(string msg, bool isAlwaysInput = false)
+        protected void LogWarning(string msg, bool isAlwaysInput = false)
         {
             TLog.LogInput(msg, Level.Special, isAlwaysInput);
         }
@@ -140,7 +140,7 @@ namespace Service
         /// </summary>
         /// <param name="msg">Message.</param>
         /// <param name="isAlwaysInput">If set to <c>true</c> 总会输出，即使设置禁用Log</param>
-        public void LogError(string msg, bool isAlwaysInput = false)
+        protected void LogError(string msg, bool isAlwaysInput = false)
         {
             TLog.LogInput(msg, Level.High, isAlwaysInput);
         }
