@@ -4,7 +4,7 @@ using NetData.OpCode;
 
 namespace Service
 {
-    public class BattleService : BaseService<NetData.OpCode.OpCodeBattleOperation>
+    public class BattleService : BaseService<NetData.OpCode.OpCodeBattleOperation, NetData.OpCode.OpCodeBattleEvent>
     {
         protected override OpCodeModule ServiceOpCode
         {
@@ -16,7 +16,7 @@ namespace Service
 
         public override void Init()
         {
-            throw new System.NotImplementedException();
+
         }
     }
 }

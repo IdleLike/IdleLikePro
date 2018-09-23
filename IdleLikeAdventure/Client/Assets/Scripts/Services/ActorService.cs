@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace Service
 {
-    public class ActorService : BaseService<NetData.OpCode.OpCodeActorOperation>
+    public class ActorService : BaseService<NetData.OpCode.OpCodeActorOperation, NetData.OpCode.OpCodeActorEvent>
     {
         protected override OpCodeModule ServiceOpCode
         {
@@ -83,7 +83,7 @@ namespace Service
 
         public override void Init()
         {
-            throw new NotImplementedException();
+
         }
 
         /// <summary>

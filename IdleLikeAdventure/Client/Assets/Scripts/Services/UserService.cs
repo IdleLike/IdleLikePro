@@ -10,7 +10,7 @@ using NetData.OpCode;
 namespace Service
 {
     
-    public class UserService : BaseService<NetData.OpCode.OpCodeUserOperation>
+    public class UserService : BaseService<NetData.OpCode.OpCodeUserOperation, NetData.OpCode.OpCodeUserEvent>
     {
         //ViewModel
         private CreateCharacterModel createCharacterModel;
@@ -161,7 +161,7 @@ namespace Service
 
         public override void Init()
         {
-            throw new NotImplementedException();
+
         }
     }
 }

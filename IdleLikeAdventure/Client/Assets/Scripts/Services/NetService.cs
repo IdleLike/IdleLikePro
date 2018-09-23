@@ -11,12 +11,12 @@ namespace Service
     /// <summary>
     /// 网络服务类
     /// </summary>
-    public class NetService : BaseService<NetData.OpCode.OpCodeNetOperation>
+    public class NetService : BaseService<NetData.OpCode.OpCodeNetOperation,NetData.OpCode.OpCodeNetEvent>
     {
         private IClient client;                                                          //客户端
         private Dictionary<byte, object> netMsgDataDic = new Dictionary<byte, object>();    //网络消息参数
         private Dictionary<OpCodeModule, Action<Dictionary<byte, object>>> responsers = new Dictionary<OpCodeModule, Action<Dictionary<byte, object>>>();
-
+        private Dictionary<OpCodeModule, Action<Dictionary<byte, object>>> eventReceivers = new Dictionary<OpCodeModule, Action<Dictionary<byte, object>>>();
         protected override OpCodeModule ServiceOpCode
         {
             get
@@ -28,7 +28,7 @@ namespace Service
         public override void Init()
         {
             //初始化客户端
-            client = GameClient.instance.StartClient();
+            client = GameClient.instance.StartClient(OnOperationResponse, OnEvent);
         }
 
         /// <summary>
@@ -66,6 +66,20 @@ namespace Service
         }
 
         /// <summary>
+        /// 注册网络推送消息
+        /// </summary>
+        /// <param name="opCodeModule">Op code module.</param>
+        /// <param name="eventReceiver">Event receiver.</param>
+        public void RegisterNetEventMsg(OpCodeModule opCodeModule, Action<Dictionary<byte, object>> eventReceiver)
+        {
+            if (eventReceivers == null) eventReceivers = new Dictionary<OpCodeModule, Action<Dictionary<byte, object>>>();
+
+            if (eventReceivers.ContainsKey(opCodeModule)) return;
+
+            eventReceivers.Add(opCodeModule, eventReceiver);
+        }
+
+        /// <summary>
         /// 移除网络消息
         /// </summary>
         /// <param name="opCodeModule">Op code module.</param>
@@ -78,7 +92,11 @@ namespace Service
             }
         }
 
-
+        /// <summary>
+        /// 网络消息回调
+        /// </summary>
+        /// <param name="opCodeModule">Op code module.</param>
+        /// <param name="parameter">Parameter.</param>
         private void OnOperationResponse(OpCodeModule opCodeModule, Dictionary<byte, object> parameter)
         {
             Action<Dictionary<byte, object>> responser = null;
@@ -88,7 +106,26 @@ namespace Service
             }
             else
             {
-                Debug.LogError(GetType() + "/OnOperationResponse()/ 不能处理的消息类型： " + opCodeModule);
+                LogError(GetType() + "/OnOperationResponse()/ 不能处理的消息类型： " + opCodeModule);
+            }
+        }
+
+
+        /// <summary>
+        /// 服务器推送消息回调
+        /// </summary>
+        /// <param name="opCodeModule">Op code module.</param>
+        /// <param name="parameter">Parameter.</param>
+        private void OnEvent(OpCodeModule opCodeModule, Dictionary<byte, object> parameter)
+        {
+            Action<Dictionary<byte, object>> eventReceiver = null;
+            if (eventReceivers.TryGetValue(opCodeModule, out eventReceiver))
+            {
+                eventReceiver(parameter);
+            }
+            else
+            {
+                LogError(GetType() + "/OnEvent()/ 不能处理的推送消息类型： " + opCodeModule);
             }
         }
 

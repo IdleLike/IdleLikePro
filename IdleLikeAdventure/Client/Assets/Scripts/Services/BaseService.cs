@@ -8,10 +8,11 @@ using Log;
 
 namespace Service
 {
-    public abstract class BaseService<OpcodeT> where OpcodeT : struct
+    public abstract class BaseService<OpCodeRequest, OpCodeEvent> where OpCodeRequest : struct where OpCodeEvent : struct
     {
     
         private Dictionary<byte, Action<BaseMsgData>> handlers = new Dictionary<byte, Action<BaseMsgData>>();
+        private Dictionary<byte, Action<BaseMsgData>> receivers = new Dictionary<byte, Action<BaseMsgData>>();
         protected abstract OpCodeModule ServiceOpCode { get;}
         public abstract void Init();
         public virtual void AddNetListener(){}
@@ -70,9 +71,8 @@ namespace Service
         /// 发送消息
         /// </summary>
         /// <param name="opcode">Opcode.</param>
-        /// <param name="parameter">Parameter.</param>
-        /// <typeparam name="T">The 1st type parameter.</typeparam>
-        protected void SendNetMsg(OpcodeT opcode, BaseMsgData  msg)
+        /// <param name="msg">Message.</param>
+        protected void SendNetMsg(OpCodeRequest opcode, BaseMsgData  msg)
         {
             GameService.Instance.SendNetMsg(ServiceOpCode,  Convert.ToByte(opcode), msg);
         }
@@ -84,13 +84,13 @@ namespace Service
         /// </summary>
         /// <param name="opcode">Opcode.</param>
         /// <param name="handler">Handler.</param>
-        protected void RegisterNetMsg(OpcodeT opcode, Action<BaseMsgData> handler)
+        protected void RegisterNetMsg(OpCodeRequest opcode, Action<BaseMsgData> handler)
         {
             if (handlers == null) handlers = new Dictionary<byte, Action<BaseMsgData>>();
             byte tempOpCode = Convert.ToByte(opcode);
             if(handlers.ContainsKey(tempOpCode))
             {
-                Debug.Log(GetType() + "/RegisterNetMsg()/ 已经注册本消息：" + opcode.ToString());
+                LogWarning(GetType() + "/RegisterNetMsg()/ 已经注册本消息：" + opcode.ToString());
             }
             else
             {
@@ -102,7 +102,7 @@ namespace Service
         /// 移除本模块网络消息
         /// </summary>
         /// <param name="opcode">Opcode.</param>
-        protected void RemoveNetMsg(OpcodeT opcode)
+        protected void RemoveNetMsg(OpCodeRequest opcode)
         {
             byte tempOpCode = Convert.ToByte(opcode);
             if (handlers.ContainsKey(tempOpCode))
@@ -110,6 +110,39 @@ namespace Service
                 handlers.Remove(tempOpCode);
             }
         }
+
+        /// <summary>
+        /// 注册本模块网络推送消息回调
+        /// </summary>
+        /// <param name="opcode">Opcode.</param>
+        /// <param name="handler">Handler.</param>
+        protected void RegisterNetEventMsg(OpCodeEvent opcode, Action<BaseMsgData> handler)
+        {
+            if (handlers == null) handlers = new Dictionary<byte, Action<BaseMsgData>>();
+            byte tempOpCode = Convert.ToByte(opcode);
+            if (receivers.ContainsKey(tempOpCode))
+            {
+                LogWarning(GetType() + "/RegisterNetMsg()/ 已经注册本消息：" + opcode.ToString());
+            }
+            else
+            {
+                handlers.Add(tempOpCode, handler);
+            }
+        }
+
+        /// <summary>
+        /// 移除本模块网络推送消息回调
+        /// </summary>
+        /// <param name="opcode">Opcode.</param>
+        protected void RemoveNetEventMsg(OpCodeEvent opcode)
+        {
+            byte tempOpCode = Convert.ToByte(opcode);
+            if (receivers.ContainsKey(tempOpCode))
+            {
+                handlers.Remove(tempOpCode);
+            }
+        }
+
         #endregion
 
         #region Log
