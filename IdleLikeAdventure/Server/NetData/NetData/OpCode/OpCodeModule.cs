@@ -12,6 +12,7 @@ namespace NetData.OpCode
     {
         User,
         Actor,
-        Battle
+        Battle,
+        Net
     }
 }
