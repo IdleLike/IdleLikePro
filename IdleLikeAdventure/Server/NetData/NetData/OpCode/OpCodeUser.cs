@@ -13,4 +13,10 @@ namespace NetData.OpCode
         Register,
         Login
     }
+
+    public enum OpCodeUserEvent : byte
+    {
+        Register,
+        Login
+    }
 }

@@ -8,7 +8,11 @@ namespace NetData.OpCode
     /// <summary>
     /// 二级协议：角色模块
     /// </summary>
-    public enum OpCodeNetOperation
+    public enum OpCodeActorOperation : byte
+    {
+    }
+
+    public enum OpCodeActorEvent : byte
     {
     }
 }

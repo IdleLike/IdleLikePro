@@ -6,10 +6,13 @@ using System.Text;
 namespace NetData.OpCode
 {
     /// <summary>
-    /// 二级协议：战斗模块
+    /// 二级协议：角色模块
     /// </summary>
-    public enum OpCodeBattleOperation : byte
+    public enum OpCodeNetOperation : byte
     {
+    }
 
+    public enum OpCodeNetEvent : byte
+    {
     }
 }
