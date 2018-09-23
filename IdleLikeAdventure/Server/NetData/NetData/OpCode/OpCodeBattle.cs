@@ -8,6 +8,11 @@ namespace NetData.OpCode
     /// <summary>
     /// 二级协议：战斗模块
     /// </summary>
+    public enum OpCodeBattleOperation : byte
+    {
+
+    }
+
     public enum OpCodeBattleEvent : byte
     {
 
