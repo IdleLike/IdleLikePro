@@ -54,13 +54,15 @@ namespace Service
         /// 打开UI窗体
         /// </summary>
         /// <param name="uiFormName"></param>
-        protected void OpenUIForm(string uiFormName, object args)
+        protected BaseUIForm OpenUIForm(string uiFormName, object args)
         {
             //if (args != null || args.Length > 0) UIParams.SetParams(args);
             //打开界面
             BaseUIForm baseUIForms = UIManager.GetInstance().ShowUIForms(uiFormName);
             //刷新界面数据
             baseUIForms.UpdatePanel(args);
+
+            return baseUIForms;
            
         }
         #endregion
