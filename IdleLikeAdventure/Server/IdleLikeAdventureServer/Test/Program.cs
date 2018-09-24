@@ -12,7 +12,17 @@ namespace Test
         {
             try
             {
-                SQLiteConnect.SQLite();
+                string inputKey = Console.ReadLine();
+                if (inputKey.Contains("a"))
+                {
+                    SQLiteConnect.CreateDataBase();
+                    Console.WriteLine("创建数据库成功");
+                }
+                else
+                {
+                    SQLiteConnect.SQLite();
+                }
+                
             }
             catch(Exception e)
             {
