@@ -8,8 +8,9 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>Test</RootNamespace>
     <AssemblyName>Test</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -20,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -30,10 +32,10 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>Test.Program</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="IdleLikeAdventureServer">
-      <HintPath>..\..\..\..\..\..\..\Photon\Photon-OnPremise-Server-SDK_v4-0-29-11263\deploy\IdleLikeAdventureServer\IdleLikeAdventureServer.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -47,6 +49,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\NetData\NetData\NetData.csproj">
+      <Project>{eaba52f2-9bbc-451b-8d14-9ee7e2846ffa}</Project>
+      <Name>NetData</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IdleLikeAdventureServer\IdleLikeAdventureServer.csproj">
+      <Project>{807756e1-fd77-42bd-93dd-e7c0adf9c705}</Project>
+      <Name>IdleLikeAdventureServer</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -11,17 +11,18 @@ namespace IdleLikeAdventureServer
     {
         public float x, y, z;
         public string username;
+        private MyGameServer gameServer;
 
 
         public ClientPeer(InitRequest initRequest) : base(initRequest)
         {
-
+            gameServer = MyGameServer.Instance as MyGameServer;
         }
 
         //处理客户端断开链接的后续工作
         protected override void OnDisconnect(PhotonHostRuntimeInterfaces.DisconnectReason reasonCode, string reasonDetail)
         {
-            MyGameServer.Instance.peerList.Remove(this);
+            gameServer.peerList.Remove(this);
         }
 
         //处理客户端的请求
@@ -29,7 +30,7 @@ namespace IdleLikeAdventureServer
         {
             BaseHandler handler = null;
             Dictionary<byte, BaseHandler> handlerDic;
-            MyGameServer.Instance.handlers.TryGetValue((OpCodeModule)operationRequest.OperationCode, out handlerDic);
+            gameServer.handlers.TryGetValue((OpCodeModule)operationRequest.OperationCode, out handlerDic);
             foreach (var item in operationRequest.Parameters)
             {
                 bool isContains = handlerDic.TryGetValue(item.Key, out handler);

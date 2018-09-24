@@ -20,18 +20,18 @@ namespace IdleLikeAdventureServer.SQLite
             //conn.SetPassword("root");
             Console.WriteLine("进入1");
 
-            //using (SQLiteConnection conn = new SQLiteConnection(@"Data Source=test.db;Pooling=true;FailIfMissing=false"))
-            //{
-            //    Console.WriteLine("进入");
-            //    conn.SetPassword("root");
-            //    conn.Open();
-            //    string query = "select * from table1";
-            //    SQLiteCommand cmd = new SQLiteCommand(query, conn);
-            //    SQLiteDataAdapter da = new SQLiteDataAdapter(cmd);
-            //    DataTable dt = new DataTable();
-            //    da.Fill(dt);
-            //    conn.Clone();
-            //}
+            using (conn = new SQLiteConnection(@"Data Source=test.db;Pooling=true;FailIfMissing=false"))
+            {
+                Console.WriteLine("进入");
+                conn.SetPassword("root");
+                conn.Open();
+                string query = "select * from table1";
+                SQLiteCommand cmd = new SQLiteCommand(query, conn);
+                SQLiteDataAdapter da = new SQLiteDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                conn.Clone();
+            }
 
             //string sql = "SELECT * FROM userInfo";
             ////string conStr = "D:/sqlliteDb/document.db";

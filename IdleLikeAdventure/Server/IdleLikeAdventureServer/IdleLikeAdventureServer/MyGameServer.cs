@@ -14,11 +14,11 @@ namespace IdleLikeAdventureServer
     {
         public static readonly ILogger log = LogManager.GetCurrentClassLogger();
 
-        public static MyGameServer Instance
-        {
-            get;
-            private set;
-        }
+        //public static MyGameServer Instance
+        //{
+        //    get;
+        //    private set;
+        //}
         public OpCodeModule OpCode;
         public Dictionary<OpCodeModule, Dictionary<byte, BaseHandler>> handlers = new Dictionary<OpCodeModule, Dictionary<byte, BaseHandler>>();
         public Dictionary<byte, BaseHandler> handlerDict = new Dictionary<byte, BaseHandler>();
@@ -38,7 +38,7 @@ namespace IdleLikeAdventureServer
         //初始化
         protected override void Setup()
         {
-            Instance = this;
+            //Instance = this;
             // 日志的初始化
             log4net.GlobalContext.Properties["Photon:ApplicationLogPath"] = Path.Combine(
                                                                     Path.Combine(this.ApplicationRootPath, "bin_Win64"), "log");
