@@ -12,43 +12,21 @@ namespace IdleLikeAdventureServer.SQLite
         static SQLiteConnection conn;
         public static void SQLite()
         {
-            ////创建一个数据库
-            //SQLiteConnection.CreateFile("Idle.sqlite");
-            ////创建连接字符串
-            //conn = new SQLiteConnection("Data Source = Idle.sqlite;Version = 3;");
-            ////数据库密码
-            //conn.SetPassword("root");
-            Console.WriteLine("进入1");
+            using (conn = new SQLiteConnection("Data Source=Database.sqlite;Version=3;"))
+            {
+                conn.Open();
+                string query = "select * from table1";
+                SQLiteCommand cmd = new SQLiteCommand(query, conn);
+                SQLiteDataAdapter da = new SQLiteDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                conn.Clone();
+            }
+        }
 
-            //using (SQLiteConnection conn = new SQLiteConnection(@"Data Source=test.db;Pooling=true;FailIfMissing=false"))
-            //{
-            //    Console.WriteLine("进入");
-            //    conn.SetPassword("root");
-            //    conn.Open();
-            //    string query = "select * from table1";
-            //    SQLiteCommand cmd = new SQLiteCommand(query, conn);
-            //    SQLiteDataAdapter da = new SQLiteDataAdapter(cmd);
-            //    DataTable dt = new DataTable();
-            //    da.Fill(dt);
-            //    conn.Clone();
-            //}
-
-            //string sql = "SELECT * FROM userInfo";
-            ////string conStr = "D:/sqlliteDb/document.db";
-            //string connStr = @"Data Source=" + @"D:\sqlliteDb\document.db;Initial Catalog=sqlite;Integrated Security=True;Max Pool Size=10";
-            //using (SQLiteConnection conn = new SQLiteConnection(connStr))
-            //{
-            //    //conn.Open();
-            //    using (SQLiteDataAdapter ap = new SQLiteDataAdapter(sql, conn))
-            //    {
-            //        DataSet ds = new DataSet();
-            //        ap.Fill(ds);
-
-            //        DataTable dt = ds.Tables[0];
-            //    }
-            //}
-
-
+        public static void CreateDataBase()
+        {
+            SQLiteConnection.CreateFile("Database.sqlite");
         }
 
         public void Create()

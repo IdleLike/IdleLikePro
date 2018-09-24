@@ -41,10 +41,11 @@
   <ItemGroup>
     <Compile Include="Message\BaseMsgData.cs" />
     <Compile Include="OpCode\ErrorCode.cs" />
-    <Compile Include="OpCode\OpCodeActorOperation.cs" />
-    <Compile Include="OpCode\OpCodeBattleOperation.cs" />
+    <Compile Include="OpCode\OpCodeActor.cs" />
+    <Compile Include="OpCode\OpCodeBattle.cs" />
     <Compile Include="OpCode\OpCodeModule.cs" />
-    <Compile Include="OpCode\OpCodeUserOperation.cs" />
+    <Compile Include="OpCode\OpCodeNet.cs" />
+    <Compile Include="OpCode\OpCodeUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tool\DictTool.cs" />
   </ItemGroup>
