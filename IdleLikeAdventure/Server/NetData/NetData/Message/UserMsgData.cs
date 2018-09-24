@@ -5,8 +5,9 @@ using System.Text;
 
 namespace NetData.Message
 {
-    public class RegisterRespondeMsgData : BaseMsgData
+    public class UserMsgData
     {
-        public UserMsgData userData;
+        public int DatabaseID;
+        public DateTime CreateTime;
     }
 }

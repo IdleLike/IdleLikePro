@@ -7,5 +7,6 @@ namespace NetData.Message
 {
     public class LoginRespondeMsgData : BaseMsgData
     {
+        public UserMsgData userData;
     }
 }
