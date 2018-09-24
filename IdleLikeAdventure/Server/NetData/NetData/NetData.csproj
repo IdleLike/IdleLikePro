@@ -40,6 +40,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Message\BaseMsgData.cs" />
+    <Compile Include="Message\LoginRequstMsgData.cs" />
+    <Compile Include="Message\LoginRespondeMsgData.cs" />
+    <Compile Include="Message\RegisterRequestMsgData.cs" />
+    <Compile Include="Message\RegisterRespondeMsgData.cs" />
+    <Compile Include="Message\UserMsgData.cs" />
     <Compile Include="OpCode\ErrorCode.cs" />
     <Compile Include="OpCode\OpCodeActor.cs" />
     <Compile Include="OpCode\OpCodeBattle.cs" />
