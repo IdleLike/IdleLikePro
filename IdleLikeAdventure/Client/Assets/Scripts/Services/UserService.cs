@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 using Entity;
 using UI.Panel;
 using NetData.OpCode;
+using NetData.Message;
+using SUIFW;
 
 namespace Service
 {
@@ -15,6 +17,11 @@ namespace Service
         //ViewModel
         private CreateCharacterModel createCharacterModel;
         private BattleRoomModel battleRoomModel;
+
+        private LoginPanel.LoginViewModel loginViewModel;
+        private RegisterPanel.RegisterViewModel registerViewModel;
+        private BaseUIForm loginPanel;
+        private BaseUIForm registerPanel;
 
         protected override OpCodeModule ServiceOpCode
         {
@@ -26,23 +33,39 @@ namespace Service
 
         internal void Login()
         {
-            //是否已经登陆过
-            if(GameGlobal.LocalData.UserID == 0)
-            {
-                //TODO 创建新用户
-                //跳转主场景， 显示创建用户界面
-                //SceneManager.LoadScene(GameGlobal.SCENE_MAIN);
-                SetCreateCharacterModel();
-                OpenUIForm(GameGlobal.PANEL_CREATECHARACTER, createCharacterModel);
-                //InitBattle();
-                //OpenUIForm(GameGlobal.PANEL_BATTLEROOM, battleRoomModel);
-            }
-            else
-            {
-                //TODO 登陆老用户
-                //加载玩家数据， 跳转主场景， 显示战斗界面
-            }
+         
+            if (loginViewModel == null) loginViewModel = new LoginPanel.LoginViewModel();
+            loginViewModel.Btn_Action = OnOpenRegisterPanel;
+            loginViewModel.LoginCallBack = LoginCallBack;
+            loginPanel = OpenUIForm("LoginPanel", loginViewModel);
         }
+
+        private void LoginCallBack(string email, string password)//,ushort serverId)
+        {
+            LoginRequstMsgData loginRequstMsgData = new LoginRequstMsgData();
+            loginRequstMsgData.Account = email;
+            loginRequstMsgData.Password = password;
+            //loginRequstMsgData.ServerID = serverId;
+            SendNetMsg(OpCodeUserOperation.Login, loginRequstMsgData);
+        }
+
+        private void OnOpenRegisterPanel()
+        {
+            if (registerViewModel == null) registerViewModel = new RegisterPanel.RegisterViewModel();
+            registerViewModel.RegisterCallBack = RegisterCallBack;
+            registerPanel = OpenUIForm("RegisterPanel", registerViewModel);
+        }
+
+        private void RegisterCallBack(string email,string password,ushort serverId)
+        {            
+            RegisterRequestMsgData registerRequestMsgData = new RegisterRequestMsgData();
+            registerRequestMsgData.Account = email;
+            registerRequestMsgData.Password = password;
+            registerRequestMsgData.ServerID = serverId;
+            SendNetMsg(OpCodeUserOperation.Register,registerRequestMsgData);
+        }
+
+
 
         //  创建角色界面数据
         private void SetCreateCharacterModel()
@@ -162,6 +185,68 @@ namespace Service
         public override void Init()
         {
 
+        }
+
+        public override void AddNetListener()
+        {
+            base.AddNetListener();
+            RegisterNetMsg(OpCodeUserOperation.Register,RegisterHandler);
+            RegisterNetMsg(OpCodeUserOperation.Login, LoginHandler);
+
+        }
+
+        private void LoginHandler(BaseMsgData data)
+        {
+            LoginRespondeMsgData loginRespondeMsgData = data as LoginRespondeMsgData;
+            if (loginRespondeMsgData != null)
+            {
+                switch (loginRespondeMsgData.Error)
+                {
+                    case ErrorCode.LoginAccountError:
+                        SendMessage("Register", "LoginAccountError", "邮箱账号或密码错误！");
+                        break;
+                    case ErrorCode.LoginPasswordError:
+                        SendMessage("Register", "LoginPasswordError", "邮箱账号或密码错误！");
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
+        private void RegisterHandler(BaseMsgData data)
+        {
+            RegisterRespondeMsgData registerRespondeMsgData = data as RegisterRespondeMsgData;
+            if (registerRespondeMsgData != null)
+            {
+                if(registerRespondeMsgData.IsError)
+                {
+                    switch (registerRespondeMsgData.Error)
+                    {
+                        case ErrorCode.RegisterAccountError:
+                            SendMessage("Register", "RegisterAccountError", "邮箱账号错误！");
+                            break;
+                        case ErrorCode.RegisterAccountExist:
+                            SendMessage("Register", "RegisterAccountExist", "邮箱账号已注册！");
+                            break;
+                        case ErrorCode.RegisterPasswordError:
+                            SendMessage("Register", "RegisterPasswordError", "密码错误，请重新输入密码！");
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                else
+                {
+                    //TODO
+                    //保存玩家信息
+                    //前往创建界面
+                }
+            }
+            else
+            {
+                LogError("RegisterHandler\\RegisterRespondeMsgData == null");
+            }
         }
     }
 }
