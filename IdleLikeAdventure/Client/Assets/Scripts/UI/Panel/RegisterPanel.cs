@@ -1,4 +1,5 @@
-﻿using SUIFW;
+﻿using NetData.OpCode;
+using SUIFW;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -24,11 +25,11 @@ public class RegisterPanel : BaseUIForm
     //邮箱格式集合
     private List<string> m_EmailFormatList = new List<string>();
     private RegisterViewModel m_RegisterViewModel = null;
-    private MessageCenter.DelMessageDelivery m_ReceiveRegisterMessage = null;
+    private string m_ErrorMessage;
 
     private void Start()
     {
-        ReceiveMessage("Register", m_ReceiveRegisterMessage);
+        ReceiveMessage("Register", ReceiveRegisterMessage);
         
         m_EmailFormatList.Add("qq.com");
         m_EmailFormatList.Add("163.com");
@@ -37,6 +38,31 @@ public class RegisterPanel : BaseUIForm
 
         m_Btn_Register.onClick.AddListener(OnRegisterCallBack);
     }
+    
+    private void ReceiveRegisterMessage(KeyValuesUpdate kv)
+    {
+        m_ErrorMessage = kv.Values.ToString();
+        switch (kv.Key)
+        {
+            case "RegisterAccountError":
+                m_Text_EmailErrorOrRegisterOrNull.text = m_ErrorMessage;
+                DisableAfterTwoSeconds(m_Text_EmailErrorOrRegisterOrNull);
+                break;
+            case "RegisterAccountExist":
+                m_Text_EmailErrorOrRegisterOrNull.text = m_ErrorMessage;
+                DisableAfterTwoSeconds(m_Text_EmailErrorOrRegisterOrNull);
+                break;
+            case "RegisterPasswordError":
+                m_Text_PasswordNull.text = m_ErrorMessage;
+                DisableAfterTwoSeconds(m_Text_PasswordNull);
+
+                break;
+            default:
+                break;
+        }
+        
+    }
+
     /// <summary>
     /// 注册按钮回调
     /// </summary>
@@ -50,7 +76,14 @@ public class RegisterPanel : BaseUIForm
         {
             m_RegisterViewModel.RegisterCallBack(m_Input_Email.text, m_Input_SetPassword.text, (ushort)m_Dropdown_SelectServer.value);
         }
-        
+
+        if (m_ErrorMessage == "" || m_ErrorMessage == string.Empty)
+        {
+            Log("注册失败");
+            return;
+        }
+        Destroy(gameObject);
+        Log("注册成功");
     }
     /// <summary>
     /// 邮箱格式检测
@@ -137,8 +170,19 @@ public class RegisterPanel : BaseUIForm
         yield return new WaitForSeconds(2);
         go.gameObject.SetActive(false);
     }
+    /// <summary>
+    /// 两秒后禁用
+    /// </summary>
+    /// <param name="go"></param>
+    /// <returns></returns>
+    private IEnumerator DisableAfterTwoSeconds(Text go)
+    {
+        go.gameObject.SetActive(true);
+        yield return new WaitForSeconds(2);
+        go.gameObject.SetActive(false);
+    }
 
-    
+
     public override void UpdatePanel(object viewModel)
     {
         m_RegisterViewModel = (RegisterViewModel)viewModel;

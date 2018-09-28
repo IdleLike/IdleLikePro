@@ -24,9 +24,12 @@ public class LoginPanel : BaseUIForm
     //邮箱格式集合
     private List<string> m_EmailFormatList = new List<string>();
     private LoginViewModel m_LoginViewModel = null;
+    private string m_ErrorMessage;
 
     private void Start()
     {
+        ReceiveMessage("Login", ReceiveLoginMessage);
+
         m_EmailFormatList.Add("qq.com");
         m_EmailFormatList.Add("163.com");
         m_EmailFormatList.Add("sina.com");
@@ -34,9 +37,19 @@ public class LoginPanel : BaseUIForm
 
         if (m_LoginViewModel != null)
         {
+            //注册按钮添加事件
             m_Btn_Register.onClick.AddListener(m_LoginViewModel.Btn_Action);
         }
         m_Btn_Login.onClick.AddListener(OnLoginCallBack);
+    }
+
+    private void ReceiveLoginMessage(KeyValuesUpdate kv)
+    {
+        m_ErrorMessage = kv.Values.ToString();
+
+        m_Text_EmailNullOrError.text = m_ErrorMessage;
+        DisableAfterTwoSeconds(m_Text_EmailNullOrError);
+       
     }
 
     /// <summary>
@@ -51,6 +64,13 @@ public class LoginPanel : BaseUIForm
         {
             m_LoginViewModel.LoginCallBack(m_Input_Email.text, m_Input_Password.text);
         }
+
+        if (m_ErrorMessage == "" || m_ErrorMessage == string.Empty)
+        {
+            Log("注册失败");
+            return;
+        }
+        Log("注册成功");
     }
     /// <summary>
     /// 邮箱格式检测
@@ -111,7 +131,7 @@ public class LoginPanel : BaseUIForm
     /// <param name="passWord1"></param>
     /// <param name="passWord2"></param>
     /// <returns></returns>
-    private IEnumerator PasswordChecked(Text go, InputField passWord1, InputField passWord2 = null)
+    private IEnumerator PasswordChecked(Text go, InputField passWord1)
     {
         if (passWord1.text == "" || passWord1.text == String.Empty)
         {
@@ -122,11 +142,6 @@ public class LoginPanel : BaseUIForm
         {
             go.gameObject.SetActive(true);
             go.text = "密码不能少于6位数！";
-        }
-        else if (passWord1 == m_Input_ConfirmPassword && passWord1.text != passWord2.text)
-        {
-            go.gameObject.SetActive(true);
-            go.text = "两次密码输入不一样！";
         }
         else
         {
@@ -143,6 +158,18 @@ public class LoginPanel : BaseUIForm
     public override void UpdatePanel(object viewModel)
     {
         m_LoginViewModel = viewModel as LoginViewModel;
+    }
+
+    /// <summary>
+    /// 两秒后禁用
+    /// </summary>
+    /// <param name="go"></param>
+    /// <returns></returns>
+    private IEnumerator DisableAfterTwoSeconds(Text go)
+    {
+        go.gameObject.SetActive(true);
+        yield return new WaitForSeconds(2);
+        go.gameObject.SetActive(false);
     }
 }
 

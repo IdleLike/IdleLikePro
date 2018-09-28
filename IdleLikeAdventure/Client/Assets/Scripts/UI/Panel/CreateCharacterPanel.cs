@@ -39,7 +39,7 @@ public class CreateCharacterPanel : BaseUIForm
     public Text CharacterTwoIsRepeatOrNull;
     public Text CharacterThreeIsRepeatOrNull;
 
-    private CreateCharacterModel m_CreateCharacterModel;
+    private CreateCharacterViewModel m_CreateCharacterModel;
 
     BaseEventData m_BaseEventData;
 
@@ -158,11 +158,11 @@ public class CreateCharacterPanel : BaseUIForm
 
     private void InitModel(object viewModel)
     {
-        if (viewModel == null || !(viewModel is CreateCharacterModel))
+        if (viewModel == null || !(viewModel is CreateCharacterViewModel))
         {
             return;
         }
-        m_CreateCharacterModel = (CreateCharacterModel)viewModel;
+        m_CreateCharacterModel = (CreateCharacterViewModel)viewModel;
         for (int i = 0; i < m_CreateCharacterModel.createCharacterViewModels.Count; i++)
         {
             Dropdown.OptionData op = new Dropdown.OptionData();

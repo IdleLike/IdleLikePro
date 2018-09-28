@@ -4,9 +4,9 @@ using System.Collections.Generic;
 
 namespace UI.Model
 {
-    public class CreateCharacterModel
+    public class CreateCharacterViewModel
     {
-        public struct CreateCharacterViewModel
+        public struct CharacterViewModel
         {
             public uint raceID { get; set; }
             public string raceName { get; set; }
@@ -26,9 +26,9 @@ namespace UI.Model
 
         public Func<string, bool> NameIsRepeatCallback;
 
-        private List<CreateCharacterViewModel> m_createCharacterViewModels;
+        private List<CharacterViewModel> m_createCharacterViewModels;
 
-        public List<CreateCharacterViewModel> createCharacterViewModels
+        public List<CharacterViewModel> createCharacterViewModels
         {
             get
             {

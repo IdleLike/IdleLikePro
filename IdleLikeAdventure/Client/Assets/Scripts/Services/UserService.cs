@@ -15,13 +15,17 @@ namespace Service
     public class UserService : BaseService<NetData.OpCode.OpCodeUserOperation, NetData.OpCode.OpCodeUserEvent>
     {
         //ViewModel
-        private CreateCharacterModel createCharacterModel;
+        private CreateCharacterViewModel createCharacterModel;
         private BattleRoomModel battleRoomModel;
 
+
+      
         private LoginPanel.LoginViewModel loginViewModel;
         private RegisterPanel.RegisterViewModel registerViewModel;
+        private CreateCharacterViewModel createCharacterViewModel;
         private BaseUIForm loginPanel;
         private BaseUIForm registerPanel;
+        private BaseUIForm createCharacterPanel;
 
         protected override OpCodeModule ServiceOpCode
         {
@@ -70,15 +74,15 @@ namespace Service
         //  创建角色界面数据
         private void SetCreateCharacterModel()
         {
-            if (createCharacterModel == null) createCharacterModel = new CreateCharacterModel();
+            if (createCharacterModel == null) createCharacterModel = new CreateCharacterViewModel();
 
-            if (createCharacterModel.createCharacterViewModels == null) createCharacterModel.createCharacterViewModels = new List<CreateCharacterModel.CreateCharacterViewModel>();
+            if (createCharacterModel.createCharacterViewModels == null) createCharacterModel.createCharacterViewModels = new List<CreateCharacterViewModel.CharacterViewModel>();
 
             //初始化所有职业数据
             for (int i = 0; i < TestStaticData.Instance.RaceDatas.Count; i++)
             {
                 // 数据赋值
-                CreateCharacterModel.CreateCharacterViewModel rocal = new CreateCharacterModel.CreateCharacterViewModel();
+                CreateCharacterViewModel.CharacterViewModel rocal = new CreateCharacterViewModel.CharacterViewModel();
                 rocal.raceID =  TestStaticData.Instance.RaceDatas[i].ID;
                 rocal.raceName = TestStaticData.Instance.RaceDatas[i].Name;
                 rocal.raceDes = TestStaticData.Instance.RaceDatas[i].Describe;
@@ -203,15 +207,23 @@ namespace Service
                 switch (loginRespondeMsgData.Error)
                 {
                     case ErrorCode.LoginAccountError:
-                        SendMessage("Register", "LoginAccountError", "邮箱账号或密码错误！");
+                        SendMessage("Login", "LoginAccountError", "邮箱账号或密码错误！");
                         break;
                     case ErrorCode.LoginPasswordError:
-                        SendMessage("Register", "LoginPasswordError", "邮箱账号或密码错误！");
+                        SendMessage("Login", "LoginPasswordError", "邮箱账号或密码错误！");
                         break;
                     default:
                         break;
                 }
+                OnOpenCreateCharacterPanel();
             }
+        }
+
+        private void OnOpenCreateCharacterPanel()
+        {
+            if (createCharacterViewModel == null) createCharacterViewModel = new CreateCharacterViewModel();
+            //registerViewModel.RegisterCallBack = RegisterCallBack;
+            createCharacterPanel = OpenUIForm("CreateCharacterPanel", createCharacterViewModel);
         }
 
         private void RegisterHandler(BaseMsgData data)
@@ -224,13 +236,13 @@ namespace Service
                     switch (registerRespondeMsgData.Error)
                     {
                         case ErrorCode.RegisterAccountError:
-                            SendMessage("Register", "RegisterAccountError", "邮箱账号错误！");
+                            SendMessage("Register", ErrorCode.RegisterAccountError.ToString(), "邮箱账号错误！");
                             break;
                         case ErrorCode.RegisterAccountExist:
-                            SendMessage("Register", "RegisterAccountExist", "邮箱账号已注册！");
+                            SendMessage("Register", ErrorCode.RegisterAccountExist.ToString(), "邮箱账号已注册！");
                             break;
                         case ErrorCode.RegisterPasswordError:
-                            SendMessage("Register", "RegisterPasswordError", "密码错误，请重新输入密码！");
+                            SendMessage("Register", ErrorCode.RegisterPasswordError.ToString(), "密码格式错误，请重新输入密码！");
                             break;
                         default:
                             break;
@@ -241,6 +253,9 @@ namespace Service
                     //TODO
                     //保存玩家信息
                     //前往创建界面
+                    OnOpenCreateCharacterPanel();
+                    
+                    SendMessage("CreateCharacter", "playerInfo", registerRespondeMsgData.userData);
                 }
             }
             else
