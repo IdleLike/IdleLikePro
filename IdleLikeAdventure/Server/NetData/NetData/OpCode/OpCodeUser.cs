@@ -11,7 +11,8 @@ namespace NetData.OpCode
     public enum OpCodeUserOperation : byte
     {
         Register,
-        Login
+        Login,
+        Create
     }
 
     public enum OpCodeUserEvent : byte
