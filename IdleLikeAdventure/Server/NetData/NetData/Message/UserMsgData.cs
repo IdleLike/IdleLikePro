@@ -8,6 +8,7 @@ namespace NetData.Message
     public class UserMsgData
     {
         public int DatabaseID;
+        public string Name;
         public DateTime CreateTime;
     }
 }
