@@ -47,3 +47,5 @@ C:\Users\fishf\Documents\GitHub\IdleLikePro\IdleLikeAdventure\Server\IdleLikeAdv
 C:\Users\fishf\Documents\GitHub\IdleLikePro\IdleLikeAdventure\Server\IdleLikeAdventureServer\Test\obj\Debug\Test.exe
 C:\Users\fishf\Documents\GitHub\IdleLikePro\IdleLikeAdventure\Server\IdleLikeAdventureServer\Test\obj\Debug\Test.pdb
 D:\U3D\IdleLikeAdventure\IdleLikePro\IdleLikeAdventure\Server\IdleLikeAdventureServer\Test\bin\Debug\log4net.config
+C:\Users\fishf\Documents\GitHub\IdleLikePro\IdleLikeAdventure\Server\IdleLikeAdventureServer\Test\bin\Debug\System.Data.SQLite.xml
+C:\Users\fishf\Documents\GitHub\IdleLikePro\IdleLikeAdventure\Server\IdleLikeAdventureServer\Test\bin\Debug\System.Data.SQLite.dll.config
