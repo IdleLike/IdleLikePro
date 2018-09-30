@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using NetData.Message;
 using NetData.OpCode;
@@ -18,9 +20,9 @@ namespace IdleLikeAdventureServer.Handler
 
         public override void OnOperationRequest(BaseMsgData baseMsgData, SendParameters sendParameters, ClientPeer peer)
         {
-            Console.WriteLine("++++++++++++++++++++++++++++++++++++++");
+            MyGameServer.log.Info("++++++++++++++++++++++++++++++++++++++");
 
-            RegisterRequestMsgData registerRequestMsgData = baseMsgData as RegisterRequestMsgData;
+            //RegisterRequestMsgData registerRequestMsgData = baseMsgData as RegisterRequestMsgData;
 
             UserMsgData userMsgData = new UserMsgData();
 
@@ -30,9 +32,7 @@ namespace IdleLikeAdventureServer.Handler
             RegisterRespondeMsgData registerRespondeMsgData = new RegisterRespondeMsgData();
             registerRespondeMsgData.userData = userMsgData;
 
-
-
-            peer.SendMessage(userMsgData, sendParameters);
+            SendResponse(peer, sendParameters, registerRespondeMsgData);
         }
     }
 }

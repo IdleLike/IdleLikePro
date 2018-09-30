@@ -36,7 +36,8 @@ namespace IdleLikeAdventureServer
                 bool isContains = handlerDic.TryGetValue(item.Key, out handler);
                 if (isContains)
                 {
-                    handler.OnOperationRequest((BaseMsgData)item.Value, sendParameters, this);
+                    //handler.OnOperationRequest((BaseMsgData)item.Value, sendParameters, this);
+                    handler.OnOperationRequest(null, sendParameters, this);
                 }
             }
         }
