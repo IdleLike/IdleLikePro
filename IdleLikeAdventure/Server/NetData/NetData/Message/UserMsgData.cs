@@ -5,7 +5,7 @@ using System.Text;
 
 namespace NetData.Message
 {
-    public class UserMsgData
+    public class UserMsgData : BaseMsgData
     {
         public int DatabaseID;
         public string Name;
