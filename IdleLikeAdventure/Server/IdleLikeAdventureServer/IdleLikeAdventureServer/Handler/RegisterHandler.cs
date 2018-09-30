@@ -18,7 +18,21 @@ namespace IdleLikeAdventureServer.Handler
 
         public override void OnOperationRequest(BaseMsgData baseMsgData, SendParameters sendParameters, ClientPeer peer)
         {
-            
+            Console.WriteLine("++++++++++++++++++++++++++++++++++++++");
+
+            RegisterRequestMsgData registerRequestMsgData = baseMsgData as RegisterRequestMsgData;
+
+            UserMsgData userMsgData = new UserMsgData();
+
+            userMsgData.CreateTime = DateTime.Now;
+            userMsgData.Name = "测试";
+            userMsgData.DatabaseID = 100;
+            RegisterRespondeMsgData registerRespondeMsgData = new RegisterRespondeMsgData();
+            registerRespondeMsgData.userData = userMsgData;
+
+
+
+            peer.SendMessage(userMsgData, sendParameters);
         }
     }
 }

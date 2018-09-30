@@ -19,7 +19,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\..\..\..\..\..\Photon\Photon-OnPremise-Server-SDK_v4-0-29-11263\deploy\IdleLikeAdventureServer\</OutputPath>
+    <OutputPath>..\..\..\..\..\..\..\..\..\Photon\Photon-OnPremise-Server-SDK_v4-0-29-11263\deploy\IdleLikeAdventureServer\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -82,6 +82,7 @@
     <Compile Include="Handler\RegisterHandler.cs" />
     <Compile Include="MyGameServer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServerDataCenter.cs" />
     <Compile Include="SQLite\SQLiteConnect.cs" />
   </ItemGroup>
   <ItemGroup>

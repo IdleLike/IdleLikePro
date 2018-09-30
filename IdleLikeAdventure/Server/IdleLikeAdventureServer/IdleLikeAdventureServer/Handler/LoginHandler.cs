@@ -18,7 +18,7 @@ namespace IdleLikeAdventureServer.Handler
 
         public override void OnOperationRequest(BaseMsgData baseMsgData, SendParameters sendParameters, ClientPeer peer)
         {
-            
+           
         }
     }
 }
