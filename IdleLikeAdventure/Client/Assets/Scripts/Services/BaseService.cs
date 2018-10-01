@@ -5,6 +5,8 @@ using NetData.Message;
 using System.Collections.Generic;
 using UnityEngine;
 using Log;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
 
 namespace Service
 {
@@ -14,6 +16,11 @@ namespace Service
         private Dictionary<byte, Action<BaseMsgData>> handlers = new Dictionary<byte, Action<BaseMsgData>>();
 
         private Dictionary<byte, Action<BaseMsgData>> receivers = new Dictionary<byte, Action<BaseMsgData>>();
+
+        private static BinaryFormatter binaryFormatter = new BinaryFormatter();
+        //private static MemoryStream memoryStream = new MemoryStream(); 
+        
+
         protected abstract OpCodeModule ServiceOpCode { get;}
         public abstract void Init();
         public virtual void AddNetListener()
@@ -197,7 +204,9 @@ namespace Service
             {
                 if (handlers.TryGetValue(item.Key, out handler))
                 {
-                    handler(item.Value as BaseMsgData);
+                    MemoryStream memoryStream = new MemoryStream(item.Value as byte[]);
+                    object value = binaryFormatter.Deserialize(memoryStream);
+                    handler(value as BaseMsgData);
                 }
             }
         }
