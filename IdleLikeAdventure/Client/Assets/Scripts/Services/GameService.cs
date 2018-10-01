@@ -26,6 +26,7 @@ namespace Service
             battleService = new BattleService();
 
             NetService.Init();
+            userService.Init();
         }
 
         /// <summary>

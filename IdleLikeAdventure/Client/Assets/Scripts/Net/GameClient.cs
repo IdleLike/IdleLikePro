@@ -80,7 +80,7 @@ namespace Net
         public void OnOperationResponse(OperationResponse operationResponse)
         {
             TLog.LogInput("接收到服务器处理的返回消息", Level.Low, false);
-
+            Debug.Log("接收到服务器处理的返回消息");
             m_ResponseHandlerCenter((OpCodeModule)operationResponse.OperationCode, operationResponse.Parameters);
         }
 
@@ -103,7 +103,13 @@ namespace Net
 
         public bool SendMessage(OpCodeModule opCode, Dictionary<byte, object> parameters)
         {
-            return m_PhotonPeer.OpCustom((byte)opCode, parameters, true);
+            Dictionary<byte, object> obj = new Dictionary<byte, object>();
+            //obj.Add(0,new BaseMsgData());
+            obj.Add(0,1);
+
+            //return m_PhotonPeer.OpCustom((byte)opCode, parameters, true);
+            return m_PhotonPeer.OpCustom((byte)opCode, obj, true);
+
         }
 
         private IEnumerator StartReceive()

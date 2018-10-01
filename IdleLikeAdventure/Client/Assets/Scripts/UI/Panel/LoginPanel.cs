@@ -35,11 +35,7 @@ public class LoginPanel : BaseUIForm
         m_EmailFormatList.Add("sina.com");
         m_EmailFormatList.Add("sina.cn");
 
-        if (m_LoginViewModel != null)
-        {
-            //注册按钮添加事件
-            m_Btn_Register.onClick.AddListener(m_LoginViewModel.Btn_Action);
-        }
+
         m_Btn_Login.onClick.AddListener(OnLoginCallBack);
     }
 
@@ -158,6 +154,9 @@ public class LoginPanel : BaseUIForm
     public override void UpdatePanel(object viewModel)
     {
         m_LoginViewModel = viewModel as LoginViewModel;
+
+        //注册按钮添加事件
+        m_Btn_Register.onClick.AddListener(m_LoginViewModel.Btn_Action);
     }
 
     /// <summary>

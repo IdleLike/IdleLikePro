@@ -17,15 +17,15 @@ namespace Service
         //ViewModel
         private CreateCharacterViewModel createCharacterModel;
         private BattleRoomModel battleRoomModel;
-
-
-      
+     
         private LoginPanel.LoginViewModel loginViewModel;
         private RegisterPanel.RegisterViewModel registerViewModel;
         private CreateCharacterViewModel createCharacterViewModel;
         private BaseUIForm loginPanel;
         private BaseUIForm registerPanel;
         private BaseUIForm createCharacterPanel;
+
+        private UserEntity userEntity = new UserEntity();
 
         protected override OpCodeModule ServiceOpCode
         {
@@ -41,7 +41,7 @@ namespace Service
             if (loginViewModel == null) loginViewModel = new LoginPanel.LoginViewModel();
             loginViewModel.Btn_Action = OnOpenRegisterPanel;
             loginViewModel.LoginCallBack = LoginCallBack;
-            loginPanel = OpenUIForm("LoginPanel", loginViewModel);
+            loginPanel = OpenUIForm("Login", loginViewModel);
         }
 
         private void LoginCallBack(string email, string password)//,ushort serverId)
@@ -57,7 +57,7 @@ namespace Service
         {
             if (registerViewModel == null) registerViewModel = new RegisterPanel.RegisterViewModel();
             registerViewModel.RegisterCallBack = RegisterCallBack;
-            registerPanel = OpenUIForm("RegisterPanel", registerViewModel);
+            registerPanel = OpenUIForm("Register", registerViewModel);
         }
 
         private void RegisterCallBack(string email,string password,ushort serverId)
@@ -188,7 +188,7 @@ namespace Service
 
         public override void Init()
         {
-
+            AddNetListener();
         }
 
         public override void AddNetListener()
@@ -229,6 +229,8 @@ namespace Service
         private void RegisterHandler(BaseMsgData data)
         {
             RegisterRespondeMsgData registerRespondeMsgData = data as RegisterRespondeMsgData;
+            Log(registerRespondeMsgData.userData.Name);
+
             if (registerRespondeMsgData != null)
             {
                 if(registerRespondeMsgData.IsError)
@@ -254,8 +256,12 @@ namespace Service
                     //保存玩家信息
                     //前往创建界面
                     OnOpenCreateCharacterPanel();
-                    
-                    SendMessage("CreateCharacter", "playerInfo", registerRespondeMsgData.userData);
+
+                    userEntity.CreateTime = registerRespondeMsgData.userData.CreateTime;
+                    userEntity.DatabaseID = registerRespondeMsgData.userData.DatabaseID;
+                    userEntity.Name = registerRespondeMsgData.userData.Name;
+
+
                 }
             }
             else

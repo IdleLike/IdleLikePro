@@ -13,6 +13,14 @@
     {
       "Key": "BattleRoom",
       "Value": "BattleRoomPanel"
+    },
+    {
+      "Key": "Register",
+      "Value": "RegisterPanel"
+    },
+    {
+      "Key": "Login",
+      "Value": "LoginPanel"
     }
   ]
 }

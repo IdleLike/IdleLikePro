@@ -651,7 +651,7 @@ MonoBehaviour:
   m_Input_Email: {fileID: 114253723298377364}
   m_Input_SetPassword: {fileID: 114610342544974474}
   m_Input_ConfirmPassword: {fileID: 114689743579541498}
-  m_Dropdown_SelectServer: {fileID: 0}
+  m_Dropdown_SelectServer: {fileID: 114072946280625412}
   m_Btn_Register: {fileID: 114703760303830192}
   m_Text_EmailErrorOrRegisterOrNull: {fileID: 114662002246019828}
   m_Text_PasswordNull: {fileID: 114508142043190504}

@@ -29,6 +29,6 @@ public class GameStart : MonoBehaviour
         //初始化游戏服务
         GameService.Instance.Initialize();
         //登陆逻辑
-       //GameService.Instance.Login();
+        GameService.Instance.Login();
 	}	
 }

@@ -9,6 +9,8 @@ namespace Entity
     public class UserEntity : BaseEntity
     {
         public string Name;
+        public DateTime CreateTime;
+        public int DatabaseID;
     }
 }
 
