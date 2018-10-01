@@ -47,6 +47,11 @@ namespace Service
         {
             NetService.SendNetMsg(opCodeModule, opCodeOperation, msg);
         }
+
+        public void RegisterNetMsgCenter(OpCodeModule opCodeModule, Action<Dictionary<byte, object>> modelMsgCenter)
+        {
+            NetService.RegisterNetMsg(opCodeModule, modelMsgCenter);
+        }
     }
 }
 

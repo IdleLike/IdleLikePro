@@ -12,10 +12,14 @@ namespace Service
     {
     
         private Dictionary<byte, Action<BaseMsgData>> handlers = new Dictionary<byte, Action<BaseMsgData>>();
+
         private Dictionary<byte, Action<BaseMsgData>> receivers = new Dictionary<byte, Action<BaseMsgData>>();
         protected abstract OpCodeModule ServiceOpCode { get;}
         public abstract void Init();
-        public virtual void AddNetListener(){}
+        public virtual void AddNetListener()
+        {
+            GameService.Instance.RegisterNetMsgCenter(ServiceOpCode, OnOperationResponse);
+        }
 
         #region Message
         /// <summary>
