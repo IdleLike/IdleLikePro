@@ -1,0 +1,2 @@
+C:\Users\fishf\Documents\GitHub\IdleLikePro\IdleLikeAdventure\Server\IdleLikeAdventureServer\IdleLikeAdventureServer.Domain\obj\Debug\IdleLikeAdventureServer.Domain.csprojAssemblyReference.cache
+C:\Users\fishf\Documents\GitHub\IdleLikePro\IdleLikeAdventure\Server\IdleLikeAdventureServer\IdleLikeAdventureServer.Domain\obj\Debug\IdleLikeAdventureServer.Domain.csproj.CoreCompileInputs.cache

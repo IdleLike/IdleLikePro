@@ -1,0 +1,9 @@
+//’Àªß±Ì
+CREATE TABLE ACCOUNT (
+    ID         INTEGER  PRIMARY KEY
+                        AUTOINCREMENT,
+    Name       VARCHAR  NOT NULL,
+    Password   VARCHAR  NOT NULL,
+    UpdateDate DATETIME NOT NULL,
+    CreateDate DATETIME NOT NULL
+);

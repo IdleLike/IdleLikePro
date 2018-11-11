@@ -1,0 +1,10 @@
+C:\Users\fishf\Documents\GitHub\IdleLikePro\IdleLikeAdventure\Server\IdleLikeAdventureServer\IdleLikeAdventureServer.Data\bin\Debug\Nhibernate\XmlMapping\Account.hbm.xml
+C:\Users\fishf\Documents\GitHub\IdleLikePro\IdleLikeAdventure\Server\IdleLikeAdventureServer\IdleLikeAdventureServer.Data\bin\Debug\IdleLikeAdventureServer.Data.dll
+C:\Users\fishf\Documents\GitHub\IdleLikePro\IdleLikeAdventure\Server\IdleLikeAdventureServer\IdleLikeAdventureServer.Data\bin\Debug\IdleLikeAdventureServer.Data.pdb
+C:\Users\fishf\Documents\GitHub\IdleLikePro\IdleLikeAdventure\Server\IdleLikeAdventureServer\IdleLikeAdventureServer.Data\bin\Debug\Antlr3.Runtime.dll
+C:\Users\fishf\Documents\GitHub\IdleLikePro\IdleLikeAdventure\Server\IdleLikeAdventureServer\IdleLikeAdventureServer.Data\bin\Debug\Antlr3.Runtime.xml
+C:\Users\fishf\Documents\GitHub\IdleLikePro\IdleLikeAdventure\Server\IdleLikeAdventureServer\IdleLikeAdventureServer.Data\obj\Debug\IdleLikeAdventureServer.Data.csprojAssemblyReference.cache
+C:\Users\fishf\Documents\GitHub\IdleLikePro\IdleLikeAdventure\Server\IdleLikeAdventureServer\IdleLikeAdventureServer.Data\obj\Debug\IdleLikeAdventureServer.Data.csproj.CoreCompileInputs.cache
+C:\Users\fishf\Documents\GitHub\IdleLikePro\IdleLikeAdventure\Server\IdleLikeAdventureServer\IdleLikeAdventureServer.Data\obj\Debug\IdleLikeAdventureServer.Data.csproj.CopyComplete
+C:\Users\fishf\Documents\GitHub\IdleLikePro\IdleLikeAdventure\Server\IdleLikeAdventureServer\IdleLikeAdventureServer.Data\obj\Debug\IdleLikeAdventureServer.Data.dll
+C:\Users\fishf\Documents\GitHub\IdleLikePro\IdleLikeAdventure\Server\IdleLikeAdventureServer\IdleLikeAdventureServer.Data\obj\Debug\IdleLikeAdventureServer.Data.pdb
