@@ -11,3 +11,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d8f9b0fd13f541abb90828f274e3714, type: 3}
   m_Name: TestDB
   m_EditorClassIdentifier: 
+  Users:
+  - ID: 0
+    Name: 

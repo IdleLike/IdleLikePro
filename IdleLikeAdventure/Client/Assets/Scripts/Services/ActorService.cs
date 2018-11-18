@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Entity;
+using NetData.Message;
 using NetData.OpCode;
 using StaticData;
 using StaticData.Data;
@@ -25,29 +26,29 @@ namespace Service
         /// <param name="userID">User identifier.</param>
         /// <param name="heroConfigID">Hero config identifier.</param>
         /// <param name="heroName">Hero name.</param>
-        public Hero CreateHero(int userID, uint rocaID, string heroName)
+        public HeroEntity CreateHero(int userID, uint rocaID, string heroName)
         {
             //TODO 为玩家创建英雄
 
             return null;   
         }
 
-        public Hero GenerateHero(HeroEntity heroEntity)
+        public HeroEntity GenerateHero(ActorMsgData actorMsgData)
         {
             //TODO 生成一个英雄
 
-            Hero hero = new Hero();
+            HeroEntity hero = new HeroEntity();
             //英雄ID
-            hero.Id = heroEntity.UserID;
+            hero.ID = actorMsgData.DataBaseID;
             //英雄名称
-            hero.Name = heroEntity.Name;
+            hero.Name = actorMsgData.Name;
             //英雄经验
-            hero.Exp = heroEntity.TotalExp;
+            hero.Exp = (uint)actorMsgData.TotalExp;
 
             CareerData careerData;
-            StaticDataMgr.mInstance.mCareerDataMap.TryGetValue(heroEntity.CareerID,out careerData);
+            StaticDataMgr.mInstance.mCareerDataMap.TryGetValue((uint)actorMsgData.CareerID,out careerData);
             RaceData raceData;
-            StaticDataMgr.mInstance.mRaceDataMap.TryGetValue(heroEntity.RaceID, out raceData);
+            StaticDataMgr.mInstance.mRaceDataMap.TryGetValue((uint)actorMsgData.RaceID, out raceData);
             if (careerData != null && raceData != null)
             {
                 //职业数据
@@ -68,15 +69,15 @@ namespace Service
                 StaticDataMgr.mInstance.mRaceAbilityDataMap.TryGetValue(raceData.AbilityTwoID, out raceAbilityData);
                 hero.RaceAbilitys.Add(raceAbilityData);
                 //血量
-                hero.MaxHP = (int)(raceData.InitHP + GetGrowthValue(raceData.HPGrowth, hero.Level) + GetGrowthValue(careerData.HPGrowth, heroEntity.CareerLevel));
+                hero.MaxHP = (int)(raceData.InitHP + GetGrowthValue(raceData.HPGrowth, hero.Level) + GetGrowthValue(careerData.HPGrowth, (uint)actorMsgData.CareerLevel));
                 //魔法
-                hero.MaxMP = (int)(raceData.InitMP + GetGrowthValue(raceData.MPGrowth, hero.Level) + GetGrowthValue(careerData.MPGrowth, heroEntity.CareerLevel));
+                hero.MaxMP = (int)(raceData.InitMP + GetGrowthValue(raceData.MPGrowth, hero.Level) + GetGrowthValue(careerData.MPGrowth, (uint)actorMsgData.CareerLevel));
                 //力量
-                hero.Pow = raceData.InitPow + GetGrowthValue(raceData.PowGrowth, hero.Level) + GetGrowthValue(careerData.PowGrowth, heroEntity.CareerLevel);
+                hero.Pow = raceData.InitPow + GetGrowthValue(raceData.PowGrowth, hero.Level) + GetGrowthValue(careerData.PowGrowth, (uint)actorMsgData.CareerLevel);
                 //体质
-                hero.Con = raceData.InitCon + GetGrowthValue(raceData.ConGrowth, hero.Level) + GetGrowthValue(careerData.ConGrowth, heroEntity.CareerLevel);
+                hero.Con = raceData.InitCon + GetGrowthValue(raceData.ConGrowth, hero.Level) + GetGrowthValue(careerData.ConGrowth, (uint)actorMsgData.CareerLevel);
                 //敏捷
-                hero.Dex = raceData.InitDex + GetGrowthValue(raceData.DexGrowth, hero.Level) + GetGrowthValue(careerData.DexGrowth, heroEntity.CareerLevel);            
+                hero.Dex = raceData.InitDex + GetGrowthValue(raceData.DexGrowth, hero.Level) + GetGrowthValue(careerData.DexGrowth, (uint)actorMsgData.CareerLevel);            
             }
             return hero;
         }

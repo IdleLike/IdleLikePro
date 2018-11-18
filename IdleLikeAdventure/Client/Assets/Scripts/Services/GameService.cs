@@ -13,7 +13,7 @@ namespace Service
     {
 
         private UserService userService;                //用户服务
-        private ActorService actorService;              //角色服务
+        public ActorService actorService;              //角色服务
         private BattleService battleService;            //战斗服务
         private NetService NetService;                  //网络服务类
 

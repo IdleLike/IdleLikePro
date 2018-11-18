@@ -25,7 +25,8 @@ public class RegisterPanel : BaseUIForm
     //邮箱格式集合
     private List<string> m_EmailFormatList = new List<string>();
     private RegisterViewModel m_RegisterViewModel = null;
-    private string m_ErrorMessage;
+    private string m_ErrorMessage = "";
+    private bool m_IsRegisterSuccess;
 
     private void Start()
     {
@@ -68,22 +69,30 @@ public class RegisterPanel : BaseUIForm
     /// </summary>
     public void OnRegisterCallBack()
     {
-        StartCoroutine(EmailNullChecked(m_Text_EmailErrorOrRegisterOrNull, m_Input_Email));
-        StartCoroutine(PasswordChecked(m_Text_PasswordNull, m_Input_SetPassword));
-        StartCoroutine(PasswordChecked(m_Text_PasswordNullOrDissimilarity, m_Input_ConfirmPassword, m_Input_SetPassword));
+        if (!EmailNullChecked(m_Text_EmailErrorOrRegisterOrNull, m_Input_Email)
+            || !PasswordChecked(m_Text_PasswordNull, m_Input_SetPassword)
+            || !PasswordChecked(m_Text_PasswordNullOrDissimilarity, m_Input_ConfirmPassword, m_Input_SetPassword))
+        {
+            Log("注册失败");
+            return;
+        }
+
 
         if (m_RegisterViewModel != null)
         {
             m_RegisterViewModel.RegisterCallBack(m_Input_Email.text, m_Input_SetPassword.text, (ushort)m_Dropdown_SelectServer.value);
         }
 
-        if (m_ErrorMessage == "" || m_ErrorMessage == string.Empty)
+        if (m_ErrorMessage != "" || m_ErrorMessage != string.Empty)
         {
             Log("注册失败");
             return;
         }
+ 
         Destroy(gameObject);
         Log("注册成功");
+       
+      
     }
     /// <summary>
     /// 邮箱格式检测
@@ -117,7 +126,7 @@ public class RegisterPanel : BaseUIForm
     /// <param name="go"></param>
     /// <param name="email"></param>
     /// <returns></returns>
-    private IEnumerator EmailNullChecked(Text go, InputField email)
+    private bool EmailNullChecked(Text go, InputField email)
     {
         if (email.text == "" || email.text == String.Empty)
         {
@@ -132,10 +141,12 @@ public class RegisterPanel : BaseUIForm
         else
         {
             go.gameObject.SetActive(false);
-            yield break;
+            return true;
         }
-        yield return new WaitForSeconds(2);
-        go.gameObject.SetActive(false);
+        //yield return new WaitForSeconds(2);
+        //go.gameObject.SetActive(false);
+        StartCoroutine(DisableAfterTwoSeconds(go));
+        return false;
     }
     /// <summary>
     /// 密码检测
@@ -144,7 +155,7 @@ public class RegisterPanel : BaseUIForm
     /// <param name="passWord1"></param>
     /// <param name="passWord2"></param>
     /// <returns></returns>
-    private IEnumerator PasswordChecked(Text go, InputField passWord1, InputField passWord2 = null)
+    private bool PasswordChecked(Text go, InputField passWord1, InputField passWord2 = null)
     {     
         if (passWord1.text == "" || passWord1.text == String.Empty)
         {
@@ -164,11 +175,12 @@ public class RegisterPanel : BaseUIForm
         else
         {
             go.gameObject.SetActive(false);
-            yield break;
+            return true;
         }
-    
-        yield return new WaitForSeconds(2);
-        go.gameObject.SetActive(false);
+        StartCoroutine(DisableAfterTwoSeconds(go));
+        return false;
+        //yield return new WaitForSeconds(2);
+        //go.gameObject.SetActive(false);
     }
     /// <summary>
     /// 两秒后禁用

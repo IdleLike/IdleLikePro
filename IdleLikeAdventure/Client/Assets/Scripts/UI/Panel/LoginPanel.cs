@@ -53,20 +53,26 @@ public class LoginPanel : BaseUIForm
     /// </summary>
     public void OnLoginCallBack()
     {
-        StartCoroutine(EmailNullChecked(m_Text_EmailNullOrError, m_Input_Email));
-        StartCoroutine(PasswordChecked(m_Text_PasswordNullOrError, m_Input_Password));
+        if(!EmailNullChecked(m_Text_EmailNullOrError, m_Input_Email) 
+        || !PasswordChecked(m_Text_PasswordNullOrError, m_Input_Password))
+        {
+            Log("登录失败");
+            return;
+        }
 
         if (m_LoginViewModel != null)
         {
             m_LoginViewModel.LoginCallBack(m_Input_Email.text, m_Input_Password.text);
         }
 
-        if (m_ErrorMessage == "" || m_ErrorMessage == string.Empty)
+        if (m_ErrorMessage != "" || m_ErrorMessage != string.Empty)
         {
-            Log("注册失败");
+            Log("登录失败");
             return;
         }
-        Log("注册成功");
+        Log("登录成功");
+
+        Destroy(gameObject);
     }
     /// <summary>
     /// 邮箱格式检测
@@ -100,7 +106,7 @@ public class LoginPanel : BaseUIForm
     /// <param name="go"></param>
     /// <param name="email"></param>
     /// <returns></returns>
-    private IEnumerator EmailNullChecked(Text go, InputField email)
+    private bool EmailNullChecked(Text go, InputField email)
     {
         if (email.text == "" || email.text == String.Empty)
         {
@@ -115,10 +121,10 @@ public class LoginPanel : BaseUIForm
         else
         {
             go.gameObject.SetActive(false);
-            yield break;
+            return true;
         }
-        yield return new WaitForSeconds(2);
-        go.gameObject.SetActive(false);
+        StartCoroutine(DisableAfterTwoSeconds(go));
+        return false;
     }
     /// <summary>
     /// 密码检测
@@ -127,7 +133,7 @@ public class LoginPanel : BaseUIForm
     /// <param name="passWord1"></param>
     /// <param name="passWord2"></param>
     /// <returns></returns>
-    private IEnumerator PasswordChecked(Text go, InputField passWord1)
+    private bool PasswordChecked(Text go, InputField passWord1)
     {
         if (passWord1.text == "" || passWord1.text == String.Empty)
         {
@@ -142,11 +148,10 @@ public class LoginPanel : BaseUIForm
         else
         {
             go.gameObject.SetActive(false);
-            yield break;
+            return true;
         }
-
-        yield return new WaitForSeconds(2);
-        go.gameObject.SetActive(false);
+        StartCoroutine(DisableAfterTwoSeconds(go));
+        return false;
     }
 
 
@@ -154,9 +159,11 @@ public class LoginPanel : BaseUIForm
     public override void UpdatePanel(object viewModel)
     {
         m_LoginViewModel = viewModel as LoginViewModel;
-
+    }
+    public void OnClickRegister()
+    {
         //注册按钮添加事件
-        m_Btn_Register.onClick.AddListener(m_LoginViewModel.Btn_Action);
+        m_LoginViewModel.Btn_Action();
     }
 
     /// <summary>

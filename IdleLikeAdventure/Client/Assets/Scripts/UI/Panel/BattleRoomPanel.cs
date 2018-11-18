@@ -154,11 +154,12 @@ namespace UI.Panel
         /// <summary>
         /// 角色集合
         /// </summary>
-        public List<BattleCharacterModel> characterList { get; set; }
+        //public List<BattleCharacterModel> characterList { get; set; }
+        public List<HeroEntity> characterList { get; set; }
         /// <summary>
         /// 敌人集合
         /// </summary>
-        public List<BattleEnemyModel> enemyList { get; set; }
+        public List<HeroEntity> enemyList { get; set; }
         /// <summary>
         /// 战报集合
         /// </summary>
@@ -567,8 +568,10 @@ namespace UI.Panel
                                     }
                                     if (CurrentBattleReport.IsGroupAttack)
                                     {
-                                        List<BattleRoomModel.BattleCharacterModel> CharacterModelList = GetTeam(battleModel, battleModel.characterList, CurrentBattleReport);
-                                        List<BattleRoomModel.BattleEnemyModel> EnemyModelList = GetTeam(battleModel, battleModel.enemyList, CurrentBattleReport);
+                                        //List<BattleRoomModel.BattleCharacterModel> CharacterModelList = GetTeam(battleModel, battleModel.characterList, CurrentBattleReport);
+                                        List<HeroEntity> CharacterModelList = GetTeam(battleModel, battleModel.characterList, CurrentBattleReport);
+
+                                        List<HeroEntity> EnemyModelList = GetTeam(battleModel, battleModel.enemyList, CurrentBattleReport);
                                         if (CharacterModelList.Count > 0 && CharacterModelList != null)
                                         {
                                             for (int i = 0; i < CharacterModelList.Count; i++)
@@ -608,8 +611,8 @@ namespace UI.Panel
                                             }
                                             if (CurrentBattleReport.IsGroupAttack)
                                             {
-                                                List<BattleRoomModel.BattleCharacterModel> CharacterModelList = GetTeam(battleModel, battleModel.characterList, CurrentBattleReport);
-                                                List<BattleRoomModel.BattleEnemyModel> EnemyModelList = GetTeam(battleModel, battleModel.enemyList, CurrentBattleReport);
+                                                List<HeroEntity> CharacterModelList = GetTeam(battleModel, battleModel.characterList, CurrentBattleReport);
+                                                List<HeroEntity> EnemyModelList = GetTeam(battleModel, battleModel.enemyList, CurrentBattleReport);
                                                 if (CharacterModelList.Count > 0 && CharacterModelList != null)
                                                 {
                                                     for (int i = 0; i < CharacterModelList.Count; i++)
@@ -745,13 +748,13 @@ namespace UI.Panel
             }
             return String.Empty;
         }
-        private List<BattleRoomModel.BattleCharacterModel> GetTeam(BattleRoomModel battleModle, List<BattleRoomModel.BattleCharacterModel> list, BattleRoomModel.BattleReportModel CurrentBattleReport)
+        private List<HeroEntity> GetTeam(BattleRoomModel battleModle, List<HeroEntity> list, BattleRoomModel.BattleReportModel CurrentBattleReport)
         {
 
-            List<BattleRoomModel.BattleCharacterModel> m_CharacterModelList = list.FindAll(p => p.ID == CurrentBattleReport.AnAttacker);
+            List<HeroEntity> m_CharacterModelList = list.FindAll(p => p.ID == CurrentBattleReport.AnAttacker);
             if (m_CharacterModelList != null && m_CharacterModelList.Count > 0)
             {
-                List<BattleRoomModel.BattleCharacterModel> modle = battleModle.characterList;
+                List<HeroEntity> modle = battleModle.characterList;
                 for (int i = 0; i < m_CharacterModelList.Count; i++)
                 {
                     modle.Remove(m_CharacterModelList[i]);
@@ -766,27 +769,27 @@ namespace UI.Panel
             }
             return null;
         }
-        private List<BattleRoomModel.BattleEnemyModel> GetTeam(BattleRoomModel battleModle, List<BattleRoomModel.BattleEnemyModel> list, BattleRoomModel.BattleReportModel CurrentBattleReport)
-        {
+        //private List<HeroEntity> GetTeam(BattleRoomModel battleModle, List<HeroEntity> list, BattleRoomModel.BattleReportModel CurrentBattleReport)
+        //{
 
-            List<BattleRoomModel.BattleEnemyModel> m_EnemyModelList = list.FindAll(p => p.ID == CurrentBattleReport.AnAttacker);
-            if (m_EnemyModelList != null && m_EnemyModelList.Count > 0)
-            {
-                List<BattleRoomModel.BattleEnemyModel> modle = battleModle.enemyList;
-                for (int i = 0; i < m_EnemyModelList.Count; i++)
-                {
-                    modle.Remove(m_EnemyModelList[i]);
-                }
+        //    List<HeroEntity> m_EnemyModelList = list.FindAll(p => p.ID == CurrentBattleReport.AnAttacker);
+        //    if (m_EnemyModelList != null && m_EnemyModelList.Count > 0)
+        //    {
+        //        List<HeroEntity> modle = battleModle.enemyList;
+        //        for (int i = 0; i < m_EnemyModelList.Count; i++)
+        //        {
+        //            modle.Remove(m_EnemyModelList[i]);
+        //        }
 
-                Debug.Log(modle.Count);
-                foreach (var item in modle)
-                {
-                    Debug.Log(item.Name);
-                }
-                return modle;
-            }
-            return null;
-        }
+        //        Debug.Log(modle.Count);
+        //        foreach (var item in modle)
+        //        {
+        //            Debug.Log(item.Name);
+        //        }
+        //        return modle;
+        //    }
+        //    return null;
+        //}
         private string GetAttacker(BattleRoomModel battleModel, BattleRoomModel.BattleReportModel CurrentBattleReport)
         {
             foreach (var item in battleModel.characterList)
@@ -845,14 +848,15 @@ namespace UI.Panel
             }
             for (int i = 0; i < model.characterList.Count; i++)
             {
+                //TODO 当前HP
                 CharacterUIInfoList[i].Name_Txt.text = model.characterList[i].Name;
-                CharacterUIInfoList[i].RocaName_Txt.text = model.characterList[i].RocaName;
-                CharacterUIInfoList[i].Career_Txt.text = model.characterList[i].Career;
+                CharacterUIInfoList[i].RocaName_Txt.text = model.characterList[i].RaceData.Name;
+                CharacterUIInfoList[i].Career_Txt.text = model.characterList[i].CareerData.Name;
                 CharacterUIInfoList[i].Level_Txt.text = model.characterList[i].Level.ToString();
-                CharacterUIInfoList[i].HP_Sli.value = Mathf.Clamp(model.characterList[i].CurrentHP, 0, model.characterList[i].MaxHP) / (float)model.characterList[i].MaxHP;
-                CharacterUIInfoList[i].MP_Sli.value = Mathf.Clamp(model.characterList[i].CurrentMP_Txt, 0, model.characterList[i].MaxMP_Txt) / (float)model.characterList[i].MaxMP_Txt;
-                CharacterUIInfoList[i].CurrentHP_Txt.text = model.characterList[i].CurrentHP.ToString();
-                CharacterUIInfoList[i].MaxHP_Txt.text = model.characterList[i].MaxHP.ToString();
+                CharacterUIInfoList[i].HP_Sli.value = Mathf.Clamp(model.characterList[i].MaxHP, 0, model.characterList[i].MaxHP) / (float)model.characterList[i].MaxHP;
+                CharacterUIInfoList[i].MP_Sli.value = Mathf.Clamp(model.characterList[i].MaxMP, 0, model.characterList[i].MaxMP) / (float)model.characterList[i].MaxMP;
+                CharacterUIInfoList[i].CurrentHP_Txt.text = model.characterList[i].MaxHP.ToString();
+                CharacterUIInfoList[i].MaxHP_Txt.text = model.characterList[i].MaxMP.ToString();
             }
             IsInit = true;
         }
@@ -868,12 +872,13 @@ namespace UI.Panel
             }
             for (int i = 0; i < model.enemyList.Count; i++)
             {
+                //TODO 当前HP
                 EnemyUIInfoList[i].Name_Txt.text = model.enemyList[i].Name;
                 EnemyUIInfoList[i].Level_Txt.text = model.enemyList[i].Level.ToString();
-                EnemyUIInfoList[i].HP_Sli.value = Mathf.Clamp(model.enemyList[i].CurrentHP, 0, model.enemyList[i].MaxHP) / (float)model.enemyList[i].MaxHP; ;
-                EnemyUIInfoList[i].CurrentHP_Txt.text = model.enemyList[i].CurrentHP.ToString();
+                EnemyUIInfoList[i].HP_Sli.value = Mathf.Clamp(model.enemyList[i].MaxHP, 0, model.enemyList[i].MaxHP) / (float)model.enemyList[i].MaxHP; ;
+                EnemyUIInfoList[i].CurrentHP_Txt.text = model.enemyList[i].MaxHP.ToString();
                 EnemyUIInfoList[i].MaxHP_Txt.text = model.enemyList[i].MaxHP.ToString();
-                EnemyUIInfoList[i].Ability_Img.sprite = model.enemyList[i].Ability_sprite;
+                EnemyUIInfoList[i].Ability_Img.sprite = ResourcesMgr.GetInstance().LoadResource<Sprite>( model.enemyList[i].AbilityIco,false);
             }
             IsInit = true;
         }

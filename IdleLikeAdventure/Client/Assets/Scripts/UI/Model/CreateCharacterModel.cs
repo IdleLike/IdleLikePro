@@ -25,21 +25,9 @@ namespace UI.Model
         public Action<CreateCharacterPanel.CreateData> CreateCharacterCallback;
 
         public Func<string, bool> NameIsRepeatCallback;
+        public Func<string, bool> TeamNameIsRepeatCallback;
 
-        private List<CharacterViewModel> m_createCharacterViewModels;
-
-        public List<CharacterViewModel> createCharacterViewModels
-        {
-            get
-            {
-                return m_createCharacterViewModels;
-            }
-
-            set
-            {
-                m_createCharacterViewModels = value;
-            }
-        }
+        public List<StaticData.Data.RaceData> createCharacterViewModels = new List<StaticData.Data.RaceData>();
 
     }
     

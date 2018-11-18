@@ -25,7 +25,11 @@ namespace StaticData
             }
             protected set { instance = value; }
         }
-	
+
+        public StaticDataMgr()
+        {
+            LoadData();
+        }
 	// 多语言配置
 	private Dictionary<string, StringData> mStringDataMap = new Dictionary<string, StringData>();
 		
@@ -41,7 +45,7 @@ namespace StaticData
         //加载数据
         public void LoadData()
         {
-			LoadDataBinWorkerString<StringData>("StringData.bytes", mStringDataMap);
+			LoadDataBinWorkerString<StringData>("String.bytes", mStringDataMap);
 			
 			LoadDataBinWorker<CareerData>("Career.bytes", mCareerDataMap); //Career Data
 			LoadDataBinWorker<CareerAbilityData>("CareerAbility.bytes", mCareerAbilityDataMap); //CareerAbility Data

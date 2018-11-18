@@ -10,7 +10,7 @@ namespace Entity
     {
         public string Name;
         public DateTime CreateTime;
-        public int DatabaseID;
+
     }
 }
 
