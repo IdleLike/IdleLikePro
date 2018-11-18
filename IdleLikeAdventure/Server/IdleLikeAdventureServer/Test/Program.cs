@@ -6,6 +6,7 @@ using System.Text;
 using NetData.Message;
 using IdleLikeAdventureServer.Domain;
 using IdleLikeAdventureServer.Data.Entity;
+using IdleLikeAdventureServer.Domain.Dal;
 
 namespace Test
 {
@@ -51,10 +52,15 @@ namespace Test
             Console.WriteLine("++++++++++++++++++++++++++++++++++++++++");
             AccountDal accountDal = DataAccessManager.Get<AccountDal>();
 
-            foreach (var item in accountDal.Get())
+
+
+            foreach (var item in accountDal.GetAll())
             {
+                Console.WriteLine("大大大");
                 Console.WriteLine(item.ID + ":" + item.Name + ":" + item.Password + ":" + item.CreateDate + ":" + item.UpdateDate) ;
             }
+
+            Console.ReadLine();
         }
     }
 }

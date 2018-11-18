@@ -10,6 +10,7 @@ namespace NetData.OpCode
     /// </summary>
     public enum OpCodeModule : byte
     {
+        None,
         User,
         Actor,
         Battle,

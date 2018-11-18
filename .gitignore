@@ -1,0 +1,9 @@
+*.vs/
+IdleLikeAdventure/Server/IdleLikeAdventureServer/.vs/
+IdleLikeAdventure/Server/IdleLikeAdventureServer/.vs/IdleLikeAdventureServer/v15/Server/sqlite3/storage.ide-shm
+IdleLikeAdventure/Server/IdleLikeAdventureServer/.vs/IdleLikeAdventureServer/v15/.suo
+IdleLikeAdventure/Server/IdleLikeAdventureServer/.vs/IdleLikeAdventureServer/v15/Server/sqlite3/storage.ide-wal
+*.ide-wal
+*.ide-wal
+IdleLikeAdventure/Server/IdleLikeAdventureServer/.vs/IdleLikeAdventureServer/DesignTimeBuild/.dtbcache
+IdleLikeAdventure/Server/IdleLikeAdventureServer/.vs/IdleLikeAdventureServer/v15/.suo

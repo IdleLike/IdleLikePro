@@ -38,8 +38,17 @@
     <StartupObject>Test.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="IdleLikeAdventureServer.Domain">
+      <HintPath>..\IdleLikeAdventureServer.Domain\bin\Debug\IdleLikeAdventureServer.Domain.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.SQLite">
+      <HintPath>..\..\Pluglns\System.Data.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SQLite.Linq">
+      <HintPath>..\..\Pluglns\System.Data.SQLite.Linq.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Xml" />
@@ -59,14 +68,6 @@
     <ProjectReference Include="..\IdleLikeAdventureServer.Data\IdleLikeAdventureServer.Data.csproj">
       <Project>{a39c559b-8903-4d1f-b71e-f66c62772430}</Project>
       <Name>IdleLikeAdventureServer.Data</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\IdleLikeAdventureServer.Domain\IdleLikeAdventureServer.Domain.csproj">
-      <Project>{b88195c0-566b-40fe-af48-391853acf7b6}</Project>
-      <Name>IdleLikeAdventureServer.Domain</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\IdleLikeAdventureServer\IdleLikeAdventureServer.csproj">
-      <Project>{807756e1-fd77-42bd-93dd-e7c0adf9c705}</Project>
-      <Name>IdleLikeAdventureServer</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

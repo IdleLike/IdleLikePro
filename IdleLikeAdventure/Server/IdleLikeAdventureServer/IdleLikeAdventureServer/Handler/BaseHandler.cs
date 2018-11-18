@@ -15,17 +15,22 @@ namespace IdleLikeAdventureServer.Handler
     {
         public OpCodeModule OpCode;
         public byte OpCodeOperation;
+        protected ServerDataCenter serverDataCenter;
         private static MemoryStream memoryStream = new MemoryStream();
         private static BinaryFormatter binaryFormatter = new BinaryFormatter();
 
+        protected BaseHandler()
+        {
+            serverDataCenter = (ApplicationBase.Instance as MyGameServer).ServerDataCenter;
+        }
 
         public abstract void OnOperationRequest
             (BaseMsgData baseMsgData,
-            Photon.SocketServer.SendParameters sendParameters, 
+            SendParameters sendParameters, 
             ClientPeer peer);
 
         protected void SendResponse(ClientPeer peer,
-            Photon.SocketServer.SendParameters sendParameters, 
+            SendParameters sendParameters, 
             BaseMsgData baseMsgData)
         {
             

@@ -1,31 +1,60 @@
+D:\U3D\IdleLikeAdventure\IdleLikePro\IdleLikeAdventure\Server\IdleLikeAdventureServer\Test\obj\Debug\Test.csprojAssemblyReference.cache
+D:\U3D\IdleLikeAdventure\IdleLikePro\IdleLikeAdventure\Server\IdleLikeAdventureServer\Test\obj\Debug\Test.csproj.CoreCompileInputs.cache
+D:\U3D\IdleLikeAdventure\IdleLikePro\IdleLikeAdventure\Server\IdleLikeAdventureServer\Test\bin\Debug\Nhibernate\XmlMapping\Account.hbm.xml
 D:\U3D\IdleLikeAdventure\IdleLikePro\IdleLikeAdventure\Server\IdleLikeAdventureServer\Test\bin\Debug\Test.exe.config
 D:\U3D\IdleLikeAdventure\IdleLikePro\IdleLikeAdventure\Server\IdleLikeAdventureServer\Test\bin\Debug\Test.exe
 D:\U3D\IdleLikeAdventure\IdleLikePro\IdleLikeAdventure\Server\IdleLikeAdventureServer\Test\bin\Debug\Test.pdb
-D:\U3D\IdleLikeAdventure\IdleLikePro\IdleLikeAdventure\Server\IdleLikeAdventureServer\Test\bin\Debug\IdleLikeAdventureServer.dll
-D:\U3D\IdleLikeAdventure\IdleLikePro\IdleLikeAdventure\Server\IdleLikeAdventureServer\Test\bin\Debug\Photon.SocketServer.dll
-D:\U3D\IdleLikeAdventure\IdleLikePro\IdleLikeAdventure\Server\IdleLikeAdventureServer\Test\bin\Debug\PhotonHostRuntimeInterfaces.dll
-D:\U3D\IdleLikeAdventure\IdleLikePro\IdleLikeAdventure\Server\IdleLikeAdventureServer\Test\bin\Debug\ExitGamesLibs.dll
+D:\U3D\IdleLikeAdventure\IdleLikePro\IdleLikeAdventure\Server\IdleLikeAdventureServer\Test\bin\Debug\IdleLikeAdventureServer.Data.dll
+D:\U3D\IdleLikeAdventure\IdleLikePro\IdleLikeAdventure\Server\IdleLikeAdventureServer\Test\bin\Debug\IdleLikeAdventureServer.Domain.dll
 D:\U3D\IdleLikeAdventure\IdleLikePro\IdleLikeAdventure\Server\IdleLikeAdventureServer\Test\bin\Debug\NetData.dll
 D:\U3D\IdleLikeAdventure\IdleLikePro\IdleLikeAdventure\Server\IdleLikeAdventureServer\Test\bin\Debug\System.Data.SQLite.dll
-D:\U3D\IdleLikeAdventure\IdleLikePro\IdleLikeAdventure\Server\IdleLikeAdventureServer\Test\bin\Debug\log4net.dll
-D:\U3D\IdleLikeAdventure\IdleLikePro\IdleLikeAdventure\Server\IdleLikeAdventureServer\Test\bin\Debug\ExitGames.Logging.Log4Net.dll
-D:\U3D\IdleLikeAdventure\IdleLikePro\IdleLikeAdventure\Server\IdleLikeAdventureServer\Test\bin\Debug\IdleLikeAdventureServer.pdb
-D:\U3D\IdleLikeAdventure\IdleLikePro\IdleLikeAdventure\Server\IdleLikeAdventureServer\Test\bin\Debug\IdleLikeAdventureServer.dll.config
-D:\U3D\IdleLikeAdventure\IdleLikePro\IdleLikeAdventure\Server\IdleLikeAdventureServer\Test\bin\Debug\Photon.SocketServer.pdb
-D:\U3D\IdleLikeAdventure\IdleLikePro\IdleLikeAdventure\Server\IdleLikeAdventureServer\Test\bin\Debug\Photon.SocketServer.xml
-D:\U3D\IdleLikeAdventure\IdleLikePro\IdleLikeAdventure\Server\IdleLikeAdventureServer\Test\bin\Debug\Photon.SocketServer.dll.config
-D:\U3D\IdleLikeAdventure\IdleLikePro\IdleLikeAdventure\Server\IdleLikeAdventureServer\Test\bin\Debug\ExitGamesLibs.pdb
-D:\U3D\IdleLikeAdventure\IdleLikePro\IdleLikeAdventure\Server\IdleLikeAdventureServer\Test\bin\Debug\ExitGamesLibs.xml
+D:\U3D\IdleLikeAdventure\IdleLikePro\IdleLikeAdventure\Server\IdleLikeAdventureServer\Test\bin\Debug\System.Data.SQLite.Linq.dll
+D:\U3D\IdleLikeAdventure\IdleLikePro\IdleLikeAdventure\Server\IdleLikeAdventureServer\Test\bin\Debug\NHibernate.dll
 D:\U3D\IdleLikeAdventure\IdleLikePro\IdleLikeAdventure\Server\IdleLikeAdventureServer\Test\bin\Debug\NetData.pdb
-D:\U3D\IdleLikeAdventure\IdleLikePro\IdleLikeAdventure\Server\IdleLikeAdventureServer\Test\bin\Debug\ExitGames.Logging.Log4Net.pdb
-D:\U3D\IdleLikeAdventure\IdleLikePro\IdleLikeAdventure\Server\IdleLikeAdventureServer\Test\bin\Debug\ExitGames.Logging.Log4Net.xml
-D:\U3D\IdleLikeAdventure\IdleLikePro\IdleLikeAdventure\Server\IdleLikeAdventureServer\Test\obj\Debug\Test.csproj.CoreCompileInputs.cache
+D:\U3D\IdleLikeAdventure\IdleLikePro\IdleLikeAdventure\Server\IdleLikeAdventureServer\Test\bin\Debug\IdleLikeAdventureServer.Data.pdb
+D:\U3D\IdleLikeAdventure\IdleLikePro\IdleLikeAdventure\Server\IdleLikeAdventureServer\Test\bin\Debug\IdleLikeAdventureServer.Domain.pdb
+D:\U3D\IdleLikeAdventure\IdleLikePro\IdleLikeAdventure\Server\IdleLikeAdventureServer\Test\bin\Debug\IdleLikeAdventureServer.Domain.dll.config
+D:\U3D\IdleLikeAdventure\IdleLikePro\IdleLikeAdventure\Server\IdleLikeAdventureServer\Test\bin\Debug\NHibernate.xml
 D:\U3D\IdleLikeAdventure\IdleLikePro\IdleLikeAdventure\Server\IdleLikeAdventureServer\Test\obj\Debug\Test.csproj.CopyComplete
 D:\U3D\IdleLikeAdventure\IdleLikePro\IdleLikeAdventure\Server\IdleLikeAdventureServer\Test\obj\Debug\Test.exe
 D:\U3D\IdleLikeAdventure\IdleLikePro\IdleLikeAdventure\Server\IdleLikeAdventureServer\Test\obj\Debug\Test.pdb
-D:\U3D\IdleLikeAdventure\IdleLikePro\IdleLikeAdventure\Server\IdleLikeAdventureServer\Test\obj\Debug\Test.csprojAssemblyReference.cache
-D:\U3D\IdleLikeAdventure\IdleLikePro\IdleLikeAdventure\Server\IdleLikeAdventureServer\Test\bin\Debug\System.Data.SQLite.xml
-D:\U3D\IdleLikeAdventure\IdleLikePro\IdleLikeAdventure\Server\IdleLikeAdventureServer\Test\bin\Debug\System.Data.SQLite.dll.config
-D:\U3D\IdleLikeAdventure\IdleLikePro\IdleLikeAdventure\Server\IdleLikeAdventureServer\Test\bin\Debug\log4net.config
+C:\Users\fishf\Documents\Tencent Files\2407040368\FileRecv\Server\Server\IdleLikeAdventureServer\Test\bin\Debug\Nhibernate\XmlMapping\Account.hbm.xml
+C:\Users\fishf\Documents\Tencent Files\2407040368\FileRecv\Server\Server\IdleLikeAdventureServer\Test\bin\Debug\Test.exe.config
+C:\Users\fishf\Documents\Tencent Files\2407040368\FileRecv\Server\Server\IdleLikeAdventureServer\Test\bin\Debug\Test.exe
+C:\Users\fishf\Documents\Tencent Files\2407040368\FileRecv\Server\Server\IdleLikeAdventureServer\Test\bin\Debug\Test.pdb
+C:\Users\fishf\Documents\Tencent Files\2407040368\FileRecv\Server\Server\IdleLikeAdventureServer\Test\bin\Debug\IdleLikeAdventureServer.Data.dll
+C:\Users\fishf\Documents\Tencent Files\2407040368\FileRecv\Server\Server\IdleLikeAdventureServer\Test\bin\Debug\IdleLikeAdventureServer.Domain.dll
+C:\Users\fishf\Documents\Tencent Files\2407040368\FileRecv\Server\Server\IdleLikeAdventureServer\Test\bin\Debug\NetData.dll
+C:\Users\fishf\Documents\Tencent Files\2407040368\FileRecv\Server\Server\IdleLikeAdventureServer\Test\bin\Debug\System.Data.SQLite.dll
+C:\Users\fishf\Documents\Tencent Files\2407040368\FileRecv\Server\Server\IdleLikeAdventureServer\Test\bin\Debug\System.Data.SQLite.Linq.dll
+C:\Users\fishf\Documents\Tencent Files\2407040368\FileRecv\Server\Server\IdleLikeAdventureServer\Test\bin\Debug\NHibernate.dll
+C:\Users\fishf\Documents\Tencent Files\2407040368\FileRecv\Server\Server\IdleLikeAdventureServer\Test\bin\Debug\NetData.pdb
+C:\Users\fishf\Documents\Tencent Files\2407040368\FileRecv\Server\Server\IdleLikeAdventureServer\Test\bin\Debug\IdleLikeAdventureServer.Data.pdb
+C:\Users\fishf\Documents\Tencent Files\2407040368\FileRecv\Server\Server\IdleLikeAdventureServer\Test\bin\Debug\IdleLikeAdventureServer.Domain.pdb
+C:\Users\fishf\Documents\Tencent Files\2407040368\FileRecv\Server\Server\IdleLikeAdventureServer\Test\bin\Debug\IdleLikeAdventureServer.Domain.dll.config
+C:\Users\fishf\Documents\Tencent Files\2407040368\FileRecv\Server\Server\IdleLikeAdventureServer\Test\bin\Debug\NHibernate.xml
+C:\Users\fishf\Documents\Tencent Files\2407040368\FileRecv\Server\Server\IdleLikeAdventureServer\Test\obj\Debug\Test.csprojAssemblyReference.cache
+C:\Users\fishf\Documents\Tencent Files\2407040368\FileRecv\Server\Server\IdleLikeAdventureServer\Test\obj\Debug\Test.csproj.CoreCompileInputs.cache
+C:\Users\fishf\Documents\Tencent Files\2407040368\FileRecv\Server\Server\IdleLikeAdventureServer\Test\obj\Debug\Test.csproj.CopyComplete
+C:\Users\fishf\Documents\Tencent Files\2407040368\FileRecv\Server\Server\IdleLikeAdventureServer\Test\obj\Debug\Test.exe
+C:\Users\fishf\Documents\Tencent Files\2407040368\FileRecv\Server\Server\IdleLikeAdventureServer\Test\obj\Debug\Test.pdb
+C:\Users\fishf\Documents\GitHub\IdleLikePro\IdleLikeAdventure\Server\IdleLikeAdventureServer\Test\bin\Debug\Nhibernate\XmlMapping\Account.hbm.xml
+C:\Users\fishf\Documents\GitHub\IdleLikePro\IdleLikeAdventure\Server\IdleLikeAdventureServer\Test\bin\Debug\Test.exe.config
+C:\Users\fishf\Documents\GitHub\IdleLikePro\IdleLikeAdventure\Server\IdleLikeAdventureServer\Test\bin\Debug\Test.exe
+C:\Users\fishf\Documents\GitHub\IdleLikePro\IdleLikeAdventure\Server\IdleLikeAdventureServer\Test\bin\Debug\Test.pdb
+C:\Users\fishf\Documents\GitHub\IdleLikePro\IdleLikeAdventure\Server\IdleLikeAdventureServer\Test\bin\Debug\IdleLikeAdventureServer.Data.dll
+C:\Users\fishf\Documents\GitHub\IdleLikePro\IdleLikeAdventure\Server\IdleLikeAdventureServer\Test\bin\Debug\IdleLikeAdventureServer.Domain.dll
+C:\Users\fishf\Documents\GitHub\IdleLikePro\IdleLikeAdventure\Server\IdleLikeAdventureServer\Test\bin\Debug\NetData.dll
+C:\Users\fishf\Documents\GitHub\IdleLikePro\IdleLikeAdventure\Server\IdleLikeAdventureServer\Test\bin\Debug\System.Data.SQLite.dll
+C:\Users\fishf\Documents\GitHub\IdleLikePro\IdleLikeAdventure\Server\IdleLikeAdventureServer\Test\bin\Debug\System.Data.SQLite.Linq.dll
+C:\Users\fishf\Documents\GitHub\IdleLikePro\IdleLikeAdventure\Server\IdleLikeAdventureServer\Test\bin\Debug\NHibernate.dll
+C:\Users\fishf\Documents\GitHub\IdleLikePro\IdleLikeAdventure\Server\IdleLikeAdventureServer\Test\bin\Debug\NetData.pdb
+C:\Users\fishf\Documents\GitHub\IdleLikePro\IdleLikeAdventure\Server\IdleLikeAdventureServer\Test\bin\Debug\IdleLikeAdventureServer.Data.pdb
+C:\Users\fishf\Documents\GitHub\IdleLikePro\IdleLikeAdventure\Server\IdleLikeAdventureServer\Test\bin\Debug\IdleLikeAdventureServer.Domain.pdb
+C:\Users\fishf\Documents\GitHub\IdleLikePro\IdleLikeAdventure\Server\IdleLikeAdventureServer\Test\bin\Debug\IdleLikeAdventureServer.Domain.dll.config
+C:\Users\fishf\Documents\GitHub\IdleLikePro\IdleLikeAdventure\Server\IdleLikeAdventureServer\Test\bin\Debug\NHibernate.xml
 C:\Users\fishf\Documents\GitHub\IdleLikePro\IdleLikeAdventure\Server\IdleLikeAdventureServer\Test\obj\Debug\Test.csprojAssemblyReference.cache
 C:\Users\fishf\Documents\GitHub\IdleLikePro\IdleLikeAdventure\Server\IdleLikeAdventureServer\Test\obj\Debug\Test.csproj.CoreCompileInputs.cache
+C:\Users\fishf\Documents\GitHub\IdleLikePro\IdleLikeAdventure\Server\IdleLikeAdventureServer\Test\obj\Debug\Test.csproj.CopyComplete
+C:\Users\fishf\Documents\GitHub\IdleLikePro\IdleLikeAdventure\Server\IdleLikeAdventureServer\Test\obj\Debug\Test.exe
+C:\Users\fishf\Documents\GitHub\IdleLikePro\IdleLikeAdventure\Server\IdleLikeAdventureServer\Test\obj\Debug\Test.pdb

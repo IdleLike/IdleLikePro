@@ -6,6 +6,7 @@ using System.IO;
 using log4net.Config;
 using IdleLikeAdventureServer.Handler;
 using NetData.OpCode;
+using System;
 
 namespace IdleLikeAdventureServer
 {
@@ -14,16 +15,17 @@ namespace IdleLikeAdventureServer
     {
         public static readonly ILogger log = LogManager.GetCurrentClassLogger();
 
-        //public static MyGameServer Instance
-        //{
-        //    get;
-        //    private set;
-        //}
-        public OpCodeModule OpCode;
-        public Dictionary<OpCodeModule, Dictionary<byte, BaseHandler>> handlers = new Dictionary<OpCodeModule, Dictionary<byte, BaseHandler>>();
-        public Dictionary<byte, BaseHandler> handlerDict = new Dictionary<byte, BaseHandler>();
+        private OpCodeModule OpCode;
+        private Dictionary<OpCodeModule, Dictionary<byte, BaseHandler>> handlers = new Dictionary<OpCodeModule, Dictionary<byte, BaseHandler>>();
+        private Dictionary<byte, BaseHandler> handlerDict = new Dictionary<byte, BaseHandler>();
+        private List<ClientPeer> peerList = new List<ClientPeer>();//通过这个集合可以访问到所有客户端的peer，从而向任何一个客户端发送数据 
+        private ServerDataCenter serverDataCenter;
 
-        public List<ClientPeer> peerList = new List<ClientPeer>();//通过这个集合可以访问到所有客户端的peer，从而向任何一个客户端发送数据 
+        public Dictionary<OpCodeModule, Dictionary<byte, BaseHandler>> Handlers { get => handlers; set => handlers = value; }
+        public Dictionary<byte, BaseHandler> HandlerDict { get => handlerDict; set => handlerDict = value; }
+        public List<ClientPeer> PeerList { get => peerList; set => peerList = value; }
+        public ServerDataCenter ServerDataCenter { get => serverDataCenter; set => serverDataCenter = value; }
+        public OpCodeModule OpCode1 { get => OpCode; set => OpCode = value; }
 
         //当一个客户端请求链接的
         //我们使用peerbase，表示和一个客户端的链接
@@ -31,7 +33,7 @@ namespace IdleLikeAdventureServer
         {
             log.Info("一个客户端连接过来了。。。。");
             ClientPeer peer = new ClientPeer(initRequest);
-            peerList.Add(peer);
+            PeerList.Add(peer);
             return peer;
         }
 
@@ -51,18 +53,32 @@ namespace IdleLikeAdventureServer
 
             log.Info("Setup Completed！");
 
+            InitData();
+            InitHandler();          
+        }
 
-            InitHandler();
+        private void InitData()
+        {
+            log.Info("InitData Start");
+
+            ServerDataCenter = new ServerDataCenter();
+            ServerDataCenter.InitDatas();
+
+            log.Info("InitData End");
         }
 
         public void InitHandler()
         {
-            LoginHandler loginHandler = new LoginHandler();
-            handlerDict.Add(loginHandler.OpCodeOperation, loginHandler);
-            RegisterHandler registerHandler = new RegisterHandler();
-            handlerDict.Add(registerHandler.OpCodeOperation, registerHandler);
+            log.Info("InitHandler Start");
 
-            handlers.Add(OpCodeModule.User, handlerDict);
+            LoginHandler loginHandler = new LoginHandler();
+            HandlerDict.Add(loginHandler.OpCodeOperation, loginHandler);
+            RegisterHandler registerHandler = new RegisterHandler();
+            HandlerDict.Add(registerHandler.OpCodeOperation, registerHandler);
+
+            Handlers.Add(OpCodeModule.User, HandlerDict);
+
+            log.Info("InitHandler End");
         }
         //server端关闭的时候
         protected override void TearDown()

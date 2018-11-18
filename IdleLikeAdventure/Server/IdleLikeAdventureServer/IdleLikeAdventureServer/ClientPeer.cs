@@ -22,7 +22,7 @@ namespace IdleLikeAdventureServer
         //处理客户端断开链接的后续工作
         protected override void OnDisconnect(PhotonHostRuntimeInterfaces.DisconnectReason reasonCode, string reasonDetail)
         {
-            gameServer.peerList.Remove(this);
+            gameServer.PeerList.Remove(this);
         }
 
         //处理客户端的请求
@@ -30,16 +30,29 @@ namespace IdleLikeAdventureServer
         {
             BaseHandler handler = null;
             Dictionary<byte, BaseHandler> handlerDic;
-            gameServer.handlers.TryGetValue((OpCodeModule)operationRequest.OperationCode, out handlerDic);
-            foreach (var item in operationRequest.Parameters)
+            gameServer.Handlers.TryGetValue((OpCodeModule)operationRequest.OperationCode, out handlerDic);
+            MyGameServer.log.Info("operationRequest.Opcode:" + operationRequest.OperationCode);
+            IEnumerator<KeyValuePair<byte, object>> parameters = operationRequest.Parameters.GetEnumerator();
+            while (parameters.MoveNext())
             {
-                bool isContains = handlerDic.TryGetValue(item.Key, out handler);
-                if (isContains)
-                {
-                    //handler.OnOperationRequest((BaseMsgData)item.Value, sendParameters, this);
-                    handler.OnOperationRequest(null, sendParameters, this);
-                }
+                //bool isContains = handlerDic.TryGetValue(parameters.Current.Key, out handler);
+                //if (isContains)
+                //{
+                //    handler.OnOperationRequest((BaseMsgData)parameters.Current.Value, sendParameters, this);
+                //}
+
+                MyGameServer.log.Info("Key:" + parameters.Current.Key);
+                MyGameServer.log.Info("ValueType" + parameters.Current.Value.GetType().Name);
             }
+
+            //foreach (var item in operationRequest.Parameters)
+            //{
+            //    bool isContains = handlerDic.TryGetValue(item.Key, out handler);
+            //    if (isContains)
+            //    {
+            //        handler.OnOperationRequest((BaseMsgData)item.Value, sendParameters, this);
+            //    }
+            //}
         }
     }
 }

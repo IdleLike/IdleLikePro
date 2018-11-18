@@ -9,9 +9,10 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>IdleLikeAdventureServer</RootNamespace>
     <AssemblyName>IdleLikeAdventureServer</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
   </PropertyGroup>
@@ -90,6 +91,10 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\IdleLikeAdventureServer.Data\IdleLikeAdventureServer.Data.csproj">
+      <Project>{a39c559b-8903-4d1f-b71e-f66c62772430}</Project>
+      <Name>IdleLikeAdventureServer.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\IdleLikeAdventureServer.Domain\IdleLikeAdventureServer.Domain.csproj">
       <Project>{b88195c0-566b-40fe-af48-391853acf7b6}</Project>
       <Name>IdleLikeAdventureServer.Domain</Name>
