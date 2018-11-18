@@ -56,6 +56,7 @@
     <Compile Include="OpCode\OpCodeUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tool\DictTool.cs" />
+    <Compile Include="Tool\SerializeTool.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

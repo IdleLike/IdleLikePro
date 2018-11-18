@@ -7,6 +7,7 @@ using log4net.Config;
 using IdleLikeAdventureServer.Handler;
 using NetData.OpCode;
 using System;
+using NetData.Message;
 
 namespace IdleLikeAdventureServer
 {
@@ -52,9 +53,12 @@ namespace IdleLikeAdventureServer
             }
 
             log.Info("Setup Completed！");
-
+            
             InitData();
-            InitHandler();          
+            InitHandler();
+
+            //注册所有自定义网络消息
+            NetData.Tools.SerializeTool.RegisterMessage(Protocol.TryRegisterCustomType);
         }
 
         private void InitData()
@@ -63,7 +67,7 @@ namespace IdleLikeAdventureServer
 
             ServerDataCenter = new ServerDataCenter();
             ServerDataCenter.InitDatas();
-
+            
             log.Info("InitData End");
         }
 

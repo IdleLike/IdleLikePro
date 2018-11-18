@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using NetData.Message;
 using IdleLikeAdventureServer.Domain;
-using IdleLikeAdventureServer.Data.Entity;
 using IdleLikeAdventureServer.Domain.Dal;
 
 namespace Test
@@ -52,15 +46,21 @@ namespace Test
             Console.WriteLine("++++++++++++++++++++++++++++++++++++++++");
             AccountDal accountDal = DataAccessManager.Get<AccountDal>();
 
-
+            
 
             foreach (var item in accountDal.GetAll())
             {
                 Console.WriteLine("大大大");
                 Console.WriteLine(item.ID + ":" + item.Name + ":" + item.Password + ":" + item.CreateDate + ":" + item.UpdateDate) ;
             }
-
+            NetData.Tools.SerializeTool.RegisterMessage(registerTest);
             Console.ReadLine();
+        }
+
+        private static bool registerTest(Type t, byte code, Func<object, byte[]> se, Func<byte[], object> de)
+        {
+            Console.WriteLine(t.Name);
+            return true;
         }
     }
 }
