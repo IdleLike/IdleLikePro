@@ -59,7 +59,7 @@ namespace Net
             //启动异步客户端服务
             m_ReceiverCoroutine = StartCoroutine(StartReceive());
 
-
+            //NetData.Tools.SerializeTool.RegisterMessage(PhotonPeer.RegisterType);
             return this;
         }
 
@@ -103,12 +103,12 @@ namespace Net
 
         public bool SendMessage(OpCodeModule opCode, Dictionary<byte, object> parameters)
         {
-            Dictionary<byte, object> obj = new Dictionary<byte, object>();
+            //Dictionary<byte, object> obj = new Dictionary<byte, object>();
             //obj.Add(0,new BaseMsgData());
-            obj.Add(0,1);
+            //.Add(0,1);
 
-            //return m_PhotonPeer.OpCustom((byte)opCode, parameters, true);
-            return m_PhotonPeer.OpCustom((byte)opCode, obj, true);
+            return m_PhotonPeer.OpCustom((byte)opCode, parameters, true);
+            //return m_PhotonPeer.OpCustom((byte)opCode, obj, true);
 
         }
 
