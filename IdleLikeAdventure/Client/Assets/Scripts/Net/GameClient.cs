@@ -59,7 +59,11 @@ namespace Net
             //启动异步客户端服务
             m_ReceiverCoroutine = StartCoroutine(StartReceive());
 
-            //NetData.Tools.SerializeTool.RegisterMessage(PhotonPeer.RegisterType);
+            Type[] types = NetData.Tools.SerializeTool.GetMessageTypes();
+            for (byte i = 0; i < types.Length; i++)
+            {
+                PhotonPeer.RegisterType(types[i], i, NetData.Tools.SerializeTool.SerializeMessage, NetData.Tools.SerializeTool.DeserializeMessage);
+            }
             return this;
         }
 
