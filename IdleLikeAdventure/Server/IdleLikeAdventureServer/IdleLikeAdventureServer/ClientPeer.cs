@@ -35,14 +35,14 @@ namespace IdleLikeAdventureServer
             IEnumerator<KeyValuePair<byte, object>> parameters = operationRequest.Parameters.GetEnumerator();
             while (parameters.MoveNext())
             {
-                //bool isContains = handlerDic.TryGetValue(parameters.Current.Key, out handler);
-                //if (isContains)
-                //{
-                //    handler.OnOperationRequest((BaseMsgData)parameters.Current.Value, sendParameters, this);
-                //}
+                bool isContains = handlerDic.TryGetValue(parameters.Current.Key, out handler);
+                if (isContains)
+                {
+                    handler.OnOperationRequest((BaseMsgData)parameters.Current.Value, sendParameters, this);
+                }
 
-                MyGameServer.log.Info("Key:" + parameters.Current.Key);
-                MyGameServer.log.Info("ValueType" + parameters.Current.Value.GetType().Name);
+                //MyGameServer.log.Info("Key:" + parameters.Current.Key);
+                //MyGameServer.log.Info("ValueType" + parameters.Current.Value.GetType().Name);
             }
 
             //foreach (var item in operationRequest.Parameters)

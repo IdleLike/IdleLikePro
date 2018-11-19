@@ -59,7 +59,7 @@ namespace Test
 
         private static bool registerTest(Type t, byte code, Func<object, byte[]> se, Func<byte[], object> de)
         {
-            Console.WriteLine(t.Name);
+            Console.WriteLine(t.Name + ":" + code);
             return true;
         }
     }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -22,6 +23,27 @@ namespace NetData.Tools
                     register(dataTypes[i], i, SerializeMessage, DeserializeMessage);
                 }
             }
+        }
+
+        /// <summary>
+        /// 获取所有MessageData
+        /// </summary>
+        /// <returns></returns>
+        public static Type[] GetMessageTypes()
+        {
+            List<Type> list = new List<Type>();
+
+            Assembly assembly = Assembly.Load("NetData");
+            Type[] dataTypes = assembly.GetTypes();
+            for (byte i = 0; i < dataTypes.Length; i++)
+            {
+                if (dataTypes[i].Name.Contains("Data"))
+                {
+                    list.Add(dataTypes[i]);
+                }
+            }
+
+            return list.ToArray();
         }
 
         /// <summary>

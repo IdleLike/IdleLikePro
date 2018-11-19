@@ -58,7 +58,12 @@ namespace IdleLikeAdventureServer
             InitHandler();
 
             //注册所有自定义网络消息
-            NetData.Tools.SerializeTool.RegisterMessage(Protocol.TryRegisterCustomType);
+            //NetData.Tools.SerializeTool.RegisterMessage(Protocol.TryRegisterCustomType);
+            Type[] messages = NetData.Tools.SerializeTool.GetMessageTypes();
+            for (byte i = 0; i < messages.Length; i++)
+            {
+                Protocol.TryRegisterCustomType(messages[i], i, NetData.Tools.SerializeTool.SerializeMessage, NetData.Tools.SerializeTool.DeserializeMessage);
+            }
         }
 
         private void InitData()
