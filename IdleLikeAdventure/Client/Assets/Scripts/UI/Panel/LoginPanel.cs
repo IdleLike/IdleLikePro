@@ -24,7 +24,7 @@ public class LoginPanel : BaseUIForm
     //邮箱格式集合
     private List<string> m_EmailFormatList = new List<string>();
     private LoginViewModel m_LoginViewModel = null;
-    private string m_ErrorMessage;
+    private bool m_IsRegisterSuccess;
 
     private void Start()
     {
@@ -41,11 +41,22 @@ public class LoginPanel : BaseUIForm
 
     private void ReceiveLoginMessage(KeyValuesUpdate kv)
     {
-        m_ErrorMessage = kv.Values.ToString();
+        string m_ErrorMessage = kv.Values.ToString();
 
-        m_Text_EmailNullOrError.text = m_ErrorMessage;
-        DisableAfterTwoSeconds(m_Text_EmailNullOrError);
-       
+        switch (kv.Key)
+        {
+            case "LoginAccountError":
+            case "LoginPasswordError":
+                m_Text_EmailNullOrError.text = m_ErrorMessage;
+                StartCoroutine(DisableAfterTwoSeconds(m_Text_EmailNullOrError));
+                m_IsRegisterSuccess = false;
+                break;
+            default:
+                m_IsRegisterSuccess = true;
+                break;
+        }
+
+
     }
 
     /// <summary>
@@ -56,7 +67,7 @@ public class LoginPanel : BaseUIForm
         if(!EmailNullChecked(m_Text_EmailNullOrError, m_Input_Email) 
         || !PasswordChecked(m_Text_PasswordNullOrError, m_Input_Password))
         {
-            Log("登录失败");
+            Log("登录失败2");
             return;
         }
 
@@ -65,9 +76,9 @@ public class LoginPanel : BaseUIForm
             m_LoginViewModel.LoginCallBack(m_Input_Email.text, m_Input_Password.text);
         }
 
-        if (m_ErrorMessage != "" || m_ErrorMessage != string.Empty)
+        if (!m_IsRegisterSuccess)
         {
-            Log("登录失败");
+            Log("denglu 111");
             return;
         }
         Log("登录成功");
@@ -81,14 +92,10 @@ public class LoginPanel : BaseUIForm
     private bool EmailFormatChecked()
     {
         string m_Email = m_Input_Email.text;
-        Log(1.ToString());
         int m_Pos = m_Email.IndexOf("@");
-        Log(m_Pos.ToString());
         if (m_Pos > 0)
         {
-            Log((m_Email.Length - 2).ToString());
             string m_EmailFormat = m_Email.Substring(m_Pos + 1, m_Email.Length - 1 - m_Pos);
-            Log(m_EmailFormat);
 
             for (int i = 0; i < m_EmailFormatList.Count; i++)
             {

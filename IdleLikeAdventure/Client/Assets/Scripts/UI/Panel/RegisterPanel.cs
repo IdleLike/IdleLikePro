@@ -25,7 +25,6 @@ public class RegisterPanel : BaseUIForm
     //邮箱格式集合
     private List<string> m_EmailFormatList = new List<string>();
     private RegisterViewModel m_RegisterViewModel = null;
-    private string m_ErrorMessage = "";
     private bool m_IsRegisterSuccess;
 
     private void Start()
@@ -42,26 +41,29 @@ public class RegisterPanel : BaseUIForm
     
     private void ReceiveRegisterMessage(KeyValuesUpdate kv)
     {
-        m_ErrorMessage = kv.Values.ToString();
+        Log("m_ErrorMessage");
+        string m_ErrorMessage = kv.Values.ToString();
         switch (kv.Key)
         {
             case "RegisterAccountError":
                 m_Text_EmailErrorOrRegisterOrNull.text = m_ErrorMessage;
-                DisableAfterTwoSeconds(m_Text_EmailErrorOrRegisterOrNull);
+                StartCoroutine(DisableAfterTwoSeconds(m_Text_EmailErrorOrRegisterOrNull));
+                m_IsRegisterSuccess = false;
                 break;
             case "RegisterAccountExist":
                 m_Text_EmailErrorOrRegisterOrNull.text = m_ErrorMessage;
-                DisableAfterTwoSeconds(m_Text_EmailErrorOrRegisterOrNull);
+                StartCoroutine(DisableAfterTwoSeconds(m_Text_EmailErrorOrRegisterOrNull));
+                m_IsRegisterSuccess = false;
                 break;
             case "RegisterPasswordError":
                 m_Text_PasswordNull.text = m_ErrorMessage;
-                DisableAfterTwoSeconds(m_Text_PasswordNull);
-
+                StartCoroutine(DisableAfterTwoSeconds(m_Text_PasswordNull));
+                m_IsRegisterSuccess = false;
                 break;
             default:
+                m_IsRegisterSuccess = true;
                 break;
         }
-        
     }
 
     /// <summary>
@@ -78,18 +80,17 @@ public class RegisterPanel : BaseUIForm
         }
 
 
-        if (m_RegisterViewModel != null)
-        {
-            m_RegisterViewModel.RegisterCallBack(m_Input_Email.text, m_Input_SetPassword.text, (ushort)m_Dropdown_SelectServer.value);
-        }
 
-        if (m_ErrorMessage != "" || m_ErrorMessage != string.Empty)
+        m_RegisterViewModel.RegisterCallBack(m_Input_Email.text, m_Input_SetPassword.text, (ushort)m_Dropdown_SelectServer.value);
+
+        if (!m_IsRegisterSuccess)
         {
-            Log("注册失败");
+            Log("注册失败111");
             return;
         }
- 
-        Destroy(gameObject);
+
+
+        //Destroy(gameObject);
         Log("注册成功");
        
       
@@ -101,14 +102,10 @@ public class RegisterPanel : BaseUIForm
     private bool EmailFormatChecked()
     {
         string m_Email = m_Input_Email.text;
-        Log(1.ToString());
         int m_Pos = m_Email.IndexOf("@");
-        Log(m_Pos.ToString());
         if (m_Pos > 0)
         {
-            Log((m_Email.Length - 2).ToString());
             string m_EmailFormat = m_Email.Substring(m_Pos + 1, m_Email.Length - 1 - m_Pos) ;
-            Log(m_EmailFormat);
       
             for (int i = 0; i < m_EmailFormatList.Count; i++)
             {

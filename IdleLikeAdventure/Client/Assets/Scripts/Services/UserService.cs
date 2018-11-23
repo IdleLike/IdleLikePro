@@ -77,12 +77,15 @@ namespace Service
             registerRequestMsgData.ServerID = serverId;
             Debug.Log("注册触发");
             SendNetMsg(OpCodeUserOperation.Register,registerRequestMsgData);
-            //TODO 打开创建角色面板
-            OnOpenCreateCharacterPanel();
-            //TODO 隐藏注册界面
-            registerPanel.gameObject.SetActive(false);
+            //if (m_IsRegisterSuccess)
+            //{
+            //    //TODO 打开创建角色面板
+            //    OnOpenCreateCharacterPanel();
+            //    //TODO 隐藏注册界面
+            //    registerPanel.gameObject.SetActive(false);
+            //}
         }
-
+        //private bool m_IsRegisterSuccess;
 
 
         ////  创建角色界面数据
@@ -303,6 +306,7 @@ namespace Service
                 else
                 {
                     OnOpenCreateCharacterPanel();
+                    loginPanel.gameObject.SetActive(false);
                 }
             }
         }
@@ -439,8 +443,8 @@ namespace Service
         private void RegisterHandler(BaseMsgData data)
         {
             RegisterRespondeMsgData registerRespondeMsgData = data as RegisterRespondeMsgData;
-            Log(registerRespondeMsgData.userData.Name);
-
+            //Log(registerRespondeMsgData.userData.Name);
+            Log("jinru");
             if (registerRespondeMsgData != null)
             {
                 if(registerRespondeMsgData.IsError)
@@ -451,6 +455,7 @@ namespace Service
                             SendMessage("Register", ErrorCode.RegisterAccountError.ToString(), "邮箱账号错误！");
                             break;
                         case ErrorCode.RegisterAccountExist:
+                            Log("邮箱账号已注册");
                             SendMessage("Register", ErrorCode.RegisterAccountExist.ToString(), "邮箱账号已注册！");
                             break;
                         case ErrorCode.RegisterPasswordError:
@@ -470,8 +475,10 @@ namespace Service
                     userEntity.ID = registerRespondeMsgData.userData.DatabaseID;
                     userEntity.Name = registerRespondeMsgData.userData.Name;
 
+                    //TODO 打开创建角色面板
                     OnOpenCreateCharacterPanel();
-
+                    //TODO 隐藏注册界面
+                    registerPanel.gameObject.SetActive(false);
                 }
             }
             else
