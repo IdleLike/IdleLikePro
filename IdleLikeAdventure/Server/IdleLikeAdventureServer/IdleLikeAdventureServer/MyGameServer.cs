@@ -62,6 +62,7 @@ namespace IdleLikeAdventureServer
             Type[] messages = NetData.Tools.SerializeTool.GetMessageTypes();
             for (byte i = 0; i < messages.Length; i++)
             {
+                log.Info(messages[i].Name +" : "+ i);
                 Protocol.TryRegisterCustomType(messages[i], i, NetData.Tools.SerializeTool.SerializeMessage, NetData.Tools.SerializeTool.DeserializeMessage);
             }
         }
