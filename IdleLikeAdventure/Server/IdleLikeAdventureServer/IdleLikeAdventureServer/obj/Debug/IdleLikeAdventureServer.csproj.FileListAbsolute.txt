@@ -24,6 +24,13 @@ C:\Users\fishf\Documents\Tencent Files\2407040368\FileRecv\Server\Server\IdleLik
 C:\Users\fishf\Documents\Tencent Files\2407040368\FileRecv\Server\Server\IdleLikeAdventureServer\IdleLikeAdventureServer\obj\Debug\IdleLikeAdventureServer.pdb
 C:\Photon\Photon-OnPremise-Server-SDK_v4-0-29-11263\deploy\IdleLikeAdventureServer\Nhibernate\XmlMapping\Account.hbm.xml
 C:\Photon\Photon-OnPremise-Server-SDK_v4-0-29-11263\deploy\IdleLikeAdventureServer\hibernate.cfg.xml
+C:\Photon\Photon-OnPremise-Server-SDK_v4-0-29-11263\deploy\IdleLikeAdventureServer\Configs\Career.bytes
+C:\Photon\Photon-OnPremise-Server-SDK_v4-0-29-11263\deploy\IdleLikeAdventureServer\Configs\CareerAbility.bytes
+C:\Photon\Photon-OnPremise-Server-SDK_v4-0-29-11263\deploy\IdleLikeAdventureServer\Configs\Level.bytes
+C:\Photon\Photon-OnPremise-Server-SDK_v4-0-29-11263\deploy\IdleLikeAdventureServer\Configs\Race.bytes
+C:\Photon\Photon-OnPremise-Server-SDK_v4-0-29-11263\deploy\IdleLikeAdventureServer\Configs\RaceAbility.bytes
+C:\Photon\Photon-OnPremise-Server-SDK_v4-0-29-11263\deploy\IdleLikeAdventureServer\Configs\String.bytes
+C:\Photon\Photon-OnPremise-Server-SDK_v4-0-29-11263\deploy\IdleLikeAdventureServer\Configs\Test.bytes
 C:\Photon\Photon-OnPremise-Server-SDK_v4-0-29-11263\deploy\IdleLikeAdventureServer\log4net.config
 C:\Photon\Photon-OnPremise-Server-SDK_v4-0-29-11263\deploy\IdleLikeAdventureServer\IdleLikeAdventureServer.dll.config
 C:\Photon\Photon-OnPremise-Server-SDK_v4-0-29-11263\deploy\IdleLikeAdventureServer\IdleLikeAdventureServer.dll

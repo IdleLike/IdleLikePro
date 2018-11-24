@@ -7,7 +7,7 @@ namespace StaticData
 {
     public class FolderCfg
     {
-        private static string BinPath = @"configs\Bytes\";//配置表存放的路径
+        private static string BinPath = @"Configs\";//配置表存放的路径
         private static string XmlPath = @".\Xml\";
         public static string XmlFolder()
         {

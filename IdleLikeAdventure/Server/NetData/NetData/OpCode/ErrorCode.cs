@@ -11,6 +11,10 @@ namespace NetData.OpCode
     public enum ErrorCode : uint
     {
         /// <summary>
+        /// 没有错误
+        /// </summary>
+        None,
+        /// <summary>
         /// 登陆账号错误
         /// </summary>
         LoginAccountError,

@@ -67,7 +67,7 @@ namespace IdleLikeAdventureServer.Handler
                     account.UpdateDate = DateTime.Now;
                     userId = serverDataCenter.AccountDal.Insert(account);
 
-                    MyGameServer.log.Info("创建账户成功，账户ID：" + userId);
+                    MyGameServer.log.Info("创建账户成功，账户ID：" + userId +" , 账户名称："+ account.Name);
 
                     userMsgData.DatabaseID = userId;
                     userMsgData.Name = account.Name;
@@ -75,9 +75,10 @@ namespace IdleLikeAdventureServer.Handler
                     registerRespondeMsgData.userData = userMsgData;
                 }               
             }
-            
+
+            MyGameServer.log.Info("registerRespondeMsgData.IsError : " + registerRespondeMsgData.IsError);
             SendResponse(peer, sendParameters, registerRespondeMsgData);
-      
+        
         }
 
         private bool CheckPassword(string password)

@@ -34,13 +34,13 @@ namespace IdleLikeAdventureServer.Handler
             BaseMsgData baseMsgData)
         {
             
-            binaryFormatter.Serialize(memoryStream, baseMsgData);
-            byte[] arr = memoryStream.ToArray();
+            //binaryFormatter.Serialize(memoryStream, baseMsgData);
+            //byte[] arr = memoryStream.ToArray();
 
             OperationResponse operationResponse = new OperationResponse();
             operationResponse.OperationCode = (byte)OpCode;
             operationResponse.Parameters = new Dictionary<byte, object>();
-            operationResponse.Parameters.Add(OpCodeOperation, arr);
+            operationResponse.Parameters.Add(OpCodeOperation, baseMsgData);
             peer.SendOperationResponse(operationResponse, sendParameters);
         }
     }
