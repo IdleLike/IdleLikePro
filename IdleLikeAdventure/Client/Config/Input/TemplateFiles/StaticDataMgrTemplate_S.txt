@@ -7,6 +7,7 @@ using StaticData;
 using System.Reflection;
 using GlobalDefine;
 using StaticData.Data;
+using StaticDataTool;
 
 namespace StaticData
 {
@@ -79,6 +80,18 @@ namespace StaticData
             return;
         }
     }//class
+	
+	//数据结构基类
+    public abstract class BaseDataObject
+    {
+        public uint ID = 0; // ID
+        public abstract void ReadFromStream(BinaryReader br);
+    }
+    public abstract class BaseDataStringIDObject
+    {
+        public string ID = string.Empty; // ID
+        public abstract void ReadFromStream(BinaryReader br);
+    }
 }
 
 
