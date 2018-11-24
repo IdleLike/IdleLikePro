@@ -72,6 +72,7 @@ public class LoginPanel : BaseUIForm
         if (m_LoginViewModel != null)
         {
             m_LoginViewModel.LoginCallBack(m_Input_Email.text, m_Input_Password.text);
+            Log(m_Input_Email.text + " " + m_Input_Password.text);
         }
 
         if (!m_IsRegisterSuccess)

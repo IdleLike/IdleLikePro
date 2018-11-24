@@ -204,9 +204,7 @@ namespace Service
             {
                 if (handlers.TryGetValue(item.Key, out handler))
                 {
-                    MemoryStream memoryStream = new MemoryStream(item.Value as byte[]);
-                    object value = binaryFormatter.Deserialize(memoryStream);
-                    handler(value as BaseMsgData);
+                    handler(item.Value as BaseMsgData);
                 }
             }
         }

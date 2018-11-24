@@ -11,6 +11,7 @@ using SUIFW;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using StaticData;
+using System.Collections;
 
 namespace Service
 {
@@ -75,15 +76,10 @@ namespace Service
             registerRequestMsgData.Account = email;
             registerRequestMsgData.Password = password;
             registerRequestMsgData.ServerID = serverId;
-            Debug.Log("注册触发");
+            Debug.Log("注册触发" + email + password);
+
             SendNetMsg(OpCodeUserOperation.Register,registerRequestMsgData);
-            //if (m_IsRegisterSuccess)
-            //{
-            //    //TODO 打开创建角色面板
-            //    OnOpenCreateCharacterPanel();
-            //    //TODO 隐藏注册界面
-            //    registerPanel.gameObject.SetActive(false);
-            //}
+
         }
         //private bool m_IsRegisterSuccess;
 
@@ -283,7 +279,10 @@ namespace Service
             battleRoomPanel = OpenUIForm("BattleRoom", battleRoomModel);
             battleRoomPanel.gameObject.SetActive(false);
         }
-
+        /// <summary>
+        /// 登录处理
+        /// </summary>
+        /// <param name="data"></param>
         private void LoginHandler(BaseMsgData data)
         {
             LoginRespondeMsgData loginRespondeMsgData = data as LoginRespondeMsgData;
@@ -451,22 +450,30 @@ namespace Service
             {
                 if(registerRespondeMsgData.IsError)
                 {
+                    ArrayList m_List = new ArrayList();
                     switch (registerRespondeMsgData.Error)
                     {
                         case ErrorCode.RegisterAccountError:
-                            SendMessage("Register", ErrorCode.RegisterAccountError.ToString(), "邮箱账号错误！");
+                            m_List.Add("邮箱账号错误！");
+                            m_List.Add(registerRespondeMsgData.Error);
+                            SendMessage("Register", ErrorCode.RegisterAccountError.ToString(), m_List);
                             break;
                         case ErrorCode.RegisterAccountExist:
-                            Log("邮箱账号已注册");
-                            SendMessage("Register", ErrorCode.RegisterAccountExist.ToString(), "邮箱账号已注册！");
+                            Log("错误  邮箱账号已注册");
+                            m_List.Add("邮箱账号已注册！");
+                            m_List.Add(registerRespondeMsgData.Error);
+                            SendMessage("Register", ErrorCode.RegisterAccountExist.ToString(), m_List);
                             break;
                         case ErrorCode.RegisterPasswordError:
-                            SendMessage("Register", ErrorCode.RegisterPasswordError.ToString(), "密码格式错误，请重新输入密码！");
+                            m_List.Add("密码格式错误，请重新输入密码！");
+                            m_List.Add(registerRespondeMsgData.Error);
+                            SendMessage("Register", ErrorCode.RegisterPasswordError.ToString(), m_List);
                             break;
                         default:
                       
                             break;
                     }
+
                 }
                 else
                 {
@@ -482,7 +489,7 @@ namespace Service
                     OnOpenCreateCharacterPanel();
                     //TODO 隐藏注册界面
                     registerPanel.gameObject.SetActive(false);
-                    Log("邮箱账号注册成功");
+                    Log("成功 邮箱账号注册成功");
                 }
             }
             else

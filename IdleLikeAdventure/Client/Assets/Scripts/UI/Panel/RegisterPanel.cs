@@ -41,29 +41,30 @@ public class RegisterPanel : BaseUIForm
     
     private void ReceiveRegisterMessage(KeyValuesUpdate kv)
     {
-        Log("m_ErrorMessage");
-        string m_ErrorMessage = kv.Values.ToString();
-        switch (kv.Key)
+        ArrayList m_ListMessage = kv.Values as ArrayList;
+        Log("m_IsRegisterSuccess = " + (Convert.ToBoolean(m_ListMessage[1])) + m_ListMessage[0].GetType()+ m_ListMessage[1].GetType());
+        m_IsRegisterSuccess = Convert.ToBoolean(m_ListMessage[1]);
+
+        if (!m_IsRegisterSuccess)
         {
-            case "RegisterAccountError":
-                m_Text_EmailErrorOrRegisterOrNull.text = m_ErrorMessage;
-                StartCoroutine(DisableAfterTwoSeconds(m_Text_EmailErrorOrRegisterOrNull));
-                m_IsRegisterSuccess = false;
-                break;
-            case "RegisterAccountExist":
-                m_Text_EmailErrorOrRegisterOrNull.text = m_ErrorMessage;
-                StartCoroutine(DisableAfterTwoSeconds(m_Text_EmailErrorOrRegisterOrNull));
-                m_IsRegisterSuccess = false;
-                break;
-            case "RegisterPasswordError":
-                m_Text_PasswordNull.text = m_ErrorMessage;
-                StartCoroutine(DisableAfterTwoSeconds(m_Text_PasswordNull));
-                m_IsRegisterSuccess = false;
-                break;
-            default:
-                break;
+            switch (kv.Key)
+            {
+                case "RegisterAccountError":
+                    m_Text_EmailErrorOrRegisterOrNull.text = m_ListMessage[0].ToString();
+                    StartCoroutine(DisableAfterTwoSeconds(m_Text_EmailErrorOrRegisterOrNull));
+                    break;
+                case "RegisterAccountExist":
+                    m_Text_EmailErrorOrRegisterOrNull.text = m_ListMessage[0].ToString();
+                    StartCoroutine(DisableAfterTwoSeconds(m_Text_EmailErrorOrRegisterOrNull));
+                    break;
+                case "RegisterPasswordError":
+                    m_Text_PasswordNull.text = m_ListMessage[0].ToString();
+                    StartCoroutine(DisableAfterTwoSeconds(m_Text_PasswordNull));
+                    break;
+                default:
+                    break;
+            }
         }
-        m_IsRegisterSuccess = true;
     }
 
     /// <summary>
@@ -82,10 +83,12 @@ public class RegisterPanel : BaseUIForm
 
 
         m_RegisterViewModel.RegisterCallBack(m_Input_Email.text, m_Input_SetPassword.text, (ushort)m_Dropdown_SelectServer.value);
+        Log(m_Input_Email.text + " " + m_Input_SetPassword.text);
 
         if (!m_IsRegisterSuccess)
         {
             Log("注册失败111");
+
             return;
         }
 
