@@ -71,11 +71,11 @@ namespace StaticData
             }
             catch (EndOfStreamException)
             {
-                Console.WriteLine(filename + "Load Data Done");
+                System.Console.WriteLine(filename + "Load Data Done");
             }
             catch (IOException e)
             {
-                Console.WriteLine(e.ToString());
+                System.Console.WriteLine(e.ToString());
             }
             finally
             {
@@ -107,11 +107,11 @@ namespace StaticData
             }
             catch (EndOfStreamException)
             {
-                Console.WriteLine(filename + "Load Data Done");
+                System.Console.WriteLine(filename + "Load Data Done");
             }
             catch (IOException e)
             {
-                Console.WriteLine(e.ToString());
+                System.Console.WriteLine(e.ToString());
             }
             finally
             {
