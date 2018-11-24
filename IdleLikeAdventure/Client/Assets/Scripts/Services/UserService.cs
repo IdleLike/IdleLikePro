@@ -305,6 +305,7 @@ namespace Service
                 }
                 else
                 {
+                    Log("登录成功");
                     OnOpenCreateCharacterPanel();
                     loginPanel.gameObject.SetActive(false);
                 }
@@ -442,6 +443,7 @@ namespace Service
 
         private void RegisterHandler(BaseMsgData data)
         {
+            Log(data.GetType().Name);
             RegisterRespondeMsgData registerRespondeMsgData = data as RegisterRespondeMsgData;
             //Log(registerRespondeMsgData.userData.Name);
             Log("jinru");
@@ -462,6 +464,7 @@ namespace Service
                             SendMessage("Register", ErrorCode.RegisterPasswordError.ToString(), "密码格式错误，请重新输入密码！");
                             break;
                         default:
+                      
                             break;
                     }
                 }
@@ -479,6 +482,7 @@ namespace Service
                     OnOpenCreateCharacterPanel();
                     //TODO 隐藏注册界面
                     registerPanel.gameObject.SetActive(false);
+                    Log("邮箱账号注册成功");
                 }
             }
             else

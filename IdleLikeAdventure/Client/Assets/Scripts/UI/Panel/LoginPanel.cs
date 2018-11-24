@@ -52,11 +52,9 @@ public class LoginPanel : BaseUIForm
                 m_IsRegisterSuccess = false;
                 break;
             default:
-                m_IsRegisterSuccess = true;
                 break;
         }
-
-
+        m_IsRegisterSuccess = true;
     }
 
     /// <summary>
@@ -83,7 +81,7 @@ public class LoginPanel : BaseUIForm
         }
         Log("登录成功");
 
-        Destroy(gameObject);
+        //Destroy(gameObject);
     }
     /// <summary>
     /// 邮箱格式检测

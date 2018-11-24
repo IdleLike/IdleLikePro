@@ -61,9 +61,9 @@ public class RegisterPanel : BaseUIForm
                 m_IsRegisterSuccess = false;
                 break;
             default:
-                m_IsRegisterSuccess = true;
                 break;
         }
+        m_IsRegisterSuccess = true;
     }
 
     /// <summary>
