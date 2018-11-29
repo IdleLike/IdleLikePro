@@ -41,20 +41,24 @@ public class LoginPanel : BaseUIForm
 
     private void ReceiveLoginMessage(KeyValuesUpdate kv)
     {
-        string m_ErrorMessage = kv.Values.ToString();
+        ArrayList m_ListMessage = kv.Values as ArrayList;
+        Log("m_IsRegisterSuccess = " + (Convert.ToBoolean(m_ListMessage[1])) + m_ListMessage[0].GetType() + m_ListMessage[1].GetType());
+        m_IsRegisterSuccess = !Convert.ToBoolean(m_ListMessage[1]);
 
-        switch (kv.Key)
+        if (!m_IsRegisterSuccess)
         {
-            case "LoginAccountError":
-            case "LoginPasswordError":
-                m_Text_EmailNullOrError.text = m_ErrorMessage;
-                StartCoroutine(DisableAfterTwoSeconds(m_Text_EmailNullOrError));
-                m_IsRegisterSuccess = false;
-                break;
-            default:
-                break;
+            switch (kv.Key)
+            {
+                case "LoginAccountError":
+                case "LoginPasswordError":
+                    m_Text_EmailNullOrError.text = m_ListMessage[0].ToString();
+                    StartCoroutine(DisableAfterTwoSeconds(m_Text_EmailNullOrError));
+                    m_IsRegisterSuccess = false;
+                    break;
+                default:
+                    break;
+            }
         }
-        m_IsRegisterSuccess = true;
     }
 
     /// <summary>
@@ -65,24 +69,29 @@ public class LoginPanel : BaseUIForm
         if(!EmailNullChecked(m_Text_EmailNullOrError, m_Input_Email) 
         || !PasswordChecked(m_Text_PasswordNullOrError, m_Input_Password))
         {
-            Log("登录失败2");
+            Log("登录失败——客户端检查");
+            ClearData();
             return;
         }
 
-        if (m_LoginViewModel != null)
-        {
-            m_LoginViewModel.LoginCallBack(m_Input_Email.text, m_Input_Password.text);
-            Log(m_Input_Email.text + " " + m_Input_Password.text);
-        }
+       
+       m_LoginViewModel.LoginCallBack(m_Input_Email.text, m_Input_Password.text);
+       Log(m_Input_Email.text + " " + m_Input_Password.text);
+        
 
         if (!m_IsRegisterSuccess)
         {
-            Log("denglu 111");
+            Log("登录失败——服务端检查");
+            ClearData();
             return;
         }
         Log("登录成功");
+    }
 
-        //Destroy(gameObject);
+    void ClearData()
+    {
+        m_Input_Email.text = "";
+        m_Input_Password.text = "";
     }
     /// <summary>
     /// 邮箱格式检测

@@ -27,13 +27,14 @@ namespace StaticData
         }
 
         // *************				data	 	***************
-		public Dictionary<ushort, TestListData> mTestListDataMap = new Dictionary<ushort, TestListData>(); //TestList Data
-
+        private Dictionary<string, StringData> mStringDataMap = new Dictionary<string, StringData>();
+		
         //加载数据
         public void LoadData()
         {
-			LoadDataBinWorker<TestListData>("TestList.bytes", mTestListDataMap); //TestList Data
 
+            LoadDataBinWorkerString("StringData.bytes", mStringDataMap);
+			
 						
 			//定义如型： void SheetNameDataProcess(ClassType data) 的函数, 会被自动调用
 
@@ -50,7 +51,7 @@ namespace StaticData
 
         void LoadDataBinWorker<ClassType>(string filename, object dic, Action<ClassType> process = null) where ClassType : BaseDataObject, new()
         {
-            Dictionary<ushort, ClassType> dataMap = dic as Dictionary<ushort, ClassType>;
+            Dictionary<uint, ClassType> dataMap = dic as Dictionary<uint, ClassType>;
 
             BinaryReader br = null;
             Stream ds = OpenBinDataFile(filename);
@@ -61,7 +62,7 @@ namespace StaticData
                 {
                     ClassType tNewData = new ClassType();
                     tNewData.ReadFromStream(br);
-                    dataMap.Add(tNewData.mID, tNewData);
+                    dataMap.Add(tNewData.ID, tNewData);
                     if (process != null)
                     {
                         process(tNewData);
@@ -83,11 +84,54 @@ namespace StaticData
             }
             return;
         }
+
+        void LoadDataBinWorkerString<ClassType>(string filename, object dic, Action<ClassType> process = null) where ClassType : BaseDataStringIDObject, new()
+        {
+            Dictionary<String, ClassType> dataMap = dic as Dictionary<String, ClassType>;
+
+            BinaryReader br = null;
+            Stream ds = OpenBinDataFile(filename);
+            br = new BinaryReader(ds);
+            try
+            {
+                while (true)
+                {
+                    ClassType tNewData = new ClassType();
+                    tNewData.ReadFromStream(br);
+                    dataMap.Add(tNewData.ID, tNewData);
+                    if (process != null)
+                    {
+                        process(tNewData);
+                    }
+                }
+            }
+            catch (EndOfStreamException)
+            {
+                Console.WriteLine(filename + "Load Data Done");
+            }
+            catch (IOException e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+            finally
+            {
+                br.Close();
+                FileDes.CloseStream();
+            }
+            return;
+        }
+
     }//class
     //数据结构基类
     public abstract class BaseDataObject
     {
-        public ushort mID = 0; // ID
+        public uint ID = 0; // ID
+        public abstract void ReadFromStream(BinaryReader br);
+    }
+
+    public abstract class BaseDataStringIDObject
+    {
+        public string ID = ""; // ID
         public abstract void ReadFromStream(BinaryReader br);
     }
 

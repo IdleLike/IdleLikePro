@@ -202,8 +202,8 @@ namespace Service
 
         public override void Init()
         {
+            StaticDataMgr.mInstance.LoadData();
             AddNetListener();
-            
         }
 
         public override void AddNetListener()
@@ -279,100 +279,23 @@ namespace Service
             battleRoomPanel = OpenUIForm("BattleRoom", battleRoomModel);
             battleRoomPanel.gameObject.SetActive(false);
         }
-        /// <summary>
-        /// 登录处理
-        /// </summary>
-        /// <param name="data"></param>
-        private void LoginHandler(BaseMsgData data)
-        {
-            LoginRespondeMsgData loginRespondeMsgData = data as LoginRespondeMsgData;
-            if (loginRespondeMsgData != null)
-            {
-                if (loginRespondeMsgData.IsError)
-                {
-                    switch (loginRespondeMsgData.Error)
-                    {
-                        case ErrorCode.LoginAccountError:
-                            SendMessage("Login", "LoginAccountError", "邮箱账号或密码错误！");
-                            break;
-                        case ErrorCode.LoginPasswordError:
-                            SendMessage("Login", "LoginPasswordError", "邮箱账号或密码错误！");
-                            break;
-                        default:
-                            break;
-                    }
-                }
-                else
-                {
-                    Log("登录成功");
-                    OnOpenCreateCharacterPanel();
-                    loginPanel.gameObject.SetActive(false);
-                }
-            }
-        }
+
 
         private void OnOpenCreateCharacterPanel()
         {
-            
-            //if (createCharacterViewModel == null) createCharacterViewModel = new CreateCharacterViewModel();
-            //foreach (var item in StaticDataMgr.mInstance.mRaceDataMap.Values)
-            //{
-            //    createCharacterViewModel.createCharacterViewModels.Add(item);
-            //}
-            //createCharacterViewModel.createCharacterViewModels = createCharacterModel.createCharacterViewModels;
-            //StaticData.Data.RaceData raceData = new StaticData.Data.RaceData();
-            //raceData.AbilityOneID = 1001;
-            //raceData.AbilityTwoID = 1002;
-            //raceData.ConGrowth = 1;
-            //raceData.Describe = "啊撒旦水水CDC";
-            //raceData.DexGrowth = 2;
-            //raceData.HPGrowth = 3;
-            //raceData.MPGrowth = 4;
-            //raceData.ID = 1;
-            //raceData.InitCon = 100;
-            //raceData.InitDex = 200;
-            //raceData.InitHP = 130;
-            //raceData.InitMP = 140;
-            //raceData.Name = "人类";
-            //raceData.PowGrowth = 5;
-            //StaticData.Data.RaceData raceData1 = new StaticData.Data.RaceData();
-            //raceData1.AbilityOneID = 1001;
-            //raceData1.AbilityTwoID = 1002;
-            //raceData1.ConGrowth = 1;
-            //raceData1.Describe = "啊撒旦水水CDC";
-            //raceData1.DexGrowth = 2;
-            //raceData1.HPGrowth = 3;
-            //raceData1.MPGrowth = 4;
-            //raceData1.ID = 1;
-            //raceData1.InitCon = 10;
-            //raceData1.InitDex = 20;
-            //raceData1.InitHP = 13;
-            //raceData1.InitMP = 140;
-            //raceData1.Name = "侏儒";
-            //raceData1.PowGrowth = 5;
-            //StaticData.Data.RaceData raceData2 = new StaticData.Data.RaceData();
-            //raceData2.AbilityOneID = 1001;
-            //raceData2.AbilityTwoID = 1002;
-            //raceData2.ConGrowth = 1;
-            //raceData2.Describe = "啊撒旦水水CDC";
-            //raceData2.DexGrowth = 2;
-            //raceData2.HPGrowth = 3;
-            //raceData2.MPGrowth = 4;
-            //raceData2.ID = 1;
-            //raceData2.InitCon = 1;
-            //raceData2.InitDex = 2;
-            //raceData2.InitHP = 1;
-            //raceData2.InitMP = 1;
-            //raceData2.Name = "精灵";
-            //raceData2.PowGrowth = 5;
-            //createCharacterViewModel.createCharacterViewModels.Add(raceData);
-            //createCharacterViewModel.createCharacterViewModels.Add(raceData1);
-            //createCharacterViewModel.createCharacterViewModels.Add(raceData2);
             if (createCharacterViewModel == null) createCharacterViewModel = new CreateCharacterViewModel();
 
             if (createCharacterViewModel.createCharacterViewModels == null) createCharacterViewModel.createCharacterViewModels = new List<StaticData.Data.RaceData>();
 
             Dictionary<uint,StaticData.Data.RaceData> m_RaceDataDic = StaticDataMgr.mInstance.mRaceDataMap;
+            Log("StaticDataMgr.mInstance.mRaceDataMap：" + StaticDataMgr.mInstance.mRaceDataMap.Count);
+
+            foreach (var item in StaticDataMgr.mInstance.mRaceDataMap.Keys)
+            {
+                Log("key：" + item);
+                Log("value：" + m_RaceDataDic[item]);
+
+            }
             //初始化所有职业数据
             foreach (var item in m_RaceDataDic.Values)
             {
@@ -439,13 +362,53 @@ namespace Service
             //OnOpenBattlePanel();
          
         }
+        /// <summary>
+        /// 登录处理
+        /// </summary>
+        /// <param name="data"></param>
+        private void LoginHandler(BaseMsgData data)
+        {
+            LoginRespondeMsgData loginRespondeMsgData = data as LoginRespondeMsgData;
 
+            if (loginRespondeMsgData != null)
+            {
+                Log("登录 ： " + loginRespondeMsgData);
+                Log("登录 ： " + loginRespondeMsgData.Error.ToString() + "是否成功 ：" +loginRespondeMsgData.IsError);
+                if (loginRespondeMsgData.IsError)
+                {
+                    ArrayList m_List = new ArrayList();
+                    switch (loginRespondeMsgData.Error)
+                    {
+                        case ErrorCode.LoginAccountError:
+                        case ErrorCode.LoginPasswordError:
+
+                            Log("注册失败：" + loginRespondeMsgData.Error.ToString() + "邮箱账号或密码错误");
+
+                            m_List.Add("邮箱账号或密码错误！");
+                            m_List.Add(loginRespondeMsgData.Error);
+                            SendMessage("Login", ErrorCode.LoginAccountError.ToString(), m_List);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                else
+                {
+                    Log("登录成功");
+                    loginPanel.gameObject.SetActive(false);
+                    OnOpenCreateCharacterPanel();
+                }
+            }
+        }
+        /// <summary>
+        /// 注册处理
+        /// </summary>
+        /// <param name="data"></param>
         private void RegisterHandler(BaseMsgData data)
         {
             Log(data.GetType().Name);
             RegisterRespondeMsgData registerRespondeMsgData = data as RegisterRespondeMsgData;
-            //Log(registerRespondeMsgData.userData.Name);
-            Log("jinru");
+            Log("注册失败："+registerRespondeMsgData.Error.ToString());
             if (registerRespondeMsgData != null)
             {
                 if(registerRespondeMsgData.IsError)
@@ -454,17 +417,23 @@ namespace Service
                     switch (registerRespondeMsgData.Error)
                     {
                         case ErrorCode.RegisterAccountError:
-                            m_List.Add("邮箱账号错误！");
+                            Log("注册失败：" + registerRespondeMsgData.Error.ToString() + "邮箱账号错误");
+
+                            m_List.Add("邮箱账号不合法！");
                             m_List.Add(registerRespondeMsgData.Error);
                             SendMessage("Register", ErrorCode.RegisterAccountError.ToString(), m_List);
+
                             break;
                         case ErrorCode.RegisterAccountExist:
-                            Log("错误  邮箱账号已注册");
+                            Log("注册失败：" + registerRespondeMsgData.Error.ToString() + "邮箱账号已注册");
+
                             m_List.Add("邮箱账号已注册！");
                             m_List.Add(registerRespondeMsgData.Error);
                             SendMessage("Register", ErrorCode.RegisterAccountExist.ToString(), m_List);
                             break;
                         case ErrorCode.RegisterPasswordError:
+                            Log("注册失败：" + registerRespondeMsgData.Error.ToString() + "密码格式错误，请重新输入密码！");
+
                             m_List.Add("密码格式错误，请重新输入密码！");
                             m_List.Add(registerRespondeMsgData.Error);
                             SendMessage("Register", ErrorCode.RegisterPasswordError.ToString(), m_List);
@@ -484,12 +453,13 @@ namespace Service
                     userEntity.CreateTime = registerRespondeMsgData.userData.CreateTime;
                     userEntity.ID = registerRespondeMsgData.userData.DatabaseID;
                     userEntity.Name = registerRespondeMsgData.userData.Name;
-
-                    //TODO 打开创建角色面板
-                    OnOpenCreateCharacterPanel();
+                    
                     //TODO 隐藏注册界面
                     registerPanel.gameObject.SetActive(false);
                     Log("成功 邮箱账号注册成功");
+                    //TODO 打开创建角色面板
+                    OnOpenCreateCharacterPanel();
+               
                 }
             }
             else

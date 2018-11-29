@@ -267,7 +267,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd956893166614a55861ff7af150d8ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Serverhost: 192.168.1.104:4530
+  m_Serverhost: 114.116.46.242:4530
   m_ServerName: IdleLikeAdventureServer
   m_DefaultConnectionProtocol: 1
 --- !u!1 &1082484407
@@ -431,6 +431,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 92977857}
     m_Modifications:
+    - target: {fileID: 114806063552407326, guid: 6a21183204c6d0d41934eef96094d2cd,
+        type: 2}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 224549709979108778, guid: 6a21183204c6d0d41934eef96094d2cd,
         type: 2}
       propertyPath: m_LocalPosition.x
@@ -520,6 +525,21 @@ Prefab:
         type: 2}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114806063552407326, guid: 6a21183204c6d0d41934eef96094d2cd,
+        type: 2}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114806063552407326, guid: 6a21183204c6d0d41934eef96094d2cd,
+        type: 2}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114806063552407326, guid: 6a21183204c6d0d41934eef96094d2cd,
+        type: 2}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a21183204c6d0d41934eef96094d2cd, type: 2}

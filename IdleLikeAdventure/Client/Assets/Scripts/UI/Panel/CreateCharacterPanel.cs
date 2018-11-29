@@ -43,7 +43,7 @@ public class CreateCharacterPanel : BaseUIForm
     public Text m_ActorThreeIsRepeatOrNullText;
     public Text m_TeamNameIsRepeatOrNullText;
 
-    private CreateCharacterViewModel m_CreateCharacterViewModel;
+    private CreateCharacterViewModel m_CreateCharacterViewModel = new CreateCharacterViewModel();
     private string m_ErrorMessage = "";
 
     private string m_InfoInitValueDes = "HP{0} Pow{1} Dex{2} Con{3}";
@@ -121,7 +121,7 @@ public class CreateCharacterPanel : BaseUIForm
                 break;
         }
     }
-    private void OnRocaTypeValueChanged(int index)
+    public void OnRocaTypeValueChanged(int index)
     {
         m_RocaNameText.text = m_CreateCharacterViewModel.createCharacterViewModels[index].Name;
         m_RocaDesText.text = m_CreateCharacterViewModel.createCharacterViewModels[index].Describe;
