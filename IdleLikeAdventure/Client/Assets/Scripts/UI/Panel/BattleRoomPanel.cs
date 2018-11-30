@@ -477,7 +477,8 @@ namespace UI.Panel
                 RoomName_Txt.text = BattleModel.RoomName;
 
                 InitCharcterInfo(BattleModel);
-                InitEnemyInfo(BattleModel);
+                //TODO 初始化怪物
+                //InitEnemyInfo(BattleModel);
             }
         }
 
@@ -857,6 +858,16 @@ namespace UI.Panel
                 CharacterUIInfoList[i].MP_Sli.value = Mathf.Clamp(model.characterList[i].MaxMP, 0, model.characterList[i].MaxMP) / (float)model.characterList[i].MaxMP;
                 CharacterUIInfoList[i].CurrentHP_Txt.text = model.characterList[i].MaxHP.ToString();
                 CharacterUIInfoList[i].MaxHP_Txt.text = model.characterList[i].MaxMP.ToString();
+
+                Log("玩家名称：" + model.characterList[i].Name + "\n" +
+                    "种族名称：" + model.characterList[i].RaceData.Name + "\n" +
+                    "职业名称：" + model.characterList[i].CareerData.Name + "\n" +
+                    "等级：" + model.characterList[i].Level.ToString() + "\n" +
+                    "最大红量：" + model.characterList[i].MaxHP + "\n" + 
+                    "最大蓝量：" + model.characterList[i].MaxMP + "\n" + 
+                    "当前红量：" + CharacterUIInfoList[i].CurrentHP_Txt.text + "\n" + 
+                    "当前蓝量：" + CharacterUIInfoList[i].MaxHP_Txt.text
+                    );
             }
             IsInit = true;
         }

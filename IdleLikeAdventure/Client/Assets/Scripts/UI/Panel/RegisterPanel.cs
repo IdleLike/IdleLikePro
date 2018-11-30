@@ -43,23 +43,25 @@ public class RegisterPanel : BaseUIForm
     {
         ArrayList m_ListMessage = kv.Values as ArrayList;
         Log("m_IsRegisterSuccess = " + (Convert.ToBoolean(m_ListMessage[1])) + m_ListMessage[0].GetType()+ m_ListMessage[1].GetType());
-        m_IsRegisterSuccess = Convert.ToBoolean(m_ListMessage[1]);
+        m_IsRegisterSuccess = !Convert.ToBoolean(m_ListMessage[1]);
 
         if (!m_IsRegisterSuccess)
         {
+            Log("m_IsRegisterSuccess = " + (Convert.ToBoolean(m_ListMessage[1])) + m_ListMessage[0].GetType() + m_ListMessage[1].GetType());
+
             switch (kv.Key)
             {
                 case "RegisterAccountError":
                     m_Text_EmailErrorOrRegisterOrNull.text = m_ListMessage[0].ToString();
-                    StartCoroutine(DisableAfterTwoSeconds(m_Text_EmailErrorOrRegisterOrNull));
+                    StartCoroutine(DisableAfterThreeSeconds(m_Text_EmailErrorOrRegisterOrNull));
                     break;
                 case "RegisterAccountExist":
                     m_Text_EmailErrorOrRegisterOrNull.text = m_ListMessage[0].ToString();
-                    StartCoroutine(DisableAfterTwoSeconds(m_Text_EmailErrorOrRegisterOrNull));
+                    StartCoroutine(DisableAfterThreeSeconds(m_Text_EmailErrorOrRegisterOrNull));
                     break;
                 case "RegisterPasswordError":
                     m_Text_PasswordNull.text = m_ListMessage[0].ToString();
-                    StartCoroutine(DisableAfterTwoSeconds(m_Text_PasswordNull));
+                    StartCoroutine(DisableAfterThreeSeconds(m_Text_PasswordNull));
                     break;
                 default:
                     break;
@@ -76,7 +78,8 @@ public class RegisterPanel : BaseUIForm
             || !PasswordChecked(m_Text_PasswordNull, m_Input_SetPassword)
             || !PasswordChecked(m_Text_PasswordNullOrDissimilarity, m_Input_ConfirmPassword, m_Input_SetPassword))
         {
-            Log("注册失败");
+            Log("注册失败——客户端检查");
+            ClearData();
             return;
         }
 
@@ -87,8 +90,8 @@ public class RegisterPanel : BaseUIForm
 
         if (!m_IsRegisterSuccess)
         {
-            Log("注册失败111");
-
+            Log("注册失败——服务端检查");
+            ClearData();
             return;
         }
 
@@ -97,6 +100,13 @@ public class RegisterPanel : BaseUIForm
         Log("注册成功");
        
       
+    }
+
+    void ClearData()
+    {
+        m_Input_Email .text = "";
+        m_Input_SetPassword.text = "";
+        m_Input_ConfirmPassword.text = "";
     }
     /// <summary>
     /// 邮箱格式检测
@@ -145,7 +155,7 @@ public class RegisterPanel : BaseUIForm
         }
         //yield return new WaitForSeconds(2);
         //go.gameObject.SetActive(false);
-        StartCoroutine(DisableAfterTwoSeconds(go));
+        StartCoroutine(DisableAfterThreeSeconds(go));
         return false;
     }
     /// <summary>
@@ -177,20 +187,18 @@ public class RegisterPanel : BaseUIForm
             go.gameObject.SetActive(false);
             return true;
         }
-        StartCoroutine(DisableAfterTwoSeconds(go));
+        StartCoroutine(DisableAfterThreeSeconds(go));
         return false;
-        //yield return new WaitForSeconds(2);
-        //go.gameObject.SetActive(false);
     }
     /// <summary>
-    /// 两秒后禁用
+    /// 三秒后禁用
     /// </summary>
     /// <param name="go"></param>
     /// <returns></returns>
-    private IEnumerator DisableAfterTwoSeconds(Text go)
+    private IEnumerator DisableAfterThreeSeconds(Text go)
     {
         go.gameObject.SetActive(true);
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(3);
         go.gameObject.SetActive(false);
     }
 
