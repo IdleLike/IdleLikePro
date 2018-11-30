@@ -156,25 +156,16 @@ public class CreateCharacterPanel : BaseUIForm
 
         //TODO 设置Error
         m_CreateCharacterViewModel.CreateCharacterCallback(CreateDataCallback());
-        //if(m_CreateCharacterViewModel.NameIsRepeatCallback(m_PlayerNameInput.text))
-        //{
-        //    m_PlayerNameIsRepeatOrNullText.text = "角色名称重复！";
-        //}
-        //if (m_CreateCharacterViewModel.TeamNameIsRepeatCallback(m_TeamNameInput.text))
-        //{
-        //    m_TeamNameIsRepeatOrNullText.text = "队伍名称重复！";
-        //}
+
         if (m_ErrorMessage != "" || m_ErrorMessage != string.Empty)
         {
             Log("登录失败");
             return;
         }
 
-
-      
-     
-        Debug.Log("成功创建角色 —— " +
+        Log("成功创建角色 —— " +
             "玩家名称：" + m_CreateData.playerName +
+            "玩家队伍名称：" + m_CreateData.teamName + 
             "角色一名称：" + m_CreateData.actorOneName +
             "角色二名称：" + m_CreateData.actorTwoName +
             "角色三名称：" + m_CreateData.actorThreeName +
@@ -201,13 +192,11 @@ public class CreateCharacterPanel : BaseUIForm
         {
             go.gameObject.SetActive(false);
             m_IsCreatePlayer = true;
-            //return true;
         }
         if (!m_IsCreatePlayer)
         {
             StartCoroutine(DisableAfterTwoSeconds(go));
         }
-        //return false;      
     }
 
     private CreateData m_CreateData;
@@ -221,38 +210,26 @@ public class CreateCharacterPanel : BaseUIForm
         m_CreateData.actorThreeName = m_ActorThreeNameInput.text;
 
 
-        StaticData.Data.RaceData raceData = new StaticData.Data.RaceData();
-        raceData.AbilityOneID = 1001;
-        raceData.AbilityTwoID = 1002;
-        raceData.ConGrowth = 1;
-        raceData.Describe = "啊撒旦水水CDC";
-        raceData.DexGrowth = 2;
-        raceData.HPGrowth = 3;
-        raceData.MPGrowth = 4;
-        raceData.ID = 1;
-        raceData.InitCon = 100;
-        raceData.InitDex = 200;
-        raceData.InitHP = 130;
-        raceData.InitMP = 140;
-        raceData.Name = "人类";
-        raceData.PowGrowth = 5;
+        //StaticData.Data.RaceData raceData = new StaticData.Data.RaceData();
+        //raceData.AbilityOneID = 1001;
+        //raceData.AbilityTwoID = 1002;
+        //raceData.ConGrowth = 1;
+        //raceData.Describe = "啊撒旦水水CDC";
+        //raceData.DexGrowth = 2;
+        //raceData.HPGrowth = 3;
+        //raceData.MPGrowth = 4;
+        //raceData.ID = 1;
+        //raceData.InitCon = 100;
+        //raceData.InitDex = 200;
+        //raceData.InitHP = 130;
+        //raceData.InitMP = 140;
+        //raceData.Name = "人类";
+        //raceData.PowGrowth = 5;
 
-        m_CreateData.rocaOneType = raceData.ID;
-        //foreach (var item in StaticDataMgr.mInstance.mRaceDataMap.Values)
-        //{
-        //    if (item.Name == m_ActorOneNameInput.text)
-        //    {
-        //        m_CreateData.rocaOneType = item.ID;
-        //    }
-        //    if (item.Name == m_ActorTwoNameInput.text)
-        //    {
-        //        m_CreateData.rocaTwoType = item.ID;
-        //    }
-        //    if (item.Name == m_ActorThreeNameInput.text)
-        //    {
-        //        m_CreateData.rocaThreeType = item.ID;
-        //    }
-        //}
+        //TODO ++
+        m_CreateData.rocaOneType = (uint)m_RocaOneTypeDropdown.value + 1;
+        m_CreateData.rocaTwoType = (uint)m_RocaTwoTypeDropdown.value + 1;
+        m_CreateData.rocaThreeType = (uint)m_RocaThreeTypeDropdown.value + 1;
 
         return m_CreateData;
     }

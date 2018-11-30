@@ -81,131 +81,19 @@ namespace Service
             SendNetMsg(OpCodeUserOperation.Register,registerRequestMsgData);
 
         }
-        //private bool m_IsRegisterSuccess;
-
-
-        ////  创建角色界面数据
-        //private void SetCreateCharacterModel()
-        //{
-        //    if (createCharacterModel == null) createCharacterModel = new CreateCharacterViewModel();
-
-        //    if (createCharacterModel.createCharacterViewModels == null) createCharacterModel.createCharacterViewModels = new List<StaticData.Data.RaceData>();
-
-        //    //初始化所有职业数据
-        //    StaticData.Data.RaceData rocal = new StaticData.Data.RaceData();
-        //    for (int i = 0; i < TestStaticData.Instance.RaceDatas.Count; i++)
-        //    {
-        //        // 数据赋值
-        //        rocal.ID =  TestStaticData.Instance.RaceDatas[i].ID;
-        //        rocal.Name = TestStaticData.Instance.RaceDatas[i].Name;
-        //        rocal.Describe = TestStaticData.Instance.RaceDatas[i].Describe;
-        //        rocal.InitCon = TestStaticData.Instance.RaceDatas[i].InitCon;
-        //        rocal.InitDex = TestStaticData.Instance.RaceDatas[i].InitDex;
-        //        rocal.InitPow = TestStaticData.Instance.RaceDatas[i].InitPow;
-        //        rocal.InitHP = TestStaticData.Instance.RaceDatas[i].InitHP;
-        //        rocal.ConGrowth = TestStaticData.Instance.RaceDatas[i].ConGrowth;
-        //        rocal.DexGrowth = TestStaticData.Instance.RaceDatas[i].DexGrowth;
-        //        rocal.PowGrowth = TestStaticData.Instance.RaceDatas[i].PowGrowth;
-        //        rocal.HPGrowth = TestStaticData.Instance.RaceDatas[i].HPGrowth;
-        //        rocal.AbilityOneID = TestStaticData.Instance.RaceDatas[i].AbilityOneID;
-        //        rocal.AbilityTwoID = TestStaticData.Instance.RaceDatas[i].AbilityTwoID;
-        //        createCharacterModel.createCharacterViewModels.Add(rocal);
-        //    }
-
-        //    //初始化所有委托
-        //    createCharacterModel.CreateCharacterCallback = Create;
-        //    createCharacterModel.NameIsRepeatCallback = CheckNameRepeat;
-        //    createCharacterViewModel.TeamNameIsRepeatCallback = OnTeamNameIsRepeatCallback;
-        //}
-
-        //  创建用户
-        //private void Create(CreateCharacterPanel.CreateData obj)
-        //{
-        //    //创建用户， 想数据库填入用户数据
-
-        //    //为用户创建英雄
-
-        //    //跳转页面
-
-        //}
-
-
-        // 检测用户名是否重复
-        //private bool CheckNameRepeat(string name)
-        //{
-        //    return TestDB.Instance.Users.Find(p=>p.Name == name) == null;
-        //}
-
-
-        private void InitBattle()
-        {
-            //if (battleRoomModel == null) battleRoomModel = new BattleRoomModel();
-
-            //if (battleRoomModel.characterList == null) battleRoomModel.characterList = new List<BattleRoomModel.BattleCharacterModel>();
-            //if (battleRoomModel.enemyList == null) battleRoomModel.enemyList = new List<BattleRoomModel.BattleEnemyModel>();
-            //if (battleRoomModel.ReportQueue == null) battleRoomModel.ReportQueue = new Queue<BattleRoomModel.BattleReportModel>();
-
-            //for (int i = 0; i < TestStaticData.Instance.BattleCharacterModel.Count; i++)
-            //{
-            //    BattleRoomModel.BattleCharacterModel model = new BattleRoomModel.BattleCharacterModel();
-            //    model.ID = TestStaticData.Instance.BattleCharacterModel[i].ID;
-            //    model.Name = TestStaticData.Instance.BattleCharacterModel[i].Name;
-            //    model.RocaName = TestStaticData.Instance.BattleCharacterModel[i].RocaName;
-            //    model.Career = TestStaticData.Instance.BattleCharacterModel[i].Career;
-            //    model.Level = TestStaticData.Instance.BattleCharacterModel[i].Level;
-            //    model.CurrentHP = TestStaticData.Instance.BattleCharacterModel[i].CurrentHP;
-            //    model.MaxHP = TestStaticData.Instance.BattleCharacterModel[i].MaxHP;
-            //    model.MaxMP_Txt = TestStaticData.Instance.BattleCharacterModel[i].MaxMP_Txt;
-            //    model.CurrentMP_Txt = TestStaticData.Instance.BattleCharacterModel[i].CurrentMP_Txt;
-            //    battleRoomModel.characterList.Add(model);
-            //}
-            //for (int i = 0; i < TestStaticData.Instance.BattleEnemyModel.Count; i++)
-            //{
-            //    BattleRoomModel.BattleEnemyModel model = new BattleRoomModel.BattleEnemyModel();
-            //    model.ID = TestStaticData.Instance.BattleEnemyModel[i].ID;
-            //    model.Name = TestStaticData.Instance.BattleEnemyModel[i].Name;
-            //    model.Level = TestStaticData.Instance.BattleEnemyModel[i].Level;
-            //    model.CurrentHP = TestStaticData.Instance.BattleEnemyModel[i].CurrentHP;
-            //    model.MaxHP = TestStaticData.Instance.BattleEnemyModel[i].MaxHP;
-            //    model.Ability_sprite = TestStaticData.Instance.BattleEnemyModel[i].Ability_sprite;
-            //    battleRoomModel.enemyList.Add(model);
-            //}
-            //for (int i = 0; i < TestStaticData.Instance.BattleReportModel.Count; i++)
-            //{
-            //    BattleRoomModel.BattleReportModel model = new BattleRoomModel.BattleReportModel();
-            //    model.DerateDamage = TestStaticData.Instance.BattleReportModel[i].DerateDamage;
-            //    model.Attacker = TestStaticData.Instance.BattleReportModel[i].Attacker;
-            //    model.AnAttacker = TestStaticData.Instance.BattleReportModel[i].AnAttacker;
-            //    model.AbilityName = TestStaticData.Instance.BattleReportModel[i].AbilityName;
-            //    model.ReportType = TestStaticData.Instance.BattleReportModel[i].ReportType;
-            //    model.ReportNum = TestStaticData.Instance.BattleReportModel[i].ReportNum;
-            //    model.IsAOE = TestStaticData.Instance.BattleReportModel[i].IsAOE;
-            //    model.Gold = TestStaticData.Instance.BattleReportModel[i].Gold;
-            //    model.Damage = TestStaticData.Instance.BattleReportModel[i].Damage;
-            //    model.RestCountdown = TestStaticData.Instance.BattleReportModel[i].RestCountdown;
-
-            //    model.TeamName = TestStaticData.Instance.BattleReportModel[i].TeamName;
-            //    //model.AdditionalEntry = TestStaticData.Instance.BattleReportModel[i].AdditionalEntry;
-            //    model.AttackHandleType = TestStaticData.Instance.BattleReportModel[i].AttackHandleType;
-            //    model.AOEType = TestStaticData.Instance.BattleReportModel[i].AOEType;
-            //    model.IsSussces = TestStaticData.Instance.BattleReportModel[i].IsSussces;
-            //    model.BuffList = TestStaticData.Instance.BattleReportModel[i].BuffList;
-            //    model.EquipmentList = TestStaticData.Instance.BattleReportModel[i].EquipmentList;
-            //    model.Recovery = TestStaticData.Instance.BattleReportModel[i].Recovery;
-            //    model.EXP = TestStaticData.Instance.BattleReportModel[i].EXP;
-            //    model.IsDerateDamage = TestStaticData.Instance.BattleReportModel[i].IsDerateDamage;
-            //    model.IsGroupAttack = TestStaticData.Instance.BattleReportModel[i].IsGroupAttack;
-            //    battleRoomModel.ReportQueue.Enqueue(model);
-            //}
-
-        }
-
+        /// <summary>
+        /// 初始化
+        /// </summary>
         public override void Init()
         {
+            //加载文档数据
             StaticDataMgr.mInstance.LoadData();
+            //监听网络消息
             AddNetListener();
         }
-
+        /// <summary>
+        /// 监听网络消息
+        /// </summary>
         public override void AddNetListener()
         {
             base.AddNetListener();
@@ -215,72 +103,25 @@ namespace Service
 
         }
 
-        private void CreateHandler(BaseMsgData data)
-        {
-            CreateUserRequestAndRespondeMsgData createUserRequestAndRespondeMsgData = data as CreateUserRequestAndRespondeMsgData;
-            if (createUserRequestAndRespondeMsgData!= null)
-            {
-                if (createUserRequestAndRespondeMsgData.IsError)
-                {
-                    switch (createUserRequestAndRespondeMsgData.Error)
-                    {
-                        //TODO 错误协议
-                        //case ErrorCode.CreateNameError:
-                        //    SendMessage("Create", "CreateNameError", "角色名称重复！");
-                        //    break;
-                        //case ErrorCode.CreateTeamNameExist:
-                        //    SendMessage("Create", "CreateTeamNameExist", "队伍名称重复！");
-                        //    break;
-                        default:
-                            break;
-                    }
-                }
-                else
-                {
-                    teamName = createUserRequestAndRespondeMsgData.TeamName;
-                    userName = createUserRequestAndRespondeMsgData.UserName;
-                    actorMsgDataList = createUserRequestAndRespondeMsgData.Actors;
-                    OnOpenBattlePanel();
 
-                }
-            }
-        }
-
+        /// <summary>
+        /// 打开战斗界面
+        /// </summary>
         private void OnOpenBattlePanel()
         {
-            //TODO 打开战斗界面
             if (battleRoomModel == null) battleRoomModel = new BattleRoomModel();
-            #region
-            //for (int i = 0; i < actorMsgDataList.Count; i++)
-            //{
-            //    foreach (var career in StaticDataMgr.mInstance.mCareerDataMap.Values)
-            //    {
-            //        if (career.ID == actorMsgDataList[i].CareerID)
-            //        {
-            //            vm1.Career = career.Name;
-            //        }
-            //    }
-            //    foreach (var race in StaticDataMgr.mInstance.mRaceDataMap.Values)
-            //    {
-            //        if (race.ID == actorMsgDataList[i].RaceID)
-            //        {
-            //            vm1.MaxHP = race.m
-            //        }
-            //    }
-            //    vm1.Level = (byte)actorMsgDataList[i].CareerLevel;
-            //    vm1.MaxHP = (byte)actorMsgDataList[i]
-            //}
-            #endregion
+            battleRoomModel.characterList = new List<HeroEntity>();
             for (int i = 0; i < actorMsgDataList.Count; i++)
             {
                 battleRoomModel.characterList.Add(GameService.Instance.actorService.GenerateHero(actorMsgDataList[i]));
             }
-
             battleRoomPanel = OpenUIForm("BattleRoom", battleRoomModel);
-            battleRoomPanel.gameObject.SetActive(false);
+            battleRoomPanel.gameObject.SetActive(true);
         }
 
-
+        /// <summary>
+        /// 打开创建角色界面
+        /// </summary>
         private void OnOpenCreateCharacterPanel()
         {
             if (createCharacterViewModel == null) createCharacterViewModel = new CreateCharacterViewModel();
@@ -335,7 +176,10 @@ namespace Service
             //SendNetMsg(OpCodeUserOperation.Create, name);
             return true;
         }
-
+        /// <summary>
+        /// 创建玩家回调，发送玩家信息至服务端
+        /// </summary>
+        /// <param name="data"></param>
         private void CreateCharacterCallback(CreateCharacterPanel.CreateData data)
         {
             
@@ -344,23 +188,21 @@ namespace Service
 
             createUserRequestAndRespondeMsgData.UserName = data.playerName;
             //createUserRequestAndRespondeMsgData.TeamName
-            ActorMsgData actorMsgData = new ActorMsgData();
-            actorMsgData.Name = data.actorOneName;
-            actorMsgData.RaceID = (int)data.rocaOneType;
-            createUserRequestAndRespondeMsgData.Actors.Add(actorMsgData);
-            actorMsgData.Name = data.actorTwoName;
-            actorMsgData.RaceID = (int)data.rocaTwoType;
-            createUserRequestAndRespondeMsgData.Actors.Add(actorMsgData);
-            actorMsgData.Name = data.actorThreeName;
-            actorMsgData.RaceID = (int)data.rocaThreeType;
-            createUserRequestAndRespondeMsgData.Actors.Add(actorMsgData);
+            //TODO 添加 ID
+            createUserRequestAndRespondeMsgData.Actors.Add(new ActorMsgData() { Name = data.actorOneName, RaceID = (int)data.rocaOneType, CareerID = 1 });
+            createUserRequestAndRespondeMsgData.Actors.Add(new ActorMsgData() { Name = data.actorTwoName, RaceID = (int)data.rocaTwoType, CareerID = 1 });
+            createUserRequestAndRespondeMsgData.Actors.Add(new ActorMsgData() { Name = data.actorThreeName, RaceID = (int)data.rocaThreeType, CareerID = 1 });
 
             SendNetMsg(OpCodeUserOperation.Create, createUserRequestAndRespondeMsgData);
-            //TODO 隐藏创建角色界面
+            //TODO 隐藏创建玩家界面
             createCharacterPanel.gameObject.SetActive(false);
-            //TODO 打开战斗面板
-            //OnOpenBattlePanel();
-         
+            //TODO 暂时保存玩家信息
+            teamName = createUserRequestAndRespondeMsgData.TeamName;
+            userName = createUserRequestAndRespondeMsgData.UserName;
+            actorMsgDataList = createUserRequestAndRespondeMsgData.Actors;
+      
+            //TODO 打开战斗界面
+            OnOpenBattlePanel();
         }
         /// <summary>
         /// 登录处理
@@ -373,7 +215,7 @@ namespace Service
             if (loginRespondeMsgData != null)
             {
                 Log("登录 ： " + loginRespondeMsgData);
-                Log("登录 ： " + loginRespondeMsgData.Error.ToString() + "是否成功 ：" +loginRespondeMsgData.IsError);
+                Log("登录 ： " + loginRespondeMsgData.Error.ToString() + "是否有错 ：" +loginRespondeMsgData.IsError);
                 if (loginRespondeMsgData.IsError)
                 {
                     ArrayList m_List = new ArrayList();
@@ -465,6 +307,39 @@ namespace Service
             else
             {
                 LogError("RegisterHandler\\RegisterRespondeMsgData == null");
+            }
+        }
+        /// <summary>
+        /// 创建角色处理
+        /// </summary>
+        /// <param name="data"></param>
+        private void CreateHandler(BaseMsgData data)
+        {
+            CreateUserRequestAndRespondeMsgData createUserRequestAndRespondeMsgData = data as CreateUserRequestAndRespondeMsgData;
+            if (createUserRequestAndRespondeMsgData != null)
+            {
+                if (createUserRequestAndRespondeMsgData.IsError)
+                {
+                    switch (createUserRequestAndRespondeMsgData.Error)
+                    {
+                        //TODO 错误协议
+                        //case ErrorCode.CreateNameError:
+                        //    SendMessage("Create", "CreateNameError", "角色名称重复！");
+                        //    break;
+                        //case ErrorCode.CreateTeamNameExist:
+                        //    SendMessage("Create", "CreateTeamNameExist", "队伍名称重复！");
+                        //    break;
+                        default:
+                            break;
+                    }
+                }
+                else
+                {
+                    teamName = createUserRequestAndRespondeMsgData.TeamName;
+                    userName = createUserRequestAndRespondeMsgData.UserName;
+                    actorMsgDataList = createUserRequestAndRespondeMsgData.Actors;
+                    OnOpenBattlePanel();
+                }
             }
         }
     }

@@ -55,7 +55,6 @@ namespace StaticData
             {
                 Debug.Log("key：" + item);
                 Debug.Log("value：" + StaticDataMgr.mInstance.mRaceDataMap[item]);
-
             }
             LoadDataBinWorker<RaceAbilityData>("RaceAbility.bytes", mRaceAbilityDataMap); //RaceAbility Data
 			LoadDataBinWorker<TestData>("Test.bytes", mTestDataMap); //Test Data

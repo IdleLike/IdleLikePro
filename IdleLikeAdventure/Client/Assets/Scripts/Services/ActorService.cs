@@ -32,7 +32,11 @@ namespace Service
 
             return null;   
         }
-
+        /// <summary>
+        /// 生成一个英雄
+        /// </summary>
+        /// <param name="actorMsgData"></param>
+        /// <returns></returns>
         public HeroEntity GenerateHero(ActorMsgData actorMsgData)
         {
             //TODO 生成一个英雄
@@ -45,11 +49,11 @@ namespace Service
             //英雄经验
             hero.Exp = (uint)actorMsgData.TotalExp;
 
-            CareerData careerData;
+            CareerData careerData = new CareerData();
             StaticDataMgr.mInstance.mCareerDataMap.TryGetValue((uint)actorMsgData.CareerID,out careerData);
-            RaceData raceData;
+            RaceData raceData = new RaceData();
             StaticDataMgr.mInstance.mRaceDataMap.TryGetValue((uint)actorMsgData.RaceID, out raceData);
-            if (careerData != null && raceData != null)
+            if (careerData != null || raceData != null)
             {
                 //职业数据
                 hero.CareerData = careerData;
@@ -58,13 +62,13 @@ namespace Service
                 //职业技能
                 for (int i = 0; i < careerData.AbilityList.Count; i++)
                 {
-                    CareerAbilityData careerAbilityData;
-                    StaticDataMgr.mInstance.mCareerAbilityDataMap.TryGetValue(careerData.AbilityList[i],out careerAbilityData);
+                    CareerAbilityData careerAbilityData = new CareerAbilityData();
+                    StaticDataMgr.mInstance.mCareerAbilityDataMap.TryGetValue(careerData.AbilityList[i], out careerAbilityData);
                     hero.CareerAbilities.Add(careerAbilityData);
                 }
                 //种族技能一
-                RaceAbilityData raceAbilityData;
-                StaticDataMgr.mInstance.mRaceAbilityDataMap.TryGetValue(raceData.AbilityOneID,out raceAbilityData);
+                RaceAbilityData raceAbilityData = new RaceAbilityData();
+                StaticDataMgr.mInstance.mRaceAbilityDataMap.TryGetValue(raceData.AbilityOneID, out raceAbilityData);
                 hero.RaceAbilitys.Add(raceAbilityData);
                 StaticDataMgr.mInstance.mRaceAbilityDataMap.TryGetValue(raceData.AbilityTwoID, out raceAbilityData);
                 hero.RaceAbilitys.Add(raceAbilityData);
