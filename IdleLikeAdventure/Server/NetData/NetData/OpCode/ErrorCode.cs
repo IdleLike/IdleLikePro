@@ -34,6 +34,21 @@ namespace NetData.OpCode
         /// 注册密码错误
         /// </summary>
         RegisterPasswordError,
-
+        /// <summary>
+        /// 创建玩家错误
+        /// </summary>
+        CreateUserError,
+        /// <summary>
+        /// 创建玩家名称存在
+        /// </summary>
+        CreateUserNameExit,
+        /// <summary>
+        /// 创建队伍名称存在
+        /// </summary>
+        CreateTeamNameExit,
+        /// <summary>
+        /// 创建角色名称存在
+        /// </summary>
+        CreateActorNameExit,
     }
 }

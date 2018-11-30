@@ -43,6 +43,7 @@ namespace IdleLikeAdventureServer.Handler
             }
             else
             {
+
                 //创建数据
 
                 //存储消息

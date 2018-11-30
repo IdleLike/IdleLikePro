@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
 using IdleLikeAdventureServer.Data.Entity;
 using NetData.Message;
 using NetData.OpCode;
@@ -56,7 +51,7 @@ namespace IdleLikeAdventureServer.Handler
                     //有重名
                     registerRespondeMsgData.IsError = true;
                     registerRespondeMsgData.Error = ErrorCode.RegisterAccountExist;
-                    MyGameServer.log.Info("创建了相同的用户名称： " + registerRequestMsgData.Account);
+                    MyGameServer.log.Info("创建了相同的用户名称： " + registerRequestMsgData.Account + ": ErrorCode:" + registerRespondeMsgData.Error);
                 }
                 else
                 {
