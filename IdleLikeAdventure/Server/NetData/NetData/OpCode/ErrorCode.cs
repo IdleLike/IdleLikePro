@@ -37,11 +37,11 @@ namespace NetData.OpCode
         /// <summary>
         /// 创建玩家错误
         /// </summary>
-        CreateUserError,
+        CreatePlayerError,
         /// <summary>
         /// 创建玩家名称存在
         /// </summary>
-        CreateUserNameExit,
+        CreatePlayerNameExit,
         /// <summary>
         /// 创建队伍名称存在
         /// </summary>
@@ -49,6 +49,14 @@ namespace NetData.OpCode
         /// <summary>
         /// 创建角色名称存在
         /// </summary>
-        CreateActorNameExit,
+        CreateActor1NameExit,
+        /// <summary>
+        /// 创建角色名称存在
+        /// </summary>
+        CreateActor2NameExit,
+        /// <summary>
+        /// 创建角色名称存在
+        /// </summary>
+        CreateActor3NameExit,
     }
 }
