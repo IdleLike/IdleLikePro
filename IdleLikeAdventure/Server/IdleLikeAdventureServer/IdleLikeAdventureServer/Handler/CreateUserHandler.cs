@@ -74,6 +74,9 @@ namespace IdleLikeAdventureServer.Handler
                     }
                 }
                 Player player = new Player();
+                player.AccountID = createUserRequestMsgData.AccountID;
+                player.CreateDate = DateTime.Now;
+                player.Name = createUserRequestMsgData.PlayerName;
                 
 
                 //创建数据
