@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using IdleLikeAdventureServer.Data.Entity;
 using NetData.Message;
 using NetData.OpCode;
 using Photon.SocketServer;
@@ -29,25 +30,61 @@ namespace IdleLikeAdventureServer.Handler
 
             CreateUserRequestAndRespondeMsgData createUserRespondeMsgData = new CreateUserRequestAndRespondeMsgData();
             //参数检测
-            if (createUserRequestMsgData.UserName == null || createUserRequestMsgData.UserName == string.Empty)
+            if (createUserRequestMsgData.PlayerName == null || createUserRequestMsgData.PlayerName == string.Empty)
             {//用户名称为空
-
+                createUserRespondeMsgData.IsError = true;
+                createUserRespondeMsgData.Error = ErrorCode.CreatePlayerError;
             }
             else if (createUserRequestMsgData.TeamName == null || createUserRequestMsgData.TeamName == string.Empty)
             {//队伍名称为空
-
+                createUserRespondeMsgData.IsError = true;
+                createUserRespondeMsgData.Error = ErrorCode.CreatePlayerError;
             }
             else if (createUserRequestMsgData.Actors == null || createUserRequestMsgData.Actors.Count != 3)
             {//角色数据错误
-
+                createUserRespondeMsgData.IsError = true;
+                createUserRespondeMsgData.Error = ErrorCode.CreatePlayerError;
             }
             else
-            {
+            {              
+                if (serverDataCenter.PlayerDal.Get(createUserRequestMsgData.PlayerName) != null)
+                {//判断玩家重名
+                    createUserRespondeMsgData.IsError = true;
+                    createUserRespondeMsgData.Error = ErrorCode.CreatePlayerNameExit;
+                    SendResponse(peer, sendParameters, createUserRespondeMsgData);
+                    return;
+                }
+
+                
+                for (int i = 0; i < createUserRequestMsgData.Actors.Count; i++)
+                {
+                    if(!serverDataCenter.StaticDataMgr.mRaceDataMap.ContainsKey((uint)createUserRequestMsgData.Actors[i].RaceID))
+                    {//判断种族是否存在
+                        createUserRespondeMsgData.IsError = true;
+                        createUserRespondeMsgData.Error = ErrorCode.CreateActorRaceIDNonExit;
+                        SendResponse(peer, sendParameters, createUserRespondeMsgData);
+                        return;
+                    }
+                    if (!serverDataCenter.StaticDataMgr.mCareerDataMap.ContainsKey((uint)createUserRequestMsgData.Actors[i].CareerID))
+                    {//判断职业是否存在
+                        createUserRespondeMsgData.IsError = true;
+                        createUserRespondeMsgData.Error = ErrorCode.CreateActorCareerNonExit;
+                        SendResponse(peer, sendParameters, createUserRespondeMsgData);
+                        return;
+                    }
+                }
+                Player player = new Player();
+                
 
                 //创建数据
 
+                //玩家数据
+
+                //角色数据
+                //队伍数据
+
                 //存储消息
-                
+
                 //初始化网络消息
 
             }

@@ -87,6 +87,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dal\TeamDal.cs" />
+    <Compile Include="Dal\PlayerDal.cs" />
+    <Compile Include="Dal\ActorDal.cs" />
     <Compile Include="Dal\AccountDal.cs" />
     <Compile Include="BaseDal.cs" />
     <Compile Include="DataAccessManager.cs" />

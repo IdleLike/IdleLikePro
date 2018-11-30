@@ -14,8 +14,15 @@ namespace IdleLikeAdventureServer
         private StaticDataMgr staticDataMgr;
 
         private AccountDal accountDal;            //账号数据
+        private ActorDal actorDal;                //角色数据
+        private PlayerDal playerDal;              //玩家数据
+        private TeamDal teamDal;                  //队伍数据
 
-        public AccountDal AccountDal { get => accountDal; set => accountDal = value; }
+        public AccountDal AccountDal { get => accountDal; private set => accountDal = value; }
+        public ActorDal ActorDal { get => actorDal; private set => actorDal = value; }
+        public PlayerDal PlayerDal { get => playerDal; private set => playerDal = value; }
+        public TeamDal TeamDal { get => teamDal; private set => teamDal = value; }
+        public StaticDataMgr StaticDataMgr { get => staticDataMgr; set => staticDataMgr = value; }
 
 
         //初始化数据
@@ -24,8 +31,8 @@ namespace IdleLikeAdventureServer
             //静态数据
             MyGameServer.log.Info("开始加载静态配置数据。");
 
-            staticDataMgr = StaticDataMgr.mInstance;
-            staticDataMgr.LoadData();
+            StaticDataMgr = StaticDataMgr.mInstance;
+            StaticDataMgr.LoadData();
 
             MyGameServer.log.Info("加载静态配置数据完成。");
 
@@ -33,6 +40,9 @@ namespace IdleLikeAdventureServer
             MyGameServer.log.Info("开始初始化动态数据。");
 
             AccountDal = new AccountDal();
+            ActorDal = new ActorDal();
+            PlayerDal = new PlayerDal();
+            TeamDal = new TeamDal(); 
 
             MyGameServer.log.Info("初始化动态数据完成。");
 

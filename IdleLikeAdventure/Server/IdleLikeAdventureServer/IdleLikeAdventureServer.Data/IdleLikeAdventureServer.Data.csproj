@@ -61,12 +61,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Nhibernate\Entity\Account.cs" />
+    <Compile Include="Nhibernate\Entity\Actor.cs" />
+    <Compile Include="Nhibernate\Entity\Player.cs" />
+    <Compile Include="Nhibernate\Entity\Team.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Nhibernate\XmlMapping\Actor.hbm.xml" />
+    <Content Include="Nhibernate\XmlMapping\Player.hbm.xml" />
+    <Content Include="Nhibernate\XmlMapping\Team.hbm.xml" />
+  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Nhibernate\XmlMapping\Account.hbm.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

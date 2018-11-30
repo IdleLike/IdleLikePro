@@ -49,14 +49,14 @@ namespace NetData.OpCode
         /// <summary>
         /// 创建角色名称存在
         /// </summary>
-        CreateActor1NameExit,
+        CreateActorNameExit,
         /// <summary>
-        /// 创建角色名称存在
+        /// 创建角色种族不存在
         /// </summary>
-        CreateActor2NameExit,
+        CreateActorRaceIDNonExit,
         /// <summary>
-        /// 创建角色名称存在
+        /// 创建角色职业不存在
         /// </summary>
-        CreateActor3NameExit,
+        CreateActorCareerNonExit,
     }
 }
