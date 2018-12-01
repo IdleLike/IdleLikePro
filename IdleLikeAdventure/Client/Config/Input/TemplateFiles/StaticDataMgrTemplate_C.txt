@@ -42,7 +42,7 @@ namespace StaticData
 			//定义如型： void SheetNameDataProcess(ClassType data) 的函数, 会被自动调用
 
             //设置进度
-            Console.WriteLine("Read All Data Done!");
+            System.Console.WriteLine("Read All Data Done!");
         }
 
         //根据指定的数据文件名，创建流。 参数格式：“Strings.bytes”
