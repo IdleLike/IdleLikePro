@@ -66,13 +66,13 @@ namespace IdleLikeAdventureServer.Handler
                         SendResponse(peer, sendParameters, createUserRespondeMsgData);
                         return;
                     }
-                    if (!serverDataCenter.StaticDataMgr.mCareerDataMap.ContainsKey((uint)createUserRequestMsgData.Actors[i].CareerID))
-                    {//判断职业是否存在
-                        createUserRespondeMsgData.IsError = true;
-                        createUserRespondeMsgData.Error = ErrorCode.CreateActorCareerNonExit;
-                        SendResponse(peer, sendParameters, createUserRespondeMsgData);
-                        return;
-                    }
+                    //if (!serverDataCenter.StaticDataMgr.mCareerDataMap.ContainsKey((uint)createUserRequestMsgData.Actors[i].CareerID))
+                    //{//判断职业是否存在
+                    //    createUserRespondeMsgData.IsError = true;
+                    //    createUserRespondeMsgData.Error = ErrorCode.CreateActorCareerNonExit;
+                    //    SendResponse(peer, sendParameters, createUserRespondeMsgData);
+                    //    return;
+                    //}
                 }
                 //玩家信息
                 Player player = new Player();

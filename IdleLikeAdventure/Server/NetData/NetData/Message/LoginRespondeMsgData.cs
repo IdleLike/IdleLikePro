@@ -8,6 +8,7 @@ namespace NetData.Message
     [Serializable]
     public class LoginRespondeMsgData : BaseMsgData
     {
+        public bool IsNewPlayer;
         public UserMsgData userData;
     }
 }

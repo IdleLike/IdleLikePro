@@ -26,25 +26,25 @@ namespace StaticData
         }
 
         // *************				data	 	***************
-        public Dictionary<uint, CareerData> mCareerDataMap = new Dictionary<uint, CareerData>(); //Career Data
-        public Dictionary<uint, CareerAbilityData> mCareerAbilityDataMap = new Dictionary<uint, CareerAbilityData>(); //CareerAbility Data
-        public Dictionary<uint, LevelData> mLevelDataMap = new Dictionary<uint, LevelData>(); //Level Data
-        public Dictionary<uint, RaceData> mRaceDataMap = new Dictionary<uint, RaceData>(); //Race Data
-        public Dictionary<uint, RaceAbilityData> mRaceAbilityDataMap = new Dictionary<uint, RaceAbilityData>(); //RaceAbility Data
-        public Dictionary<uint, TestData> mTestDataMap = new Dictionary<uint, TestData>(); //Test Data
+		public Dictionary<uint, CareerData> mCareerDataMap = new Dictionary<uint, CareerData>(); //Career Data
+		public Dictionary<uint, CareerAbilityData> mCareerAbilityDataMap = new Dictionary<uint, CareerAbilityData>(); //CareerAbility Data
+		public Dictionary<uint, LevelData> mLevelDataMap = new Dictionary<uint, LevelData>(); //Level Data
+		public Dictionary<uint, RaceData> mRaceDataMap = new Dictionary<uint, RaceData>(); //Race Data
+		public Dictionary<uint, RaceAbilityData> mRaceAbilityDataMap = new Dictionary<uint, RaceAbilityData>(); //RaceAbility Data
+		public Dictionary<uint, TestData> mTestDataMap = new Dictionary<uint, TestData>(); //Test Data
 
         //加载数据
         public void LoadData()
         {
-            LoadDataBinWorker<CareerData>("Career.bytes", mCareerDataMap); //Career Data
-            LoadDataBinWorker<CareerAbilityData>("CareerAbility.bytes", mCareerAbilityDataMap); //CareerAbility Data
-            LoadDataBinWorker<LevelData>("Level.bytes", mLevelDataMap); //Level Data
-            LoadDataBinWorker<RaceData>("Race.bytes", mRaceDataMap); //Race Data
-            LoadDataBinWorker<RaceAbilityData>("RaceAbility.bytes", mRaceAbilityDataMap); //RaceAbility Data
-            LoadDataBinWorker<TestData>("Test.bytes", mTestDataMap); //Test Data
+			LoadDataBinWorker<CareerData>("Career.bytes", mCareerDataMap); //Career Data
+			LoadDataBinWorker<CareerAbilityData>("CareerAbility.bytes", mCareerAbilityDataMap); //CareerAbility Data
+			LoadDataBinWorker<LevelData>("Level.bytes", mLevelDataMap); //Level Data
+			LoadDataBinWorker<RaceData>("Race.bytes", mRaceDataMap); //Race Data
+			LoadDataBinWorker<RaceAbilityData>("RaceAbility.bytes", mRaceAbilityDataMap); //RaceAbility Data
+			LoadDataBinWorker<TestData>("Test.bytes", mTestDataMap); //Test Data
 
-
-            //定义如型： void SheetNameDataProcess(ClassType data) 的函数, 会被自动调用
+						
+			//定义如型： void SheetNameDataProcess(ClassType data) 的函数, 会被自动调用
 
             //设置进度
             Console.WriteLine("Read All Data Done!");
@@ -92,8 +92,8 @@ namespace StaticData
             return;
         }
     }//class
-
-    //数据结构基类
+	
+	//数据结构基类
     public abstract class BaseDataObject
     {
         public uint ID = 0; // ID
