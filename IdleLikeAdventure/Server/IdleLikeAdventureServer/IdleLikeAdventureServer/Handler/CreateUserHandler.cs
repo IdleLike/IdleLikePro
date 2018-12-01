@@ -73,23 +73,59 @@ namespace IdleLikeAdventureServer.Handler
                         return;
                     }
                 }
+                //玩家信息
                 Player player = new Player();
                 player.AccountID = createUserRequestMsgData.AccountID;
                 player.CreateDate = DateTime.Now;
                 player.Name = createUserRequestMsgData.PlayerName;
+                player.ServerID = createUserRequestMsgData.ServerID;
+                player.UpdateDate = DateTime.Now;
+
+                player.ID = serverDataCenter.PlayerDal.Insert(player);
+
+                createUserRespondeMsgData.AccountID = player.AccountID;
+                createUserRespondeMsgData.PlayerName = player.Name;
+                createUserRespondeMsgData.ServerID = player.ServerID;
                 
 
-                //创建数据
-
-                //玩家数据
+                Team team = new Team();
+                team.Name = createUserRequestMsgData.TeamName;
+                team.PlayerID = player.ID;
+                team.CreateDate = DateTime.Now;
+                team.UpdateDate = DateTime.Now;
+                team.ActorIDs = string.Empty;
 
                 //角色数据
-                //队伍数据
+                createUserRespondeMsgData.Actors = createUserRequestMsgData.Actors;
+                for (int i = 0; i < createUserRequestMsgData.Actors.Count; i++)
+                {
+                    ActorMsgData msgData = createUserRequestMsgData.Actors[i];
+                    Actor actor = new Actor();
+                    actor.CareerID = GameConst.CAREER_DEFAULT_ID;
+                    actor.CareerLevel = 1;
+                    actor.CareerPoint = 0;
+                    actor.CreateDate = DateTime.Now;
+                    actor.RaceID = msgData.RaceID;
+                    actor.TotalExp = 0;
+                    actor.Name = msgData.Name;
+                    actor.UpdateDate = DateTime.Now;
 
-                //存储消息
+                    actor.ID = serverDataCenter.ActorDal.Insert(actor);
+                    msgData.DataBaseID = actor.ID;
+                    msgData.CareerID = actor.CareerID;
+                    msgData.CareerLevel = actor.CareerLevel;
+                    msgData.CareerPoint = actor.CareerPoint;
+                    msgData.TotalExp = actor.TotalExp;
+                    msgData.CreateTime = actor.CreateDate;
+                    msgData.UpdateTime = actor.UpdateDate;
+                    
 
-                //初始化网络消息
+                    if (i != 0) team.ActorIDs += "|";
+                    team.ActorIDs += actor.ID;
+                }
 
+                createUserRespondeMsgData.TeamID = serverDataCenter.TeamDal.Insert(team);
+                createUserRespondeMsgData.TeamName = team.Name;
             }
 
 

@@ -41,9 +41,9 @@ namespace IdleLikeAdventureServer.Domain.Dal
             return tempActors.ToArray();
         }
 
-        public int Insert(Account account)
+        public int Insert(Actor actor)
         {
-            int id = (int)session.Save(account);
+            int id = (int)session.Save(actor);
             session.Flush();
             return id;
         }

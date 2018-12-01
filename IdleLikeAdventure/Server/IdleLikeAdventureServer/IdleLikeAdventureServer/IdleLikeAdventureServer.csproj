@@ -73,6 +73,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClientPeer.cs" />
+    <Compile Include="GameConst.cs" />
     <Compile Include="Handler\BaseHandler.cs" />
     <Compile Include="Handler\CreateUserHandler.cs" />
     <Compile Include="Handler\LoginHandler.cs" />

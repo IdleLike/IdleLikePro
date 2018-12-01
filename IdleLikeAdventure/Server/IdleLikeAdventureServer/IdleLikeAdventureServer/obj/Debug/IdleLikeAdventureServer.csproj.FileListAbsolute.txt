@@ -22,8 +22,6 @@ C:\Users\fishf\Documents\Tencent Files\2407040368\FileRecv\Server\Server\IdleLik
 C:\Users\fishf\Documents\Tencent Files\2407040368\FileRecv\Server\Server\IdleLikeAdventureServer\IdleLikeAdventureServer\obj\Debug\IdleLikeAdventureServer.csproj.CoreCompileInputs.cache
 C:\Users\fishf\Documents\Tencent Files\2407040368\FileRecv\Server\Server\IdleLikeAdventureServer\IdleLikeAdventureServer\obj\Debug\IdleLikeAdventureServer.dll
 C:\Users\fishf\Documents\Tencent Files\2407040368\FileRecv\Server\Server\IdleLikeAdventureServer\IdleLikeAdventureServer\obj\Debug\IdleLikeAdventureServer.pdb
-C:\Users\fishf\Documents\GitHub\IdleLikePro\IdleLikeAdventure\Server\IdleLikeAdventureServer\IdleLikeAdventureServer\obj\Debug\IdleLikeAdventureServer.csprojAssemblyReference.cache
-C:\Users\fishf\Documents\GitHub\IdleLikePro\IdleLikeAdventure\Server\IdleLikeAdventureServer\IdleLikeAdventureServer\obj\Debug\IdleLikeAdventureServer.csproj.CoreCompileInputs.cache
 C:\Photon\Photon-OnPremise-Server-SDK_v4-0-29-11263\deploy\IdleLikeAdventureServer\Nhibernate\XmlMapping\Account.hbm.xml
 C:\Photon\Photon-OnPremise-Server-SDK_v4-0-29-11263\deploy\IdleLikeAdventureServer\hibernate.cfg.xml
 C:\Photon\Photon-OnPremise-Server-SDK_v4-0-29-11263\deploy\IdleLikeAdventureServer\Configs\Career.bytes
@@ -37,6 +35,8 @@ C:\Photon\Photon-OnPremise-Server-SDK_v4-0-29-11263\deploy\IdleLikeAdventureServ
 C:\Photon\Photon-OnPremise-Server-SDK_v4-0-29-11263\deploy\IdleLikeAdventureServer\IdleLikeAdventureServer.dll.config
 C:\Photon\Photon-OnPremise-Server-SDK_v4-0-29-11263\deploy\IdleLikeAdventureServer\IdleLikeAdventureServer.dll
 C:\Photon\Photon-OnPremise-Server-SDK_v4-0-29-11263\deploy\IdleLikeAdventureServer\IdleLikeAdventureServer.pdb
+C:\Users\fishf\Documents\GitHub\IdleLikePro\IdleLikeAdventure\Server\IdleLikeAdventureServer\IdleLikeAdventureServer\obj\Debug\IdleLikeAdventureServer.csprojAssemblyReference.cache
+C:\Users\fishf\Documents\GitHub\IdleLikePro\IdleLikeAdventure\Server\IdleLikeAdventureServer\IdleLikeAdventureServer\obj\Debug\IdleLikeAdventureServer.csproj.CoreCompileInputs.cache
 C:\Users\fishf\Documents\GitHub\IdleLikePro\IdleLikeAdventure\Server\IdleLikeAdventureServer\IdleLikeAdventureServer\obj\Debug\IdleLikeAdventureServer.csproj.CopyComplete
 C:\Users\fishf\Documents\GitHub\IdleLikePro\IdleLikeAdventure\Server\IdleLikeAdventureServer\IdleLikeAdventureServer\obj\Debug\IdleLikeAdventureServer.dll
 C:\Users\fishf\Documents\GitHub\IdleLikePro\IdleLikeAdventure\Server\IdleLikeAdventureServer\IdleLikeAdventureServer\obj\Debug\IdleLikeAdventureServer.pdb

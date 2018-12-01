@@ -9,7 +9,9 @@ namespace NetData.Message
         public int AccountID;
         public int ServerID;
         public string PlayerName;
+        public int PlayerID;
         public string TeamName;
+        public int TeamID;
         public List<ActorMsgData> Actors;
     }
 }
