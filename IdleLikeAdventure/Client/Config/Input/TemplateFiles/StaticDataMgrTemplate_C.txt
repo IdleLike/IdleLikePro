@@ -35,7 +35,7 @@ namespace StaticData
         //加载数据
         public void LoadData()
         {
-			LoadDataBinWorkerString<StringData>("StringData.bytes", mStringDataMap);
+			LoadDataBinWorkerString<StringData>("String.bytes", mStringDataMap);
 			
 			{$LoadData}
 						
@@ -74,11 +74,11 @@ namespace StaticData
             }
             catch (EndOfStreamException)
             {
-                Console.WriteLine(filename + "Load Data Done");
+                System.Console.WriteLine(filename + "Load Data Done");
             }
             catch (IOException e)
             {
-                Console.WriteLine(e.ToString());
+                System.Console.WriteLine(e.ToString());
             }
             finally
             {
@@ -110,11 +110,11 @@ namespace StaticData
             }
             catch (EndOfStreamException)
             {
-                Console.WriteLine(filename + "Load Data Done");
+                System.Console.WriteLine(filename + "Load Data Done");
             }
             catch (IOException e)
             {
-                Console.WriteLine(e.ToString());
+                System.Console.WriteLine(e.ToString());
             }
             finally
             {
