@@ -205,6 +205,11 @@ namespace Service
                 if (handlers.TryGetValue(item.Key, out handler))
                 {
                     handler(item.Value as BaseMsgData);
+                    CreateUserRequestAndRespondeMsgData createUserRequestAndRespondeMsgData = item.Value as CreateUserRequestAndRespondeMsgData;
+                    if (createUserRequestAndRespondeMsgData != null)
+                    {
+                        Log("创建 ： " + createUserRequestAndRespondeMsgData.Error.ToString() + "是否有错 ：" + createUserRequestAndRespondeMsgData.IsError);
+                    }
                 }
             }
         }

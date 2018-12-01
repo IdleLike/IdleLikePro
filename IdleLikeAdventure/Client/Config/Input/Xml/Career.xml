@@ -72,7 +72,7 @@
   <Names>
    <NamedRange ss:Name="_FilterDatabase" ss:RefersTo="=strings!#REF!" ss:Hidden="1"/>
   </Names>
-  <Table ss:ExpandedColumnCount="12" ss:ExpandedRowCount="3" x:FullColumns="1"
+  <Table ss:ExpandedColumnCount="12" ss:ExpandedRowCount="5" x:FullColumns="1"
    x:FullRows="1" ss:StyleID="s62" ss:DefaultColumnWidth="0"
    ss:DefaultRowHeight="11.25">
    <Column ss:StyleID="s62" ss:AutoFitWidth="0" ss:Width="54"/>
@@ -127,6 +127,30 @@
     <Cell ss:StyleID="s65"><Data ss:Type="String">both</Data></Cell>
     <Cell ss:StyleID="s65"><Data ss:Type="String">both</Data></Cell>
    </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell><Data ss:Type="Number">1001</Data></Cell>
+    <Cell ss:Index="4"><Data ss:Type="Number">10</Data></Cell>
+    <Cell><Data ss:Type="String">战士</Data></Cell>
+    <Cell><Data ss:Type="String">力量</Data></Cell>
+    <Cell><Data ss:Type="Number">20</Data></Cell>
+    <Cell><Data ss:Type="Number">30</Data></Cell>
+    <Cell><Data ss:Type="Number">50</Data></Cell>
+    <Cell><Data ss:Type="Number">70</Data></Cell>
+    <Cell><Data ss:Type="Number">90</Data></Cell>
+    <Cell><Data ss:Type="String">1001|1002</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell><Data ss:Type="Number">2001</Data></Cell>
+    <Cell ss:Index="4"><Data ss:Type="Number">10</Data></Cell>
+    <Cell><Data ss:Type="String">魔法</Data></Cell>
+    <Cell><Data ss:Type="String">魔力</Data></Cell>
+    <Cell><Data ss:Type="Number">10</Data></Cell>
+    <Cell><Data ss:Type="Number">40</Data></Cell>
+    <Cell><Data ss:Type="Number">60</Data></Cell>
+    <Cell><Data ss:Type="Number">80</Data></Cell>
+    <Cell><Data ss:Type="Number">100</Data></Cell>
+    <Cell><Data ss:Type="String">1001|1002</Data></Cell>
+   </Row>
   </Table>
   <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
    <PageSetup>
@@ -144,12 +168,10 @@
    <Zoom>131</Zoom>
    <PageBreakZoom>100</PageBreakZoom>
    <Selected/>
-   <LeftColumnVisible>3</LeftColumnVisible>
    <Panes>
     <Pane>
      <Number>3</Number>
-     <ActiveRow>10</ActiveRow>
-     <ActiveCol>8</ActiveCol>
+     <ActiveRow>3</ActiveRow>
     </Pane>
    </Panes>
    <ProtectObjects>False</ProtectObjects>

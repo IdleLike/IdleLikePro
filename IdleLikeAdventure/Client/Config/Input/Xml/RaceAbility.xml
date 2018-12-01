@@ -72,7 +72,7 @@
   <Names>
    <NamedRange ss:Name="_FilterDatabase" ss:RefersTo="=strings!#REF!" ss:Hidden="1"/>
   </Names>
-  <Table ss:ExpandedColumnCount="3" ss:ExpandedRowCount="3" x:FullColumns="1"
+  <Table ss:ExpandedColumnCount="3" ss:ExpandedRowCount="9" x:FullColumns="1"
    x:FullRows="1" ss:StyleID="s62" ss:DefaultColumnWidth="0"
    ss:DefaultRowHeight="11.25">
    <Column ss:StyleID="s62" ss:AutoFitWidth="0" ss:Width="54"/>
@@ -96,6 +96,36 @@
     <Cell ss:StyleID="s65"><Data ss:Type="String">both</Data></Cell>
     <Cell ss:StyleID="s65"><Data ss:Type="String">both</Data></Cell>
    </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell><Data ss:Type="Number">1001</Data></Cell>
+    <Cell><Data ss:Type="String">人类种族技能1</Data></Cell>
+    <Cell><Data ss:Type="String">人类种族技能描述1</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell><Data ss:Type="Number">1002</Data></Cell>
+    <Cell><Data ss:Type="String">人类种族技能2</Data></Cell>
+    <Cell><Data ss:Type="String">人类种族技能描述2</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell><Data ss:Type="Number">2001</Data></Cell>
+    <Cell><Data ss:Type="String">亡灵种族技能1</Data></Cell>
+    <Cell><Data ss:Type="String">亡灵种族技能描述1</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell><Data ss:Type="Number">2002</Data></Cell>
+    <Cell><Data ss:Type="String">亡灵种族技能2</Data></Cell>
+    <Cell><Data ss:Type="String">亡灵种族技能描述2</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="10.199999999999999">
+    <Cell><Data ss:Type="Number">3001</Data></Cell>
+    <Cell><Data ss:Type="String">精灵种族技能1</Data></Cell>
+    <Cell><Data ss:Type="String">精灵种族技能描述1</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="10.199999999999999">
+    <Cell><Data ss:Type="Number">3002</Data></Cell>
+    <Cell><Data ss:Type="String">精灵种族技能2</Data></Cell>
+    <Cell><Data ss:Type="String">精灵种族技能描述2</Data></Cell>
+   </Row>
   </Table>
   <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
    <PageSetup>
@@ -116,8 +146,8 @@
    <Panes>
     <Pane>
      <Number>3</Number>
-     <ActiveCol>3</ActiveCol>
-     <RangeSelection>C4:C16384</RangeSelection>
+     <ActiveRow>6</ActiveRow>
+     <ActiveCol>1</ActiveCol>
     </Pane>
    </Panes>
    <ProtectObjects>False</ProtectObjects>

@@ -19,9 +19,8 @@ namespace StaticData
         {
             get
             {
-                if (instance == null) { 
+                if (instance == null)
                     instance = new StaticDataMgr();
-                }
                 return instance;
             }
             protected set { instance = value; }
@@ -39,7 +38,6 @@ namespace StaticData
 		public Dictionary<uint, RaceAbilityData> mRaceAbilityDataMap = new Dictionary<uint, RaceAbilityData>(); //RaceAbility Data
 		public Dictionary<uint, TestData> mTestDataMap = new Dictionary<uint, TestData>(); //Test Data
 
-     
         //加载数据
         public void LoadData()
         {
@@ -49,14 +47,7 @@ namespace StaticData
 			LoadDataBinWorker<CareerAbilityData>("CareerAbility.bytes", mCareerAbilityDataMap); //CareerAbility Data
 			LoadDataBinWorker<LevelData>("Level.bytes", mLevelDataMap); //Level Data
 			LoadDataBinWorker<RaceData>("Race.bytes", mRaceDataMap); //Race Data
-            Debug.Log("StaticDataMgr.mInstance.mRaceDataMap：" + StaticDataMgr.mInstance.mRaceDataMap.Count);
-
-            foreach (var item in StaticDataMgr.mInstance.mRaceDataMap.Keys)
-            {
-                Debug.Log("key：" + item);
-                Debug.Log("value：" + StaticDataMgr.mInstance.mRaceDataMap[item]);
-            }
-            LoadDataBinWorker<RaceAbilityData>("RaceAbility.bytes", mRaceAbilityDataMap); //RaceAbility Data
+			LoadDataBinWorker<RaceAbilityData>("RaceAbility.bytes", mRaceAbilityDataMap); //RaceAbility Data
 			LoadDataBinWorker<TestData>("Test.bytes", mTestDataMap); //Test Data
 
 						

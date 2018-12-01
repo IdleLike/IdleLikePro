@@ -17,9 +17,9 @@ public class CreateCharacterPanel : BaseUIForm
         public string actorThreeName { get; set; }
         public string playerName { get; set; }
         public string teamName { get; set; }
-        public uint rocaOneType { get; set; }
-        public uint rocaTwoType { get; set; }
-        public uint rocaThreeType { get; set; }
+        public uint raceOneType { get; set; }
+        public uint raceTwoType { get; set; }
+        public uint raceThreeType { get; set; }
     }
 
     public Button m_CreateBtn;
@@ -28,15 +28,15 @@ public class CreateCharacterPanel : BaseUIForm
     public InputField m_ActorTwoNameInput;
     public InputField m_ActorThreeNameInput;
     public InputField m_TeamNameInput;
-    public Dropdown m_RocaOneTypeDropdown;
-    public Dropdown m_RocaTwoTypeDropdown;
-    public Dropdown m_RocaThreeTypeDropdown;
-    public Text m_RocaNameText;
-    public Text m_RocaDesText;
+    public Dropdown m_RaceOneTypeDropdown;
+    public Dropdown m_RaceTwoTypeDropdown;
+    public Dropdown m_RaceThreeTypeDropdown;
+    public Text m_RaceNameText;
+    public Text m_RaceDesText;
     public Text m_InitDesText;
     public Text m_GrowthDesText;
     public Text m_AbilityOneDesText;
-    public Text m_AbilityTowDesText;
+    public Text m_AbilityTwoDesText;
     public Text m_PlayerNameIsRepeatOrNullText;
     public Text m_ActorOneIsRepeatOrNullText;
     public Text m_ActorTwoIsRepeatOrNullText;
@@ -44,9 +44,10 @@ public class CreateCharacterPanel : BaseUIForm
     public Text m_TeamNameIsRepeatOrNullText;
 
     private CreateCharacterViewModel m_CreateCharacterViewModel = new CreateCharacterViewModel();
-    private string m_ErrorMessage = "";
 
     private string m_InfoInitValueDes = "HP{0} Pow{1} Dex{2} Con{3}";
+    private bool m_IsCreatePlayerSuccess = false;
+
     private void Awake()
     {
         ReceiveMessage("Create", ReceiveCreateMessage);
@@ -54,9 +55,9 @@ public class CreateCharacterPanel : BaseUIForm
 
         m_CreateBtn.onClick.AddListener(OnCreateClick);
 
-        m_RocaOneTypeDropdown.onValueChanged.AddListener(OnRocaTypeValueChanged);
-        m_RocaTwoTypeDropdown.onValueChanged.AddListener(OnRocaTypeValueChanged);
-        m_RocaThreeTypeDropdown.onValueChanged.AddListener(OnRocaTypeValueChanged);
+        m_RaceOneTypeDropdown.onValueChanged.AddListener(OnRocaTypeValueChanged);
+        m_RaceTwoTypeDropdown.onValueChanged.AddListener(OnRocaTypeValueChanged);
+        m_RaceThreeTypeDropdown.onValueChanged.AddListener(OnRocaTypeValueChanged);
 
         m_PlayerNameInput.onValueChanged.AddListener(OnNameIsNull);
         m_ActorOneNameInput.onValueChanged.AddListener(OnActorOneIsRepeat);
@@ -68,20 +69,32 @@ public class CreateCharacterPanel : BaseUIForm
 
     private void ReceiveCreateMessage(KeyValuesUpdate kv)
     {
-        m_ErrorMessage = kv.Values.ToString();
-        switch (kv.Key)
-        {
-            case "CreateNameError":
-                m_PlayerNameIsRepeatOrNullText.text = m_ErrorMessage;
-                DisableAfterTwoSeconds(m_PlayerNameIsRepeatOrNullText);
-                break;
-            case "CreateTeamNameExist":
-                m_TeamNameIsRepeatOrNullText.text = m_ErrorMessage;
-                DisableAfterTwoSeconds(m_TeamNameIsRepeatOrNullText);
-                break;
+        ArrayList m_ListMessage = kv.Values as ArrayList;
+        Log("m_IsRegisterSuccess = " + (Convert.ToBoolean(m_ListMessage[1])) + m_ListMessage[0].GetType() + m_ListMessage[1].GetType());
+        m_IsCreatePlayerSuccess = !Convert.ToBoolean(m_ListMessage[1]);
 
-            default:
-                break;
+        if (!m_IsCreatePlayerSuccess)
+        {
+            switch (kv.Key)
+            {
+                case "CreatePlayerError":
+                case "CreatePlayerNameExit":
+                    m_PlayerNameIsRepeatOrNullText.text = m_ListMessage[0].ToString();
+                    StartCoroutine(DisableAfterTwoSeconds(m_PlayerNameIsRepeatOrNullText));
+                    break;
+                case "CreateTeamNameExit":
+                    m_TeamNameIsRepeatOrNullText.text = m_ListMessage[0].ToString();
+                    StartCoroutine(DisableAfterTwoSeconds(m_TeamNameIsRepeatOrNullText));
+                    break;
+                case "CreateActorNameExit":
+                case "CreateActorRaceIDNonExit":
+                case "CreateActorCareerNonExit":
+                    m_ActorOneIsRepeatOrNullText.text = m_ListMessage[0].ToString();
+                    StartCoroutine(DisableAfterTwoSeconds(m_PlayerNameIsRepeatOrNullText));
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
@@ -111,20 +124,20 @@ public class CreateCharacterPanel : BaseUIForm
         switch (index)
         {
             case 1:
-                OnRocaTypeValueChanged(m_RocaOneTypeDropdown.value);
+                OnRocaTypeValueChanged(m_RaceOneTypeDropdown.value);
                 break;
             case 2:
-                OnRocaTypeValueChanged(m_RocaTwoTypeDropdown.value);
+                OnRocaTypeValueChanged(m_RaceTwoTypeDropdown.value);
                 break;
             case 3:
-                OnRocaTypeValueChanged(m_RocaThreeTypeDropdown.value);
+                OnRocaTypeValueChanged(m_RaceThreeTypeDropdown.value);
                 break;
         }
     }
     public void OnRocaTypeValueChanged(int index)
     {
-        m_RocaNameText.text = m_CreateCharacterViewModel.createCharacterViewModels[index].Name;
-        m_RocaDesText.text = m_CreateCharacterViewModel.createCharacterViewModels[index].Describe;
+        m_RaceNameText.text = m_CreateCharacterViewModel.createCharacterViewModels[index].Name;
+        m_RaceDesText.text = m_CreateCharacterViewModel.createCharacterViewModels[index].Describe;
 
         m_InitDesText.text = String.Format(m_InfoInitValueDes,
             m_CreateCharacterViewModel.createCharacterViewModels[index].InitHP,
@@ -136,9 +149,11 @@ public class CreateCharacterPanel : BaseUIForm
             m_CreateCharacterViewModel.createCharacterViewModels[index].PowGrowth,
             m_CreateCharacterViewModel.createCharacterViewModels[index].DexGrowth,
             m_CreateCharacterViewModel.createCharacterViewModels[index].ConGrowth);
+        //通过技能ID寻找技能描述
+        m_AbilityOneDesText.text = StaticDataHelper.GetRaceAbilityByID(m_CreateCharacterViewModel.createCharacterViewModels[index].AbilityOneID).AbilityDescribe;
+        m_AbilityTwoDesText.text = StaticDataHelper.GetRaceAbilityByID(m_CreateCharacterViewModel.createCharacterViewModels[index].AbilityTwoID).AbilityDescribe;
     }
 
-    private bool m_IsCreatePlayer = false;
 
     public void OnCreateClick()
     {
@@ -148,31 +163,51 @@ public class CreateCharacterPanel : BaseUIForm
         CheckedInputInfo(m_ActorTwoIsRepeatOrNullText, m_ActorTwoNameInput.text, m_ActorOneNameInput.text, m_ActorThreeNameInput.text);
         CheckedInputInfo(m_ActorThreeIsRepeatOrNullText, m_ActorThreeNameInput.text, m_ActorOneNameInput.text, m_ActorTwoNameInput.text);
 
-        if (!m_IsCreatePlayer)
+        if (!m_IsCreatePlayerSuccess)
         {
-            Debug.Log("创建角色失败");
+            Log("创建角色失败——客户端检查");
+            UpdateData();
             return;
         }
 
         //TODO 设置Error
         m_CreateCharacterViewModel.CreateCharacterCallback(CreateDataCallback());
 
-        if (m_ErrorMessage != "" || m_ErrorMessage != string.Empty)
+        if (!m_IsCreatePlayerSuccess)
         {
-            Log("登录失败");
+            Log("创建角色失败——服务端检查");
+            UpdateData();
             return;
         }
 
         Log("成功创建角色 —— " +
             "玩家名称：" + m_CreateData.playerName +
-            "玩家队伍名称：" + m_CreateData.teamName + 
+            "玩家队伍名称：" + m_CreateData.teamName +
             "角色一名称：" + m_CreateData.actorOneName +
             "角色二名称：" + m_CreateData.actorTwoName +
             "角色三名称：" + m_CreateData.actorThreeName +
-            "种族一类型：" + m_CreateData.rocaOneType +
-            "种族二类型：" + m_CreateData.rocaTwoType +
-            "种族三类型：" + m_CreateData.rocaThreeType);
+            "种族一类型：" + m_CreateData.raceOneType +
+            "种族二类型：" + m_CreateData.raceTwoType +
+            "种族三类型：" + m_CreateData.raceThreeType);
     }
+    void UpdateData()
+    {
+        m_PlayerNameInput.text = "";
+        m_ActorOneNameInput.text = "";
+        m_ActorTwoNameInput.text = "";
+        m_ActorThreeNameInput.text = "";
+        m_TeamNameInput.text = "";
+        InitModel(m_CreateCharacterViewModel);
+    //m_RocaOneTypeDropdown;
+    //m_RocaTwoTypeDropdown;
+    //m_RocaThreeTypeDropdown;
+    //m_RocaNameText;
+    //m_RocaDesText;
+    //m_InitDesText;
+    //m_GrowthDesText;
+    //m_AbilityOneDesText;
+    //m_AbilityTowDesText;
+}
 
     private void CheckedInputInfo(Text go,string nameOne,string nameTwo, string nameThree)
     {
@@ -180,20 +215,20 @@ public class CreateCharacterPanel : BaseUIForm
         {
             go.text = "名称为空！";
             go.gameObject.SetActive(true);
-            m_IsCreatePlayer = false;
+            m_IsCreatePlayerSuccess = false;
         }
         else if (nameOne == nameTwo || nameOne == nameThree)
         {
             go.text = "英雄名称重复！";
             go.gameObject.SetActive(true);
-            m_IsCreatePlayer = false;
+            m_IsCreatePlayerSuccess = false;
         }
         else
         {
             go.gameObject.SetActive(false);
-            m_IsCreatePlayer = true;
+            m_IsCreatePlayerSuccess = true;
         }
-        if (!m_IsCreatePlayer)
+        if (!m_IsCreatePlayerSuccess)
         {
             StartCoroutine(DisableAfterTwoSeconds(go));
         }
@@ -227,9 +262,9 @@ public class CreateCharacterPanel : BaseUIForm
         //raceData.PowGrowth = 5;
 
         //TODO ++
-        m_CreateData.rocaOneType = (uint)m_RocaOneTypeDropdown.value + 1;
-        m_CreateData.rocaTwoType = (uint)m_RocaTwoTypeDropdown.value + 1;
-        m_CreateData.rocaThreeType = (uint)m_RocaThreeTypeDropdown.value + 1;
+        m_CreateData.raceOneType = StaticDataHelper.GetRaceIDByName(m_RaceOneTypeDropdown.captionText.text);
+        m_CreateData.raceTwoType = StaticDataHelper.GetRaceIDByName(m_RaceTwoTypeDropdown.captionText.text);
+        m_CreateData.raceThreeType = StaticDataHelper.GetRaceIDByName(m_RaceThreeTypeDropdown.captionText.text);
 
         return m_CreateData;
     }
@@ -246,9 +281,9 @@ public class CreateCharacterPanel : BaseUIForm
         {
             Dropdown.OptionData op = new Dropdown.OptionData();
             op.text = m_CreateCharacterViewModel.createCharacterViewModels[i].Name;
-            m_RocaOneTypeDropdown.options.Add(op);
-            m_RocaTwoTypeDropdown.options.Add(op);
-            m_RocaThreeTypeDropdown.options.Add(op);
+            m_RaceOneTypeDropdown.options.Add(op);
+            m_RaceTwoTypeDropdown.options.Add(op);
+            m_RaceThreeTypeDropdown.options.Add(op);
         }
 
         OnRocaTypeValueChanged(0);
@@ -275,7 +310,7 @@ public class CreateCharacterPanel : BaseUIForm
     private IEnumerator DisableAfterTwoSeconds(Text go)
     {
         go.gameObject.SetActive(true);
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(3);
         go.gameObject.SetActive(false);
     }
 }

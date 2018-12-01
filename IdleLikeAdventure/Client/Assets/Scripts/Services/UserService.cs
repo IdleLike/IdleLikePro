@@ -33,7 +33,7 @@ namespace Service
         private UserEntity userEntity = new UserEntity();
         private List<ActorMsgData> actorMsgDataList = new List<ActorMsgData>();
         private string teamName = string.Empty;
-        private string userName = string.Empty;
+        private string playerName = string.Empty;
 
         protected override OpCodeModule ServiceOpCode
         {
@@ -88,6 +88,8 @@ namespace Service
         {
             //加载文档数据
             StaticDataMgr.mInstance.LoadData();
+            //保存加载的文档数据
+            StaticDataHelper.SaveData();
             //监听网络消息
             AddNetListener();
         }
@@ -186,23 +188,22 @@ namespace Service
             CreateUserRequestAndRespondeMsgData createUserRequestAndRespondeMsgData = new CreateUserRequestAndRespondeMsgData();
             createUserRequestAndRespondeMsgData.Actors = new List<ActorMsgData>();
 
-            createUserRequestAndRespondeMsgData.UserName = data.playerName;
-            //createUserRequestAndRespondeMsgData.TeamName
+            createUserRequestAndRespondeMsgData.PlayerName = data.playerName;
+            createUserRequestAndRespondeMsgData.TeamName = data.teamName;
             //TODO 添加 ID
-            createUserRequestAndRespondeMsgData.Actors.Add(new ActorMsgData() { Name = data.actorOneName, RaceID = (int)data.rocaOneType, CareerID = 1 });
-            createUserRequestAndRespondeMsgData.Actors.Add(new ActorMsgData() { Name = data.actorTwoName, RaceID = (int)data.rocaTwoType, CareerID = 1 });
-            createUserRequestAndRespondeMsgData.Actors.Add(new ActorMsgData() { Name = data.actorThreeName, RaceID = (int)data.rocaThreeType, CareerID = 1 });
+            createUserRequestAndRespondeMsgData.Actors.Add(new ActorMsgData() { Name = data.actorOneName , RaceID = (int)data.raceOneType });//, CareerID = (int)StaticDataHelper.GetCareerIDByName("战士")});
+            createUserRequestAndRespondeMsgData.Actors.Add(new ActorMsgData() { Name = data.actorTwoName , RaceID = (int)data.raceTwoType });//, CareerID = (int)StaticDataHelper.GetCareerIDByName("战士") });
+            createUserRequestAndRespondeMsgData.Actors.Add(new ActorMsgData() { Name = data.actorThreeName  , RaceID = (int)data.raceThreeType });//, CareerID = (int)StaticDataHelper.GetCareerIDByName("魔法") });
 
+            Log("创建回调");
             SendNetMsg(OpCodeUserOperation.Create, createUserRequestAndRespondeMsgData);
-            //TODO 隐藏创建玩家界面
-            createCharacterPanel.gameObject.SetActive(false);
             //TODO 暂时保存玩家信息
-            teamName = createUserRequestAndRespondeMsgData.TeamName;
-            userName = createUserRequestAndRespondeMsgData.UserName;
-            actorMsgDataList = createUserRequestAndRespondeMsgData.Actors;
+            //teamName = createUserRequestAndRespondeMsgData.TeamName;
+            //playerName = createUserRequestAndRespondeMsgData.PlayerName;
+            //actorMsgDataList = createUserRequestAndRespondeMsgData.Actors;
       
             //TODO 打开战斗界面
-            OnOpenBattlePanel();
+            //OnOpenBattlePanel();
         }
         /// <summary>
         /// 登录处理
@@ -223,16 +224,14 @@ namespace Service
                     {
                         case ErrorCode.LoginAccountError:
                         case ErrorCode.LoginPasswordError:
-
                             Log("注册失败：" + loginRespondeMsgData.Error.ToString() + "邮箱账号或密码错误");
-
                             m_List.Add("邮箱账号或密码错误！");
-                            m_List.Add(loginRespondeMsgData.Error);
-                            SendMessage("Login", ErrorCode.LoginAccountError.ToString(), m_List);
                             break;
                         default:
                             break;
                     }
+                    m_List.Add(loginRespondeMsgData.IsError);
+                    SendMessage("Login", loginRespondeMsgData.Error.ToString(), m_List);
                 }
                 else
                 {
@@ -256,35 +255,27 @@ namespace Service
                 if(registerRespondeMsgData.IsError)
                 {
                     ArrayList m_List = new ArrayList();
+
                     switch (registerRespondeMsgData.Error)
                     {
                         case ErrorCode.RegisterAccountError:
                             Log("注册失败：" + registerRespondeMsgData.Error.ToString() + "邮箱账号错误");
-
                             m_List.Add("邮箱账号不合法！");
-                            m_List.Add(registerRespondeMsgData.Error);
-                            SendMessage("Register", ErrorCode.RegisterAccountError.ToString(), m_List);
-
                             break;
                         case ErrorCode.RegisterAccountExist:
                             Log("注册失败：" + registerRespondeMsgData.Error.ToString() + "邮箱账号已注册");
-
                             m_List.Add("邮箱账号已注册！");
-                            m_List.Add(registerRespondeMsgData.Error);
-                            SendMessage("Register", ErrorCode.RegisterAccountExist.ToString(), m_List);
                             break;
                         case ErrorCode.RegisterPasswordError:
                             Log("注册失败：" + registerRespondeMsgData.Error.ToString() + "密码格式错误，请重新输入密码！");
-
                             m_List.Add("密码格式错误，请重新输入密码！");
-                            m_List.Add(registerRespondeMsgData.Error);
-                            SendMessage("Register", ErrorCode.RegisterPasswordError.ToString(), m_List);
                             break;
                         default:
                       
                             break;
                     }
-
+                    m_List.Add(registerRespondeMsgData.IsError);
+                    SendMessage("Register", registerRespondeMsgData.Error.ToString(), m_List);
                 }
                 else
                 {
@@ -295,7 +286,7 @@ namespace Service
                     userEntity.CreateTime = registerRespondeMsgData.userData.CreateTime;
                     userEntity.ID = registerRespondeMsgData.userData.DatabaseID;
                     userEntity.Name = registerRespondeMsgData.userData.Name;
-                    
+
                     //TODO 隐藏注册界面
                     registerPanel.gameObject.SetActive(false);
                     Log("成功 邮箱账号注册成功");
@@ -318,28 +309,57 @@ namespace Service
             CreateUserRequestAndRespondeMsgData createUserRequestAndRespondeMsgData = data as CreateUserRequestAndRespondeMsgData;
             if (createUserRequestAndRespondeMsgData != null)
             {
+                Log("创建 ： " + createUserRequestAndRespondeMsgData.Error.ToString() + "是否有错 ：" + createUserRequestAndRespondeMsgData.IsError);
+
                 if (createUserRequestAndRespondeMsgData.IsError)
                 {
+                    ArrayList m_List = new ArrayList();
                     switch (createUserRequestAndRespondeMsgData.Error)
                     {
-                        //TODO 错误协议
-                        //case ErrorCode.CreateNameError:
-                        //    SendMessage("Create", "CreateNameError", "角色名称重复！");
-                        //    break;
-                        //case ErrorCode.CreateTeamNameExist:
-                        //    SendMessage("Create", "CreateTeamNameExist", "队伍名称重复！");
-                        //    break;
+                        case ErrorCode.CreatePlayerError:
+                            Log("创建玩家错误");
+                            m_List.Add("创建玩家错误！");
+                            break;
+                        case ErrorCode.CreatePlayerNameExit:
+                            Log("玩家名称重复");
+                            m_List.Add("玩家名称重复！");
+                            break;
+                        case ErrorCode.CreateTeamNameExit:
+                            Log("队伍名称重复");
+                            m_List.Add("队伍名称重复！");
+                            break;
+                        case ErrorCode.CreateActorNameExit:
+                            Log("英雄名称重复");
+                            m_List.Add("英雄名称重复！");
+                            break;
+                        case ErrorCode.CreateActorRaceIDNonExit:
+                            Log("种族不存在");
+                            m_List.Add("种族不存在！");
+                            break;
+                        case ErrorCode.CreateActorCareerNonExit:
+                            Log("职业不存在");
+                            m_List.Add("职业不存在！");
+                            break;
                         default:
                             break;
                     }
+                    m_List.Add(createUserRequestAndRespondeMsgData.IsError);
+                    SendMessage("Create", createUserRequestAndRespondeMsgData.Error.ToString(), m_List);
                 }
                 else
                 {
+                    Log("创建成功,打开战斗界面");
                     teamName = createUserRequestAndRespondeMsgData.TeamName;
-                    userName = createUserRequestAndRespondeMsgData.UserName;
+                    playerName = createUserRequestAndRespondeMsgData.PlayerName;
                     actorMsgDataList = createUserRequestAndRespondeMsgData.Actors;
                     OnOpenBattlePanel();
+                    //TODO 隐藏创建玩家界面
+                    createCharacterPanel.gameObject.SetActive(false);
                 }
+            }
+            else
+            {
+                Log(GetType() + "：createUserRequestAndRespondeMsgData == null");
             }
         }
     }
