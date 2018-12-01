@@ -34,9 +34,6 @@ namespace IdleLikeAdventureServer.Handler
             BaseMsgData baseMsgData)
         {
             
-            //binaryFormatter.Serialize(memoryStream, baseMsgData);
-            //byte[] arr = memoryStream.ToArray();
-
             OperationResponse operationResponse = new OperationResponse();
             operationResponse.OperationCode = (byte)OpCode;
             operationResponse.Parameters = new Dictionary<byte, object>();

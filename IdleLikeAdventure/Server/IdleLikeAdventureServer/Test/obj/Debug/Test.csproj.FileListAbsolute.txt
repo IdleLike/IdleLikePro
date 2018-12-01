@@ -38,6 +38,9 @@ C:\Users\fishf\Documents\Tencent Files\2407040368\FileRecv\Server\Server\IdleLik
 C:\Users\fishf\Documents\Tencent Files\2407040368\FileRecv\Server\Server\IdleLikeAdventureServer\Test\obj\Debug\Test.csproj.CopyComplete
 C:\Users\fishf\Documents\Tencent Files\2407040368\FileRecv\Server\Server\IdleLikeAdventureServer\Test\obj\Debug\Test.exe
 C:\Users\fishf\Documents\Tencent Files\2407040368\FileRecv\Server\Server\IdleLikeAdventureServer\Test\obj\Debug\Test.pdb
+C:\Users\fishf\Documents\GitHub\IdleLikePro\IdleLikeAdventure\Server\IdleLikeAdventureServer\Test\bin\Debug\Nhibernate\XmlMapping\Actor.hbm.xml
+C:\Users\fishf\Documents\GitHub\IdleLikePro\IdleLikeAdventure\Server\IdleLikeAdventureServer\Test\bin\Debug\Nhibernate\XmlMapping\Player.hbm.xml
+C:\Users\fishf\Documents\GitHub\IdleLikePro\IdleLikeAdventure\Server\IdleLikeAdventureServer\Test\bin\Debug\Nhibernate\XmlMapping\Team.hbm.xml
 C:\Users\fishf\Documents\GitHub\IdleLikePro\IdleLikeAdventure\Server\IdleLikeAdventureServer\Test\bin\Debug\Nhibernate\XmlMapping\Account.hbm.xml
 C:\Users\fishf\Documents\GitHub\IdleLikePro\IdleLikeAdventure\Server\IdleLikeAdventureServer\Test\bin\Debug\Test.exe.config
 C:\Users\fishf\Documents\GitHub\IdleLikePro\IdleLikeAdventure\Server\IdleLikeAdventureServer\Test\bin\Debug\Test.exe

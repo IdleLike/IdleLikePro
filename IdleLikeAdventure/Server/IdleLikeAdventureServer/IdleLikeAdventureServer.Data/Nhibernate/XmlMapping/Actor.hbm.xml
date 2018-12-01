@@ -8,9 +8,9 @@
 		<property name="Name" column="Name" type="string"  />
 		<property name="RaceID" column="RaceID" type="int"  />
 		<property name="CareerID" column="CareerID" type="int"  />
-		<property name="CareerLevel" column="CareerLevel" type="interger"  />
-		<property name="CareerPoint" column="CareerPoint" type="interger"  />
-		<property name="TotalExp" column="TotalExp" type="interger"  />
+		<property name="CareerLevel" column="CareerLevel" type="int"  />
+		<property name="CareerPoint" column="CareerPoint" type="int"  />
+		<property name="TotalExp" column="TotalExp" type="int"  />
 		<property name="UpdateDate" column="UpdateDate" type="DateTime"  />
 		<property name="CreateDate" column="CreateDate" type="DateTime"  />
 				

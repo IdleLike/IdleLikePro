@@ -23,7 +23,7 @@ namespace IdleLikeAdventureServer
         private ServerDataCenter serverDataCenter;
 
         public Dictionary<OpCodeModule, Dictionary<byte, BaseHandler>> Handlers { get => handlers; set => handlers = value; }
-        public Dictionary<byte, BaseHandler> HandlerDict { get => handlerDict; set => handlerDict = value; }
+        //public Dictionary<byte, BaseHandler> HandlerDict { get => handlerDict; set => handlerDict = value; }
         public List<ClientPeer> PeerList { get => peerList; set => peerList = value; }
         public ServerDataCenter ServerDataCenter { get => serverDataCenter; set => serverDataCenter = value; }
         public OpCodeModule OpCode1 { get => OpCode; set => OpCode = value; }
@@ -80,13 +80,18 @@ namespace IdleLikeAdventureServer
         public void InitHandler()
         {
             log.Info("InitHandler Start");
-
+            Dictionary<byte, BaseHandler> UserHandlerDict = new Dictionary<byte, BaseHandler>();
             LoginHandler loginHandler = new LoginHandler();
-            HandlerDict.Add(loginHandler.OpCodeOperation, loginHandler);
+            UserHandlerDict.Add(loginHandler.OpCodeOperation, loginHandler);
             RegisterHandler registerHandler = new RegisterHandler();
-            HandlerDict.Add(registerHandler.OpCodeOperation, registerHandler);
+            UserHandlerDict.Add(registerHandler.OpCodeOperation, registerHandler);
+            CreateUserHandler createUserHandler = new CreateUserHandler();
+            UserHandlerDict.Add(createUserHandler.OpCodeOperation, createUserHandler);
+            Handlers.Add(OpCodeModule.User, UserHandlerDict);
 
-            Handlers.Add(OpCodeModule.User, HandlerDict);
+            //Dictionary<byte, BaseHandler> actorHandlerDict = new Dictionary<byte, BaseHandler>();
+            
+            //Handlers.Add(OpCodeModule.Actor, UserHandlerDict);
 
             log.Info("InitHandler End");
         }

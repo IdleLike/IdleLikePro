@@ -87,6 +87,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Builder\ActorBuilder.cs" />
     <Compile Include="Dal\TeamDal.cs" />
     <Compile Include="Dal\PlayerDal.cs" />
     <Compile Include="Dal\ActorDal.cs" />

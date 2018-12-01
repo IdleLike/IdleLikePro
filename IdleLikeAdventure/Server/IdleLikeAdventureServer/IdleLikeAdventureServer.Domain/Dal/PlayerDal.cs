@@ -20,7 +20,7 @@ namespace IdleLikeAdventureServer.Domain.Dal
             Player player = null;
             if (players != null)
             {
-                player = players.Find(p => p.Name == player.Name);
+                player = players.Find(p => p.Name == name);
             }
 
             if (player == null)

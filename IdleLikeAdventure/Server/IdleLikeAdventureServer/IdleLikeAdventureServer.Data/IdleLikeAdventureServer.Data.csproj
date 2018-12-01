@@ -70,9 +70,15 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Nhibernate\XmlMapping\Actor.hbm.xml" />
-    <Content Include="Nhibernate\XmlMapping\Player.hbm.xml" />
-    <Content Include="Nhibernate\XmlMapping\Team.hbm.xml" />
+    <EmbeddedResource Include="Nhibernate\XmlMapping\Actor.hbm.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Nhibernate\XmlMapping\Player.hbm.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Nhibernate\XmlMapping\Team.hbm.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Nhibernate\XmlMapping\Account.hbm.xml">

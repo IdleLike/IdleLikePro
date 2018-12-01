@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using IdleLikeAdventureServer.Data.Entity;
 using NetData.Message;
 using NetData.OpCode;
@@ -14,12 +10,13 @@ namespace IdleLikeAdventureServer.Handler
     {
         public CreateUserHandler()
         {
-            OpCode = OpCodeModule.Actor;
-            OpCodeOperation = (byte)OpCodeActorOperation.CreateUser;
+            OpCode = OpCodeModule.User;
+            OpCodeOperation = (byte)OpCodeUserOperation.Create;
         }
 
         public override void OnOperationRequest(BaseMsgData baseMsgData, SendParameters sendParameters, ClientPeer peer)
         {
+            MyGameServer.log.Info("开始创建玩家信息。");
             //转型消息
             CreateUserRequestAndRespondeMsgData createUserRequestMsgData = baseMsgData as CreateUserRequestAndRespondeMsgData;
             if (createUserRequestMsgData == null)
@@ -34,16 +31,19 @@ namespace IdleLikeAdventureServer.Handler
             {//用户名称为空
                 createUserRespondeMsgData.IsError = true;
                 createUserRespondeMsgData.Error = ErrorCode.CreatePlayerError;
+                MyGameServer.log.Info("玩家名称为空");
             }
             else if (createUserRequestMsgData.TeamName == null || createUserRequestMsgData.TeamName == string.Empty)
             {//队伍名称为空
                 createUserRespondeMsgData.IsError = true;
                 createUserRespondeMsgData.Error = ErrorCode.CreatePlayerError;
+                MyGameServer.log.Info("队伍名称为空");
             }
             else if (createUserRequestMsgData.Actors == null || createUserRequestMsgData.Actors.Count != 3)
             {//角色数据错误
                 createUserRespondeMsgData.IsError = true;
                 createUserRespondeMsgData.Error = ErrorCode.CreatePlayerError;
+                MyGameServer.log.Info("角色数据为空或是数量不为3");
             }
             else
             {              
@@ -52,6 +52,7 @@ namespace IdleLikeAdventureServer.Handler
                     createUserRespondeMsgData.IsError = true;
                     createUserRespondeMsgData.Error = ErrorCode.CreatePlayerNameExit;
                     SendResponse(peer, sendParameters, createUserRespondeMsgData);
+                    MyGameServer.log.Info("存在同名玩家");
                     return;
                 }
 
@@ -126,11 +127,16 @@ namespace IdleLikeAdventureServer.Handler
 
                 createUserRespondeMsgData.TeamID = serverDataCenter.TeamDal.Insert(team);
                 createUserRespondeMsgData.TeamName = team.Name;
+                createUserRespondeMsgData.IsError = false;
             }
 
 
             //发送消息
             SendResponse(peer, sendParameters, createUserRespondeMsgData);
+
+            
+
+            MyGameServer.log.Info("创建玩家信息完成。" + createUserRespondeMsgData.Error);
         }
     }
 }
