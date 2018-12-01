@@ -215,29 +215,40 @@ namespace Service
 
             if (loginRespondeMsgData != null)
             {
-                Log("登录 ： " + loginRespondeMsgData);
-                Log("登录 ： " + loginRespondeMsgData.Error.ToString() + "是否有错 ：" +loginRespondeMsgData.IsError);
-                if (loginRespondeMsgData.IsError)
+                if(loginRespondeMsgData.IsNewPlayer)
                 {
-                    ArrayList m_List = new ArrayList();
-                    switch (loginRespondeMsgData.Error)
+                    Log("登录 ： " + loginRespondeMsgData);
+                    Log("登录 ： " + loginRespondeMsgData.Error.ToString() + "是否有错 ：" + loginRespondeMsgData.IsError);
+                    if (loginRespondeMsgData.IsError)
                     {
-                        case ErrorCode.LoginAccountError:
-                        case ErrorCode.LoginPasswordError:
-                            Log("注册失败：" + loginRespondeMsgData.Error.ToString() + "邮箱账号或密码错误");
-                            m_List.Add("邮箱账号或密码错误！");
-                            break;
-                        default:
-                            break;
+                        ArrayList m_List = new ArrayList();
+                        switch (loginRespondeMsgData.Error)
+                        {
+                            case ErrorCode.LoginAccountError:
+                            case ErrorCode.LoginPasswordError:
+                                Log("注册失败：" + loginRespondeMsgData.Error.ToString() + "邮箱账号或密码错误");
+                                m_List.Add("邮箱账号或密码错误！");
+                                break;
+                            default:
+                                break;
+                        }
+                        m_List.Add(loginRespondeMsgData.IsError);
+                        SendMessage("Login", loginRespondeMsgData.Error.ToString(), m_List);
                     }
-                    m_List.Add(loginRespondeMsgData.IsError);
-                    SendMessage("Login", loginRespondeMsgData.Error.ToString(), m_List);
+                    else
+                    {
+                        Log("新用户登录成功");
+                        loginPanel.gameObject.SetActive(false);
+                        OnOpenCreateCharacterPanel();
+                    }
                 }
                 else
                 {
-                    Log("登录成功");
+                    //TODO 打开面板
+                    Log("老用户登录成功");
                     loginPanel.gameObject.SetActive(false);
-                    OnOpenCreateCharacterPanel();
+                    //打开战斗界面
+                    OnOpenBattlePanel();
                 }
             }
         }

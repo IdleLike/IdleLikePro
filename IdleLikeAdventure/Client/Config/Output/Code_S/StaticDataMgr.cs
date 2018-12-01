@@ -29,8 +29,10 @@ namespace StaticData
 		public Dictionary<uint, CareerData> mCareerDataMap = new Dictionary<uint, CareerData>(); //Career Data
 		public Dictionary<uint, CareerAbilityData> mCareerAbilityDataMap = new Dictionary<uint, CareerAbilityData>(); //CareerAbility Data
 		public Dictionary<uint, LevelData> mLevelDataMap = new Dictionary<uint, LevelData>(); //Level Data
+		public Dictionary<uint, MonsterData> mMonsterDataMap = new Dictionary<uint, MonsterData>(); //Monster Data
 		public Dictionary<uint, RaceData> mRaceDataMap = new Dictionary<uint, RaceData>(); //Race Data
 		public Dictionary<uint, RaceAbilityData> mRaceAbilityDataMap = new Dictionary<uint, RaceAbilityData>(); //RaceAbility Data
+		public Dictionary<uint, StageData> mStageDataMap = new Dictionary<uint, StageData>(); //Stage Data
 		public Dictionary<uint, TestData> mTestDataMap = new Dictionary<uint, TestData>(); //Test Data
 
         //加载数据
@@ -39,8 +41,10 @@ namespace StaticData
 			LoadDataBinWorker<CareerData>("Career.bytes", mCareerDataMap); //Career Data
 			LoadDataBinWorker<CareerAbilityData>("CareerAbility.bytes", mCareerAbilityDataMap); //CareerAbility Data
 			LoadDataBinWorker<LevelData>("Level.bytes", mLevelDataMap); //Level Data
+			LoadDataBinWorker<MonsterData>("Monster.bytes", mMonsterDataMap); //Monster Data
 			LoadDataBinWorker<RaceData>("Race.bytes", mRaceDataMap); //Race Data
 			LoadDataBinWorker<RaceAbilityData>("RaceAbility.bytes", mRaceAbilityDataMap); //RaceAbility Data
+			LoadDataBinWorker<StageData>("Stage.bytes", mStageDataMap); //Stage Data
 			LoadDataBinWorker<TestData>("Test.bytes", mTestDataMap); //Test Data
 
 						
