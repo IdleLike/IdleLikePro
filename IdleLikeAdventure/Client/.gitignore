@@ -2,7 +2,7 @@
 Library/
 obj/
 Temp/
-Config/Output/
+Config/_Win/_Defines.dll
 .DS_Store
 Assembly-CSharp.csproj
 Assets/.DS_Store
