@@ -10,7 +10,8 @@ namespace NetData.OpCode
     /// </summary>
     public enum OpCodeBattleOperation : byte
     {
-
+        None,
+        BattleRequest
     }
 
     public enum OpCodeBattleEvent : byte

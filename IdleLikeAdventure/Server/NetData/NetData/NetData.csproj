@@ -41,6 +41,9 @@
   <ItemGroup>
     <Compile Include="Message\ActorMsgData.cs" />
     <Compile Include="Message\BaseMsgData.cs" />
+    <Compile Include="Message\BattleMsgData.cs" />
+    <Compile Include="Message\BattleRequestMsgData.cs" />
+    <Compile Include="Message\BattleRespondeMsgData.cs" />
     <Compile Include="Message\CreateUserRequestAndRespondeMsgData.cs" />
     <Compile Include="Message\LoginRequstMsgData.cs" />
     <Compile Include="Message\LoginRespondeMsgData.cs" />

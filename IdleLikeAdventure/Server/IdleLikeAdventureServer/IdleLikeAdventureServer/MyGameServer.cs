@@ -89,9 +89,9 @@ namespace IdleLikeAdventureServer
             UserHandlerDict.Add(createUserHandler.OpCodeOperation, createUserHandler);
             Handlers.Add(OpCodeModule.User, UserHandlerDict);
 
-            //Dictionary<byte, BaseHandler> actorHandlerDict = new Dictionary<byte, BaseHandler>();
+            Dictionary<byte, BaseHandler> battleHandlerDict = new Dictionary<byte, BaseHandler>();
             
-            //Handlers.Add(OpCodeModule.Actor, UserHandlerDict);
+            Handlers.Add(OpCodeModule.Battle, battleHandlerDict);
 
             log.Info("InitHandler End");
         }

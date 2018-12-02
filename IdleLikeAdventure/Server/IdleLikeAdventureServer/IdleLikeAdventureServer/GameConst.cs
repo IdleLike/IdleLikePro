@@ -8,6 +8,6 @@ namespace IdleLikeAdventureServer
 {
     public class GameConst
     {
-        public const int CAREER_DEFAULT_ID = 10001;
+        public const int CAREER_DEFAULT_ID = 1001;
     }
 }
