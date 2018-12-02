@@ -94,9 +94,31 @@ namespace IdleLikeAdventureServer.Handler
                             }
                             loginRespondeMsgData.Actors = actorMsgs;
 
-                            //IList<Team> teams = serverDataCenter.TeamDal.Get
-                            List<TeamMsgData> teamMsgDatas = new List<TeamMsgData>();
+                            IList<Team> teams = serverDataCenter.TeamDal.GetAllPlayer(player.ID);
+                            if (teams != null)
+                            {
+                                List<TeamMsgData> teamMsgDatas = new List<TeamMsgData>();
+                                for (int i = 0; i < teams.Count; i++)
+                                {
+                                    TeamMsgData teamMsgData = new TeamMsgData();
+                                    
+                                    string[] actorIds = teams[i].ActorIDs.Split('|');
+                                    teamMsgData.ActorIDs = new List<int>(actorIds.Length);
+                                    for (int j = 0; j < actorIds.Length; j++)
+                                    {
+                                        teamMsgData.ActorIDs.Add(Convert.ToInt32(actorIds[j]));                             
+                                    }
+                                    teamMsgData.DatabaseID = teams[i].ID;
+                                    teamMsgData.Name = teams[i].Name;
 
+                                    teamMsgDatas.Add(teamMsgData);
+                                }
+                                loginRespondeMsgData.Teams = teamMsgDatas;
+                            }
+                            else
+                            {
+                                MyGameServer.log.Info("玩家没有队伍， ID：" + player.ID + " 名称：" + player.Name);
+                            }                         
                         }
                         else
                         {

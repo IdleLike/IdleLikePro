@@ -59,13 +59,9 @@ namespace IdleLikeAdventureServer.Domain.Dal
                 tempTeams.Add(teams.Find(p => p.PlayerID == playerID));
             }
 
-            if (tempTeams == null)
+            if (tempTeams.Count < 1)
             {
-                //IList<Team> tempAccounts = session.CreateQuery("from Team a where a.Name=:Name, a.PlayerID=:playerId").SetString("Name", name).List<Team>();
-                //if (tempAccounts != null && tempAccounts.Count > 0)
-                //{
-                //    team = tempAccounts[0];
-                //}
+                tempTeams.AddRange(session.CreateQuery("from Team a where a.PlayerID=:PlayerId").SetInt32("PlayerId", playerID).List<Team>());      
             }
 
             return tempTeams;
