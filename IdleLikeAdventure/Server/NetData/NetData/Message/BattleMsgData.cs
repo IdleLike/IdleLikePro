@@ -12,7 +12,7 @@ namespace NetData.Message
         public int TeamID;
         public List<uint> EnemyID;
         //战斗信息
-        List<RoundInfo> Rounds;
+        public List<RoundInfo> Rounds;
         //战斗结算
         public bool IsWin;
         public List<int> Exps;
