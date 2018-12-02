@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enumeration\EnumBattleKind.cs" />
     <Compile Include="Message\ActorMsgData.cs" />
     <Compile Include="Message\BaseMsgData.cs" />
     <Compile Include="Message\BattleMsgData.cs" />
