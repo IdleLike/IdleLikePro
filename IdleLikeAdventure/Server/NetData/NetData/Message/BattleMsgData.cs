@@ -24,7 +24,7 @@ namespace NetData.Message
     [Serializable]
     public struct RoundInfo
     {
-        List<AttackInfo> AttackInfos;
+        public List<AttackInfo> AttackInfos;
     }
 
     [Serializable]

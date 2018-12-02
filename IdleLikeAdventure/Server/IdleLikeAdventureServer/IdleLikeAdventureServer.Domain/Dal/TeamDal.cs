@@ -53,8 +53,22 @@ namespace IdleLikeAdventureServer.Domain.Dal
 
         public IList<Team> GetAllPlayer(int playerID)
         {
-            List<Team> teams = new List<Team>();
-            return null;
+            List<Team> tempTeams = new List<Team>();
+            if (teams != null)
+            {
+                tempTeams.Add(teams.Find(p => p.PlayerID == playerID));
+            }
+
+            if (tempTeams == null)
+            {
+                //IList<Team> tempAccounts = session.CreateQuery("from Team a where a.Name=:Name, a.PlayerID=:playerId").SetString("Name", name).List<Team>();
+                //if (tempAccounts != null && tempAccounts.Count > 0)
+                //{
+                //    team = tempAccounts[0];
+                //}
+            }
+
+            return tempTeams;
         }
 
         public int Insert(Team team)
