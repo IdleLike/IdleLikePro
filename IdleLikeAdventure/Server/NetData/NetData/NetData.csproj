@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="Enumeration\EnumBattleKind.cs" />
     <Compile Include="Message\ActorMsgData.cs" />
+    <Compile Include="Message\AttackInfoMsgData.cs" />
     <Compile Include="Message\BaseMsgData.cs" />
     <Compile Include="Message\BattleMsgData.cs" />
     <Compile Include="Message\BattleRequestMsgData.cs" />
@@ -51,6 +52,7 @@
     <Compile Include="Message\PlayerMsgData.cs" />
     <Compile Include="Message\RegisterRequestMsgData.cs" />
     <Compile Include="Message\RegisterRespondeMsgData.cs" />
+    <Compile Include="Message\RoundInfoMsgData.cs" />
     <Compile Include="Message\TeamMsgData.cs" />
     <Compile Include="Message\UserMsgData.cs" />
     <Compile Include="OpCode\ErrorCode.cs" />
