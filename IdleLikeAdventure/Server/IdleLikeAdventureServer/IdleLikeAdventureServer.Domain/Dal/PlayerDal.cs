@@ -35,6 +35,26 @@ namespace IdleLikeAdventureServer.Domain.Dal
             return player;
         }
 
+        public Player Get(int accountID)
+        {
+            Player player = null;
+            if (players != null)
+            {
+                player = players.Find(p => p.AccountID == accountID);
+            }
+
+            if (player == null)
+            {
+                IList<Player> tempAccounts = session.CreateQuery("from Player a where a.AccountID=:AccountID").SetInt32("AccountID", accountID).List<Player>();
+                if (tempAccounts != null && tempAccounts.Count > 0)
+                {
+                    player = tempAccounts[0];
+                }
+            }
+
+            return player;
+        }
+
         public int Insert(Player player)
         {
             int id = (int)session.Save(player);

@@ -41,6 +41,11 @@ namespace IdleLikeAdventureServer.Domain.Dal
             return tempActors.ToArray();
         }
 
+        public IList<Actor> GetAllPlayer(int playerID)
+        {
+            return session.CreateQuery("from Actor a where a.PlayerID=:PlayerID").SetInt32("PlayerID", playerID).List<Actor>();
+        }
+
         public int Insert(Actor actor)
         {
             int id = (int)session.Save(actor);

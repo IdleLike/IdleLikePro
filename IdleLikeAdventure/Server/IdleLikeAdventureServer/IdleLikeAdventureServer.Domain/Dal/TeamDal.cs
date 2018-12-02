@@ -51,6 +51,12 @@ namespace IdleLikeAdventureServer.Domain.Dal
             return team;
         }
 
+        public IList<Team> GetAllPlayer(int playerID)
+        {
+            List<Team> teams = new List<Team>();
+            return null;
+        }
+
         public int Insert(Team team)
         {
             int id = (int)session.Save(team);

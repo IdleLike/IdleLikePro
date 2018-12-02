@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NetData.Enumeration;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,6 @@ namespace NetData.Message
     public class BattleRequestMsgData : BaseMsgData
     {
         public int TeamID;
-        public byte BattleType;
+        public EnumBattleKind BattleType;
     }
 }

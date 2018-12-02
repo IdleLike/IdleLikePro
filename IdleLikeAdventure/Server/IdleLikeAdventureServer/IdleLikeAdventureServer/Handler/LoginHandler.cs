@@ -56,13 +56,54 @@ namespace IdleLikeAdventureServer.Handler
                 else
                 {//登陆成功
                     loginRespondeMsgData.IsError = false;
-                    UserMsgData userMsgData = new UserMsgData();
-                    userMsgData.Name = account.Name;
-                    userMsgData.CreateTime = account.CreateDate;
-                    userMsgData.DatabaseID = account.ID;
-                    loginRespondeMsgData.userData = userMsgData;
 
                     //TODO 追加用户游戏数据
+                    
+                    Player player = serverDataCenter.PlayerDal.Get(account.ID);
+                    if (player == null)
+                    {//还没创建过角色
+                        loginRespondeMsgData.IsNewPlayer = true;
+                    }
+                    else
+                    {//获取其它信息
+                        loginRespondeMsgData.IsNewPlayer = false;
+                        //获取玩家信息
+                        PlayerMsgData playerMsgData = new PlayerMsgData();
+                        playerMsgData.DatabaseID = player.ID;
+                        playerMsgData.Name = player.Name;
+                        playerMsgData.ServerID = player.ServerID;
+                        loginRespondeMsgData.Player = playerMsgData;
+                        //获取角色信息
+                        IList<Actor> actors = serverDataCenter.ActorDal.GetAllPlayer(player.ID);
+                        if (actors != null)
+                        {
+                            List<ActorMsgData> actorMsgs = new List<ActorMsgData>(actors.Count);
+                            for (int i = 0; i < actors.Count; i++)
+                            {
+                                ActorMsgData actorMsgData = new ActorMsgData();
+                                actorMsgData.CareerID = actors[i].CareerID;
+                                actorMsgData.CareerLevel = actors[i].CareerLevel;
+                                actorMsgData.CareerPoint = actors[i].CareerPoint;
+                                actorMsgData.CreateTime = actors[i].CreateDate;
+                                actorMsgData.DataBaseID = actors[i].ID;
+                                actorMsgData.Name = actors[i].Name;
+                                actorMsgData.RaceID = actors[i].RaceID;
+                                actorMsgData.TotalExp = actors[i].TotalExp;
+
+                                actorMsgs.Add(actorMsgData);
+                            }
+                            loginRespondeMsgData.Actors = actorMsgs;
+
+                            //IList<Team> teams = serverDataCenter.TeamDal.Get
+                            List<TeamMsgData> teamMsgDatas = new List<TeamMsgData>();
+
+                        }
+                        else
+                        {
+                            MyGameServer.log.Info("玩家没有英雄， 玩家名称：" + player.Name);
+                        }
+                        //获取队伍信息
+                    }
 
                     MyGameServer.log.Info("登陆成功，ID：" + account.ID);
                 }

@@ -5,11 +5,10 @@ using System.Text;
 
 namespace NetData.Message
 {
-    [Serializable]
-    public class TeamMsgData
+    public class PlayerMsgData
     {
         public int DatabaseID;
         public string Name;
-        public List<int> ActorIDs;
+        public int ServerID;
     }
 }
