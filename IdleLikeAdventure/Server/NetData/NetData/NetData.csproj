@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enumeration\EnumAbilityEffect.cs" />
     <Compile Include="Enumeration\EnumBattleKind.cs" />
     <Compile Include="Message\ActorMsgData.cs" />
     <Compile Include="Message\AttackInfoMsgData.cs" />

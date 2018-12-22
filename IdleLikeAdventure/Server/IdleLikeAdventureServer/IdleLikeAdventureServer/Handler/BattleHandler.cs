@@ -54,7 +54,7 @@ namespace IdleLikeAdventureServer.Handler
 
                 battleMsgData.Rounds.Add(roundInfoMsgData);
             }
-
+            battleRespondeMsgData.BattleInfo = battleMsgData;
             SendResponse(peer, sendParameters, battleRespondeMsgData);
             MyGameServer.log.Info("成功发送战斗请求");
         }
