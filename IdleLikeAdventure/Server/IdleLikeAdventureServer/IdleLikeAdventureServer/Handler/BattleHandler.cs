@@ -19,6 +19,7 @@ namespace IdleLikeAdventureServer.Handler
 
         public override void OnOperationRequest(BaseMsgData baseMsgData, SendParameters sendParameters, ClientPeer peer)
         {
+            MyGameServer.log.Info("开始处理战斗请求");
             BattleRequestMsgData battleRequestMsgData = baseMsgData as BattleRequestMsgData;
 
 
@@ -54,7 +55,8 @@ namespace IdleLikeAdventureServer.Handler
                 battleMsgData.Rounds.Add(roundInfoMsgData);
             }
 
-            SendResponse(peer, sendParameters, battleRespondeMsgData);            
+            SendResponse(peer, sendParameters, battleRespondeMsgData);
+            MyGameServer.log.Info("成功发送战斗请求");
         }
     }
 }

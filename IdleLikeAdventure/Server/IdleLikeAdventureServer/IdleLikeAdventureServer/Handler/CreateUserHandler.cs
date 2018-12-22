@@ -109,6 +109,7 @@ namespace IdleLikeAdventureServer.Handler
                     actor.RaceID = msgData.RaceID;
                     actor.TotalExp = 0;
                     actor.Name = msgData.Name;
+                    actor.PlayerID = player.ID;
                     actor.UpdateDate = DateTime.Now;
 
                     actor.ID = serverDataCenter.ActorDal.Insert(actor);
@@ -120,6 +121,8 @@ namespace IdleLikeAdventureServer.Handler
                     msgData.CreateTime = actor.CreateDate;
                     msgData.UpdateTime = actor.UpdateDate;
                     
+
+
 
                     if (i != 0) team.ActorIDs += "|";
                     team.ActorIDs += actor.ID;
