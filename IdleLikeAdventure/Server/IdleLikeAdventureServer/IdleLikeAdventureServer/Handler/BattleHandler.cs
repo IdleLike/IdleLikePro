@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NetData.Enumeration;
 using NetData.Message;
 using NetData.OpCode;
 using Photon.SocketServer;
@@ -48,6 +49,7 @@ namespace IdleLikeAdventureServer.Handler
 
                     attackInfoMsgData.AttakPos = j;
                     attackInfoMsgData.DefendsPos = j % 2 == 0 ? (byte)(j + 1) : (byte)(j - 1);
+                    attackInfoMsgData.EffectType = EnumAbilityEffect.Damage;
                     attackInfoMsgData.AbilityID = 0;
                     attackInfoMsgData.AbiilityEffectValue = 10;
                 }

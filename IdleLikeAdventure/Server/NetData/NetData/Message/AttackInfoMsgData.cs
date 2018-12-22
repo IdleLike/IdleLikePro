@@ -12,7 +12,7 @@ namespace NetData.Message
         public byte AttakPos;
         public byte DefendsPos;
         public uint AbilityID;
-        public EnumAbilityEffect effectType;
+        public EnumAbilityEffect EffectType;
         public int AbiilityEffectValue;
     }
 }
