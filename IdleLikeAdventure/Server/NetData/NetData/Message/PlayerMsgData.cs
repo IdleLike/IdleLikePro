@@ -5,6 +5,7 @@ using System.Text;
 
 namespace NetData.Message
 {
+    [Serializable]
     public class PlayerMsgData
     {
         public int DatabaseID;
