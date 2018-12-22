@@ -9,6 +9,7 @@ namespace NetData.Message
     public class LoginRespondeMsgData : BaseMsgData
     {
         public bool IsNewPlayer;
+        public int AccountID;
         public PlayerMsgData Player;
         public List<TeamMsgData> Teams;
         public List<ActorMsgData> Actors;

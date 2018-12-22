@@ -56,9 +56,9 @@ namespace IdleLikeAdventureServer.Handler
                 else
                 {//登陆成功
                     loginRespondeMsgData.IsError = false;
-
+                    loginRespondeMsgData.AccountID = account.ID;
                     //TODO 追加用户游戏数据
-                    
+
                     Player player = serverDataCenter.PlayerDal.Get(account.ID);
                     if (player == null)
                     {//还没创建过角色
