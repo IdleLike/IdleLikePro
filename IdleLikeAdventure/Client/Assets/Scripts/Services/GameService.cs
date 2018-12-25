@@ -12,10 +12,10 @@ namespace Service
     public class GameService : ClassSingleton<GameService>
     {
 
-        private UserService userService;                //用户服务
+        public UserService userService;                //用户服务
         public ActorService actorService;              //角色服务
-        private BattleService battleService;            //战斗服务
-        private NetService NetService;                  //网络服务类
+        public BattleService battleService;            //战斗服务
+        public NetService NetService;                  //网络服务类
 
         public void Initialize()
         {
@@ -27,6 +27,7 @@ namespace Service
 
             NetService.Init();
             userService.Init();
+            battleService.Init();
         }
 
         /// <summary>

@@ -198,15 +198,6 @@ public class CreateCharacterPanel : BaseUIForm
         m_ActorThreeNameInput.text = "";
         m_TeamNameInput.text = "";
         InitModel(m_CreateCharacterViewModel);
-    //m_RocaOneTypeDropdown;
-    //m_RocaTwoTypeDropdown;
-    //m_RocaThreeTypeDropdown;
-    //m_RocaNameText;
-    //m_RocaDesText;
-    //m_InitDesText;
-    //m_GrowthDesText;
-    //m_AbilityOneDesText;
-    //m_AbilityTowDesText;
 }
 
     private void CheckedInputInfo(Text go,string nameOne,string nameTwo, string nameThree)
@@ -244,24 +235,6 @@ public class CreateCharacterPanel : BaseUIForm
         m_CreateData.actorTwoName = m_ActorTwoNameInput.text;
         m_CreateData.actorThreeName = m_ActorThreeNameInput.text;
 
-
-        //StaticData.Data.RaceData raceData = new StaticData.Data.RaceData();
-        //raceData.AbilityOneID = 1001;
-        //raceData.AbilityTwoID = 1002;
-        //raceData.ConGrowth = 1;
-        //raceData.Describe = "啊撒旦水水CDC";
-        //raceData.DexGrowth = 2;
-        //raceData.HPGrowth = 3;
-        //raceData.MPGrowth = 4;
-        //raceData.ID = 1;
-        //raceData.InitCon = 100;
-        //raceData.InitDex = 200;
-        //raceData.InitHP = 130;
-        //raceData.InitMP = 140;
-        //raceData.Name = "人类";
-        //raceData.PowGrowth = 5;
-
-        //TODO ++
         m_CreateData.raceOneType = StaticDataHelper.GetRaceIDByName(m_RaceOneTypeDropdown.captionText.text);
         m_CreateData.raceTwoType = StaticDataHelper.GetRaceIDByName(m_RaceTwoTypeDropdown.captionText.text);
         m_CreateData.raceThreeType = StaticDataHelper.GetRaceIDByName(m_RaceThreeTypeDropdown.captionText.text);

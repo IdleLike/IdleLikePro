@@ -33,6 +33,7 @@ namespace StaticData
         // *************				data	 	***************
 		public Dictionary<uint, CareerData> mCareerDataMap = new Dictionary<uint, CareerData>(); //Career Data
 		public Dictionary<uint, CareerAbilityData> mCareerAbilityDataMap = new Dictionary<uint, CareerAbilityData>(); //CareerAbility Data
+		public Dictionary<uint, EquipmentData> mEquipmentDataMap = new Dictionary<uint, EquipmentData>(); //Equipment Data
 		public Dictionary<uint, LevelData> mLevelDataMap = new Dictionary<uint, LevelData>(); //Level Data
 		public Dictionary<uint, MonsterData> mMonsterDataMap = new Dictionary<uint, MonsterData>(); //Monster Data
 		public Dictionary<uint, RaceData> mRaceDataMap = new Dictionary<uint, RaceData>(); //Race Data
@@ -47,6 +48,7 @@ namespace StaticData
 			
 			LoadDataBinWorker<CareerData>("Career.bytes", mCareerDataMap); //Career Data
 			LoadDataBinWorker<CareerAbilityData>("CareerAbility.bytes", mCareerAbilityDataMap); //CareerAbility Data
+			LoadDataBinWorker<EquipmentData>("Equipment.bytes", mEquipmentDataMap); //Equipment Data
 			LoadDataBinWorker<LevelData>("Level.bytes", mLevelDataMap); //Level Data
 			LoadDataBinWorker<MonsterData>("Monster.bytes", mMonsterDataMap); //Monster Data
 			LoadDataBinWorker<RaceData>("Race.bytes", mRaceDataMap); //Race Data

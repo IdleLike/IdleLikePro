@@ -10,33 +10,25 @@ namespace UI.Panel
 {
     public class BattleRoomModel
     {
-        [Serializable]
-        public struct BattleCharacterModel
+        private class BattleReportInfo
         {
-            /// <summary>
-            /// 角色ID
-            /// </summary>
-            public byte ID;
+            public string m_DateTime;
+            public string m_Info;
+            public int m_RoundNum;
+        }
+        private List<BattleReportInfo> m_BattleReportInfo_List = new List<BattleReportInfo>();
+
+
+        public class BattleCharacterModel
+        {
             /// <summary>
             /// 角色名称
             /// </summary>
             public string Name;
             /// <summary>
-            /// 角色种族
-            /// </summary>
-            public string RocaName;
-            /// <summary>
-            /// 角色职业
-            /// </summary>
-            public string Career;
-            /// <summary>
             /// 角色等级
             /// </summary>
             public byte Level;
-            /// <summary>
-            /// 角色血量
-            /// </summary>
-            public ushort CurrentHP;
             /// <summary>
             /// 角色最大血量
             /// </summary>
@@ -45,18 +37,9 @@ namespace UI.Panel
             /// 角色最大魔法
             /// </summary>
             public ushort MaxMP_Txt;
-            /// <summary>
-            /// 角色当前魔法
-            /// </summary>
-            public ushort CurrentMP_Txt;
         }
-        [Serializable]
-        public struct BattleEnemyModel
+        public class BattleEnemyModel
         {
-            /// <summary>
-            /// 敌人ID
-            /// </summary>
-            public byte ID;
             /// <summary>
             /// 敌人名称
             /// </summary>
@@ -68,32 +51,19 @@ namespace UI.Panel
             /// <summary>
             /// 敌人血量
             /// </summary>
-            public ushort CurrentHP;
-            /// <summary>
-            /// 敌人血量
-            /// </summary>
             public ushort MaxHP;
             /// <summary>
-            /// 敌人技能悬停显示
+            /// 敌人技能信息
             /// </summary>
-            public Sprite Ability_sprite;
-            /// <summary>
-            /// 技能回调
-            /// </summary>
-            public Action<string> AbilityCallback;
+            public List<string> AbilityInfoList = new List<string>();
         }
+
         public enum ReportType
         {
             Attack,
             Rest,
             Result
         }
-        //public enum AdditionalEntry
-        //{
-        //    AOE,
-        //    Equipment,
-        //    Buff
-        //}
         [Serializable]
         public class Equipment
         {
@@ -118,7 +88,13 @@ namespace UI.Panel
         [Serializable]
         public class BattleReportModel
         {
+            public int RestTime;
+            public int GoldRewards;
+            public bool IsWin;
+
             public string TeamName;
+
+
             public bool IsDerateDamage;
             public ushort DerateDamage;
             public byte Attacker;
@@ -145,10 +121,11 @@ namespace UI.Panel
         /// 地图名称
         /// </summary>
         public string MapName;
-        /// <summary>
-        /// 房间名称
-        /// </summary>
-        public string RoomName;
+        ///// <summary>
+        ///// 房间名称
+        ///// </summary>
+        //public string RoomName;
+        public string TeamName;
 
 
         /// <summary>
@@ -474,11 +451,11 @@ namespace UI.Panel
             {
                 Debug.Log("第一次初始化");
                 MapName_Txt.text = BattleModel.MapName;
-                RoomName_Txt.text = BattleModel.RoomName;
+                RoomName_Txt.text = BattleModel.TeamName;
 
                 InitCharcterInfo(BattleModel);
                 //TODO 初始化怪物
-                //InitEnemyInfo(BattleModel);
+                InitEnemyInfo(BattleModel);
             }
         }
 

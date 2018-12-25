@@ -28,6 +28,8 @@ public class GameStart : MonoBehaviour
         GameGlobal.LocalData = TestLocalData.Instance.LocalData;
         //初始化游戏服务
         GameService.Instance.Initialize();
+        //初始化游戏数据
+        DataCenter.Instance.Initialize();
         //登陆逻辑
         GameService.Instance.Login();
 	}	

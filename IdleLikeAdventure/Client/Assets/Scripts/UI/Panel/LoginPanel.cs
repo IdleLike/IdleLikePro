@@ -24,7 +24,7 @@ public class LoginPanel : BaseUIForm
     //邮箱格式集合
     private List<string> m_EmailFormatList = new List<string>();
     private LoginViewModel m_LoginViewModel = null;
-    private bool m_IsRegisterSuccess;
+    private bool m_IsRegisterSuccess = true;
 
     private void Start()
     {

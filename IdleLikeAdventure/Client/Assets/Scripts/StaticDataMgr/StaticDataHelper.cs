@@ -11,6 +11,9 @@ public class StaticDataHelper : ClassSingleton<StaticDataHelper> {
     static Dictionary<uint, CareerAbilityData> CareerAbilityDataDic = new Dictionary<uint, CareerAbilityData>(); //CareerAbility Data
     static Dictionary<uint, LevelData> LevelDataDic = new Dictionary<uint, LevelData>(); //Level Data
     static Dictionary<uint, RaceAbilityData> RaceAbilityDataDic = new Dictionary<uint, RaceAbilityData>(); //RaceAbility Data
+    static Dictionary<uint, MonsterData> MonsterDataDic = new Dictionary<uint, MonsterData>(); //Monster Data
+    static Dictionary<uint, EquipmentData> EquipmentDataDic = new Dictionary<uint, EquipmentData>(); //Equipment Data
+
     /// <summary>
     /// 保存加载的文档数据
     /// </summary>
@@ -21,10 +24,43 @@ public class StaticDataHelper : ClassSingleton<StaticDataHelper> {
         CareerAbilityDataDic = StaticDataMgr.mInstance.mCareerAbilityDataMap;
         LevelDataDic = StaticDataMgr.mInstance.mLevelDataMap;
         RaceAbilityDataDic = StaticDataMgr.mInstance.mRaceAbilityDataMap;
+        MonsterDataDic = StaticDataMgr.mInstance.mMonsterDataMap;
+        EquipmentDataDic = StaticDataMgr.mInstance.mEquipmentDataMap;
     }
     //TODO 构建职业树， 每个子节点是职业技能数据
     //节点信息包括职业配置信息， 父节点，子节点列表， 子节点已经按照Order字段升序排序
 
+
+    /// <summary>
+    /// 通过ID获取装备数据
+    /// </summary>
+    /// <returns></returns>
+    public static EquipmentData GetEquipmentByID(uint index)
+    {
+        foreach (var equipment in EquipmentDataDic.Values)
+        {
+            if (index == equipment.ID)
+            {
+                return equipment;
+            }
+        }
+        return null;
+    }
+    /// <summary>
+    /// 通过ID获取怪物数据
+    /// </summary>
+    /// <returns></returns>
+    public static MonsterData GetMonsterByID(uint index)
+    {
+        foreach (var monster in MonsterDataDic.Values)
+        {
+            if (index == monster.ID)
+            {
+                return monster;
+            }
+        }
+        return null;
+    }
     /// <summary>
     /// 通过ID获取职业技能数据
     /// </summary>

@@ -25,7 +25,7 @@ public class RegisterPanel : BaseUIForm
     //邮箱格式集合
     private List<string> m_EmailFormatList = new List<string>();
     private RegisterViewModel m_RegisterViewModel = null;
-    private bool m_IsRegisterSuccess;
+    private bool m_IsRegisterSuccess = true;
 
     private void Start()
     {

@@ -18,22 +18,31 @@ namespace Service
     
     public class UserService : BaseService<NetData.OpCode.OpCodeUserOperation, NetData.OpCode.OpCodeUserEvent>
     {
+        public UIBattleRoomViewModel battleRoomModel;
+        public BaseUIForm battleRoomPanel;
+
         //ViewModel
         private CreateCharacterViewModel createCharacterModel;
-        private BattleRoomModel battleRoomModel;
-     
+  
+
         private LoginPanel.LoginViewModel loginViewModel;
         private RegisterPanel.RegisterViewModel registerViewModel;
         private CreateCharacterViewModel createCharacterViewModel;
-        private BaseUIForm battleRoomPanel;
         private BaseUIForm loginPanel;
         private BaseUIForm registerPanel;
         private BaseUIForm createCharacterPanel;
 
-        private UserEntity userEntity = new UserEntity();
-        private List<ActorMsgData> actorMsgDataList = new List<ActorMsgData>();
-        private string teamName = string.Empty;
-        private string playerName = string.Empty;
+        //private UserEntity userEntity = new UserEntity();
+        //private List<ActorMsgData> actorMsgDataList = new List<ActorMsgData>();
+        //private string teamName = string.Empty;
+        //private string playerName = string.Empty;
+        //private int accountID;
+        //private int playerID;
+        //private int serverID;
+
+        //public int teamID;
+        public Dictionary<int, List<UIBattleRoomViewModel.BattleCharacter>> TeamList = new Dictionary<int, List<UIBattleRoomViewModel.BattleCharacter>>();
+
 
         protected override OpCodeModule ServiceOpCode
         {
@@ -111,14 +120,26 @@ namespace Service
         /// </summary>
         private void OnOpenBattlePanel()
         {
-            if (battleRoomModel == null) battleRoomModel = new BattleRoomModel();
-            battleRoomModel.characterList = new List<HeroEntity>();
-            for (int i = 0; i < actorMsgDataList.Count; i++)
-            {
-                battleRoomModel.characterList.Add(GameService.Instance.actorService.GenerateHero(actorMsgDataList[i]));
-            }
-            battleRoomPanel = OpenUIForm("BattleRoom", battleRoomModel);
-            battleRoomPanel.gameObject.SetActive(true);
+            //if (battleRoomModel == null) battleRoomModel = new UIBattleRoomViewModel();
+            //battleRoomModel.characterList = new List<UIBattleRoomViewModel.BattleCharacter>(); //new List<HeroEntity>();
+            //List<ActorMsgData> ActorDataList = DataCenter.Instance.userData.ActorDataList;
+            //for (int i = 0; i < ActorDataList.Count; i++)
+            //{
+            //    HeroEntity hero = GameService.Instance.actorService.GenerateHero(ActorDataList[i]);
+            //    UIBattleRoomViewModel.BattleCharacter character = new UIBattleRoomViewModel.BattleCharacter();
+            //    character.CareerName = hero.CareerData.Name;
+            //    character.MaxEXP = StaticDataMgr.mInstance.mLevelDataMap[hero.Level].NextLevelNeedExp;
+            //    character.CurrentEXP = hero.Exp - StaticDataMgr.mInstance.mLevelDataMap[hero.Level].CurrentLevelNeedExp;
+            //    character.Level = hero.Level;
+            //    character.MaxHP = hero.MaxHP;
+            //    character.Name = hero.Name;
+            //    character.RaceName = hero.RaceData.Name;
+            //    battleRoomModel.characterList.Add(character);
+            //}
+            //请求战斗哦
+            GameService.Instance.battleService.BattleRequest();
+
+   
         }
 
         /// <summary>
@@ -190,6 +211,7 @@ namespace Service
 
             createUserRequestAndRespondeMsgData.PlayerName = data.playerName;
             createUserRequestAndRespondeMsgData.TeamName = data.teamName;
+            createUserRequestAndRespondeMsgData.AccountID = DataCenter.Instance.userData.AccountID;
             //TODO 添加 ID
             createUserRequestAndRespondeMsgData.Actors.Add(new ActorMsgData() { Name = data.actorOneName , RaceID = (int)data.raceOneType });//, CareerID = (int)StaticDataHelper.GetCareerIDByName("战士")});
             createUserRequestAndRespondeMsgData.Actors.Add(new ActorMsgData() { Name = data.actorTwoName , RaceID = (int)data.raceTwoType });//, CareerID = (int)StaticDataHelper.GetCareerIDByName("战士") });
@@ -215,40 +237,48 @@ namespace Service
 
             if (loginRespondeMsgData != null)
             {
-                if(loginRespondeMsgData.IsNewPlayer)
+                Log("登录 ： " + loginRespondeMsgData);
+                Log("登录 ： " + loginRespondeMsgData.Error.ToString() + "是否有错 ：" + loginRespondeMsgData.IsError);
+                if (loginRespondeMsgData.IsError)
                 {
-                    Log("登录 ： " + loginRespondeMsgData);
-                    Log("登录 ： " + loginRespondeMsgData.Error.ToString() + "是否有错 ：" + loginRespondeMsgData.IsError);
-                    if (loginRespondeMsgData.IsError)
+                    ArrayList m_List = new ArrayList();
+                    switch (loginRespondeMsgData.Error)
                     {
-                        ArrayList m_List = new ArrayList();
-                        switch (loginRespondeMsgData.Error)
-                        {
-                            case ErrorCode.LoginAccountError:
-                            case ErrorCode.LoginPasswordError:
-                                Log("注册失败：" + loginRespondeMsgData.Error.ToString() + "邮箱账号或密码错误");
-                                m_List.Add("邮箱账号或密码错误！");
-                                break;
-                            default:
-                                break;
-                        }
-                        m_List.Add(loginRespondeMsgData.IsError);
-                        SendMessage("Login", loginRespondeMsgData.Error.ToString(), m_List);
+                        case ErrorCode.LoginAccountError:
+                        case ErrorCode.LoginPasswordError:
+                            Log("注册失败：" + loginRespondeMsgData.Error.ToString() + "邮箱账号或密码错误");
+                            m_List.Add("邮箱账号或密码错误！");
+                            break;
+                        default:
+                            break;
                     }
-                    else
+                    m_List.Add(loginRespondeMsgData.IsError);
+                    SendMessage("Login", loginRespondeMsgData.Error.ToString(), m_List);
+                }
+                else
+                {
+                    DataCenter.Instance.userData.AccountID = loginRespondeMsgData.AccountID;
+                    DataCenter.Instance.userData.ActorDataList = loginRespondeMsgData.Actors;
+                    DataCenter.Instance.userData.PlayerID = loginRespondeMsgData.Player.DatabaseID;
+                    DataCenter.Instance.userData.PlayerName = loginRespondeMsgData.Player.Name;
+                    DataCenter.Instance.userData.ServerID = loginRespondeMsgData.Player.ServerID;
+
+
+                    DataCenter.Instance.userData.TeamDataList = loginRespondeMsgData.Teams;
+                    if (loginRespondeMsgData.IsNewPlayer)
                     {
                         Log("新用户登录成功");
                         loginPanel.gameObject.SetActive(false);
                         OnOpenCreateCharacterPanel();
                     }
-                }
-                else
-                {
-                    //TODO 打开面板
-                    Log("老用户登录成功");
-                    loginPanel.gameObject.SetActive(false);
-                    //打开战斗界面
-                    OnOpenBattlePanel();
+                    else
+                    {
+                        //TODO 打开面板
+                        Log("老用户登录成功");
+                        loginPanel.gameObject.SetActive(false);
+                        //打开战斗界面
+                        OnOpenBattlePanel();
+                    }
                 }
             }
         }
@@ -292,12 +322,9 @@ namespace Service
                 {
                     //TODO
                     //保存玩家信息
-                    //前往创建界面
-
-                    userEntity.CreateTime = registerRespondeMsgData.userData.CreateTime;
-                    userEntity.ID = registerRespondeMsgData.userData.DatabaseID;
-                    userEntity.Name = registerRespondeMsgData.userData.Name;
-
+                    DataCenter.Instance.userData.CreateTime = registerRespondeMsgData.userData.CreateTime;
+                    DataCenter.Instance.userData.AccountID = registerRespondeMsgData.userData.DatabaseID;
+                    DataCenter.Instance.userData.UserName = registerRespondeMsgData.userData.Name;
                     //TODO 隐藏注册界面
                     registerPanel.gameObject.SetActive(false);
                     Log("成功 邮箱账号注册成功");
@@ -360,9 +387,13 @@ namespace Service
                 else
                 {
                     Log("创建成功,打开战斗界面");
-                    teamName = createUserRequestAndRespondeMsgData.TeamName;
-                    playerName = createUserRequestAndRespondeMsgData.PlayerName;
-                    actorMsgDataList = createUserRequestAndRespondeMsgData.Actors;
+                    DataCenter.Instance.userData.TeamName = createUserRequestAndRespondeMsgData.TeamName;
+                    DataCenter.Instance.userData.PlayerName = createUserRequestAndRespondeMsgData.PlayerName;
+                    DataCenter.Instance.userData.ActorDataList = createUserRequestAndRespondeMsgData.Actors;
+                    DataCenter.Instance.userData.AccountID = createUserRequestAndRespondeMsgData.AccountID;
+                    DataCenter.Instance.userData.PlayerID = createUserRequestAndRespondeMsgData.PlayerID;
+                    DataCenter.Instance.userData.ServerID = createUserRequestAndRespondeMsgData.ServerID;
+                    DataCenter.Instance.userData.TeamID = createUserRequestAndRespondeMsgData.TeamID;
                     OnOpenBattlePanel();
                     //TODO 隐藏创建玩家界面
                     createCharacterPanel.gameObject.SetActive(false);
