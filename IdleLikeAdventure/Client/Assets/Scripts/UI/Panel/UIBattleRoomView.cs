@@ -9,23 +9,6 @@ using UnityEngine.UI;
 
 public class UIBattleRoomView : BaseUIForm
 {
-    private int m_AttackNum = 0;
-    private int m_RoundNum = 0;
-    private string m_AttackName = "";
-    private string m_DefendsName = "";
-    private int m_AbiilityEffectValue = 0;
-    private string m_AbilityName = "";
-
-    private class BattleReportInfo
-    {
-        public string m_DateTime;
-        public string m_Info;
-        public int m_RoundNum;
-    }
-    private List<BattleReportInfo> m_BattleReportInfo_List = new List<BattleReportInfo>();
-
-    public UIBattleRoomViewModel m_ViewModel = new UIBattleRoomViewModel();
-    
     #region UI组件
     public List<CharacterUIInfo> m_CharacterUIInfoList = new List<CharacterUIInfo>();
     [Serializable]
@@ -109,9 +92,10 @@ public class UIBattleRoomView : BaseUIForm
         ///// </summary>
         public Text AbilityNameAndType;
     }
-    
+
     public Text m_BattleReport_Txt;
     public UIBattleReportScript m_AttackBattleReport;
+    public GameObject m_EnemyGo;
     #endregion
 
     #region 战报信息
@@ -127,6 +111,23 @@ public class UIBattleRoomView : BaseUIForm
 
     #endregion
 
+    #region 战报临时数据
+    private string m_AttackName = "";
+    private string m_DefendsName = "";
+    private string m_AbilityName = "";
+    private int m_AbiilityEffectValue = 0;
+    private UIBattleRoomViewModel.BattleCharacter AttackCharacter = null;
+    private UIBattleRoomViewModel.BattleCharacter DefendsCharacter = null;
+    private UIBattleRoomViewModel.BattleEnemy AttackEnemy = null;
+    private UIBattleRoomViewModel.BattleEnemy DefendsEnemy = null;
+    private CharacterUIInfo UIAttackCharacter = null;
+    private CharacterUIInfo UIDefendsCharacter = null;
+    private EnemyUIInfo UIAttackEnemy = null;
+    private EnemyUIInfo UIDefendsEnemy = null;
+    #endregion
+
+    public UIBattleRoomViewModel m_ViewModel = new UIBattleRoomViewModel();
+    
     public override void UpdatePanel(object viewModel)
     {
         m_ViewModel = viewModel as UIBattleRoomViewModel;
@@ -138,88 +139,114 @@ public class UIBattleRoomView : BaseUIForm
             if (FindEnemyTime > 0)
             {
                 //更新倒计时
-                GameObject m_ReportGo = Instantiate(m_AttackBattleReport.gameObject);
-                UIBattleReportScript m_ReportScript = m_ReportGo.GetComponent<UIBattleReportScript>();
+                UIBattleReportScript m_ReportScript = CreateReport().GetComponent<UIBattleReportScript>();
                 m_ReportScript.m_DateTime_Txt.text = "";
-                m_ReportGo.transform.parent = m_AttackBattleReport.transform.parent;
-                m_ReportGo.transform.localScale = Vector3.one;
-                m_ReportGo.SetActive(true);
+                m_EnemyGo.SetActive(false);
                 StartCoroutine(CountDown(FindEnemyTime, m_ReportScript.m_Info_Txt));
-                //while (FindEnemyTime > 0)
-                //{
-                //    yield return new WaitForSeconds(1);
-                //    m_ReportScript.m_Info_Txt.text = string.Format(m_FindEnemy, FindEnemyTime);
-                //    FindEnemyTime--;
-                //}
             }
             else
             {
-                InitEnemyInfo();
-                List<UIBattleRoomViewModel.AttackInfos> AttackInfos = m_ViewModel.BattleReportList.AttackInfoList;
-                StartCoroutine(PlayAttackInfo(AttackInfos));
+                PrepareBattle();
             }
-        
-            //while (m_BattleReportInfo_List.Count > 0)
-            //{
-            //    m_BattleReportInfo_List.RemoveAt(0);
-            //    StartCoroutine(BattleReportUpdate(m_AttackNum));
-            //    m_AttackNum++;
-            //}
-
         }
     }
-
+    /// <summary>
+    /// 初始化敌人，战斗准备
+    /// </summary>
+    void PrepareBattle()
+    {
+        InitEnemyInfo();
+        m_EnemyGo.SetActive(true);
+        List<UIBattleRoomViewModel.AttackInfos> AttackInfos = m_ViewModel.BattleReportList.AttackInfoList;
+        StartCoroutine(PlayAttackInfo(AttackInfos));
+    }
+    /// <summary>
+    /// HP改变
+    /// </summary>
+    /// <param name="hp"></param>
+    /// <param name="maxhp"></param>
+    /// <param name="effectValue"></param>
+    /// <param name="text"></param>
+    /// <param name="slider"></param>
+    /// <param name="type"></param>
+    void HPValueChanged(ref int hp,int maxhp,int effectValue,Text text,Slider slider, EnumAbilityEffect type)
+    {
+        switch (type)
+        {
+            case EnumAbilityEffect.Damage:
+                hp -= effectValue;
+                break;
+            case EnumAbilityEffect.Recovery:
+                hp += effectValue;
+                break;
+            default:
+                break;
+        }
+        hp = hp < 0 ? 0 : hp;
+        hp = hp > maxhp ? maxhp : hp; 
+        text.text = hp.ToString();
+        slider.value = Mathf.Clamp(hp, 0, maxhp) / (float)maxhp;
+    }
+    /// <summary>
+    /// 获取战报信息
+    /// </summary>
+    /// <param name="info"></param>
+    void GetAttackInfo(UIBattleRoomViewModel.AttackInfos info)
+    {
+        if (info.AttakPos % 2 == 0)
+        {
+            AttackEnemy = m_ViewModel.enemyList.Find(p => p.ID == info.AttakPos);
+            UIAttackEnemy = m_EnemyUIInfoList.Find(p => p.ID == info.AttakPos);
+        }
+        else
+        {
+            AttackCharacter = m_ViewModel.characterList.Find(p => p.HeroID == info.AttakPos);
+            UIAttackCharacter = m_CharacterUIInfoList.Find(p => p.ID == info.AttakPos);
+        }
+        if (info.DefendsPos % 2 == 0)
+        {
+            DefendsEnemy = m_ViewModel.enemyList.Find(p => p.ID == info.DefendsPos);
+            UIDefendsEnemy = m_EnemyUIInfoList.Find(p => p.ID == info.DefendsPos);
+        }
+        else
+        {
+            DefendsCharacter = m_ViewModel.characterList.Find(p => p.HeroID == info.DefendsPos);
+            UIDefendsCharacter = m_CharacterUIInfoList.Find(p => p.ID == info.DefendsPos);
+        }
+        m_AttackName = AttackCharacter != null ? AttackCharacter.Name : AttackEnemy.Name;
+        m_DefendsName = DefendsCharacter != null ? DefendsCharacter.Name : DefendsEnemy.Name;
+        m_AbiilityEffectValue = info.AbiilityEffectValue;
+        m_AbilityName = info.AbilityName;
+    }
+    /// <summary>
+    /// 创建一条战报
+    /// </summary>
+    /// <returns></returns>
+    GameObject CreateReport()
+    {
+        GameObject m_ReportGo = Instantiate(m_AttackBattleReport.gameObject);
+        m_ReportGo.transform.parent = m_AttackBattleReport.transform.parent;
+        m_ReportGo.transform.localScale = Vector3.one;
+        m_ReportGo.transform.SetAsFirstSibling();
+        m_ReportGo.SetActive(true);
+        return m_ReportGo;
+    }
+    /// <summary>
+    /// 开始播放战报
+    /// </summary>
+    /// <param name="AttackInfos"></param>
+    /// <returns></returns>
     private IEnumerator PlayAttackInfo(List<UIBattleRoomViewModel.AttackInfos> AttackInfos)
     {
-        yield return new WaitForSeconds(1f);
-
+        Log("播放战报");
         for (int i = 0; i < AttackInfos.Count; i++)
         {
+            UIBattleReportScript m_ReportScript = CreateReport().GetComponent<UIBattleReportScript>();
 
-            GameObject m_ReportGo = Instantiate(m_AttackBattleReport.gameObject);
-            m_ReportGo.transform.parent = m_AttackBattleReport.gameObject.transform;
-            UIBattleReportScript m_ReportScript = m_ReportGo.GetComponent<UIBattleReportScript>();
-
-            m_BattleReportInfo_List = new List<BattleReportInfo>();
-
-            UIBattleRoomViewModel.BattleCharacter AttackCharacter = null;
-            UIBattleRoomViewModel.BattleCharacter DefendsCharacter = null;
-            UIBattleRoomViewModel.BattleEnemy AttackEnemy = null;
-            UIBattleRoomViewModel.BattleEnemy DefendsEnemy = null;
-            CharacterUIInfo UIAttackCharacter = null;
-            CharacterUIInfo UIDefendsCharacter = null;
-            EnemyUIInfo UIAttackEnemy = null;
-            EnemyUIInfo UIDefendsEnemy = null;
             Debug.Log("AttackInfos[i].AttakPos" + AttackInfos[i].AttakPos);
             Debug.Log("AttackInfos[i].DefendsPos" + AttackInfos[i].DefendsPos);
-            if (AttackInfos[i].AttakPos % 2 == 0)
-            {
-                AttackEnemy = m_ViewModel.enemyList.Find(p => p.ID == AttackInfos[i].AttakPos);
-                UIAttackEnemy = m_EnemyUIInfoList.Find(p => p.ID == AttackInfos[i].AttakPos);
-            }
-            else
-            {
-                AttackCharacter = m_ViewModel.characterList.Find(p => p.HeroID == AttackInfos[i].AttakPos);
-                UIAttackCharacter = m_CharacterUIInfoList.Find(p => p.ID == AttackInfos[i].AttakPos);
-            }
-            if (AttackInfos[i].DefendsPos % 2 == 0)
-            {
-                DefendsEnemy = m_ViewModel.enemyList.Find(p => p.ID == AttackInfos[i].DefendsPos);
-                UIDefendsEnemy = m_EnemyUIInfoList.Find(p => p.ID == AttackInfos[i].DefendsPos);
-            }
-            else
-            {
-                DefendsCharacter = m_ViewModel.characterList.Find(p => p.HeroID == AttackInfos[i].DefendsPos);
-                UIDefendsCharacter = m_CharacterUIInfoList.Find(p => p.ID == AttackInfos[i].DefendsPos);
-            }
-
-
-            //TODO 明天
-
-            m_AttackName = AttackCharacter != null ? AttackCharacter.Name : AttackEnemy.Name;
-            m_DefendsName = DefendsCharacter != null ? DefendsCharacter.Name : DefendsEnemy.Name;
-            m_AbiilityEffectValue = AttackInfos[i].AbiilityEffectValue;
-            m_AbilityName = AttackInfos[i].AbilityName;
+            //获取战报信息
+            GetAttackInfo(AttackInfos[i]);
 
             switch (AttackInfos[i].EffectType)
             {
@@ -245,26 +272,12 @@ public class UIBattleRoomView : BaseUIForm
                     }
                     if (DefendsCharacter != null)
                     {
-                        DefendsCharacter.CurrentHP -= m_AbiilityEffectValue;
-
-                        if (DefendsCharacter.CurrentHP < 0)
-                        {
-                            DefendsCharacter.CurrentHP = 0;
-                        }
-                        UIDefendsCharacter.CurrentHP_Txt.text = DefendsCharacter.CurrentHP.ToString();
+                        HPValueChanged(ref DefendsCharacter.CurrentHP, DefendsCharacter.MaxHP, m_AbiilityEffectValue, UIDefendsCharacter.CurrentHP_Txt, UIDefendsCharacter.HP_Sli, AttackInfos[i].EffectType);
                     }
                     else
                     {
-                        DefendsEnemy.CurrentHP -= m_AbiilityEffectValue;
-
-                        if (DefendsEnemy.CurrentHP < 0)
-                        {
-                            DefendsEnemy.CurrentHP = 0;
-                        }
-                        UIDefendsEnemy.CurrentHP_Txt.text = DefendsEnemy.CurrentHP.ToString();
+                        HPValueChanged(ref DefendsEnemy.CurrentHP, DefendsEnemy.MaxHP, m_AbiilityEffectValue, UIDefendsEnemy.CurrentHP_Txt, UIDefendsEnemy.HP_Sli, AttackInfos[i].EffectType);
                     }
-      
-                    m_ReportScript.m_DateTime_Txt.text = DateTime.Now.ToString();
                     break;
                 case EnumAbilityEffect.Recovery:
                     m_ReportScript.m_Info_Txt.text = string.Format(m_Recovery,
@@ -276,26 +289,12 @@ public class UIBattleRoomView : BaseUIForm
 
                     if (AttackCharacter != null)
                     {
-                        AttackCharacter.CurrentHP += m_AbiilityEffectValue;
-                        if (AttackCharacter.CurrentHP > AttackCharacter.MaxHP)
-                        {
-                            AttackCharacter.CurrentHP = AttackCharacter.MaxHP;
-                        }
-                        UIAttackCharacter.CurrentHP_Txt.text = AttackCharacter.CurrentHP.ToString();
+                        HPValueChanged(ref AttackCharacter.CurrentHP, AttackCharacter.MaxHP, m_AbiilityEffectValue, UIAttackCharacter.CurrentHP_Txt, UIAttackCharacter.HP_Sli, AttackInfos[i].EffectType);
                     }
                     else
                     {
-                        AttackEnemy.CurrentHP += m_AbiilityEffectValue;
-                        if (AttackEnemy.CurrentHP > AttackEnemy.MaxHP)
-                        {
-                            AttackEnemy.CurrentHP = AttackEnemy.MaxHP;
-                        }
-                        UIAttackEnemy.CurrentHP_Txt.text = AttackEnemy.CurrentHP.ToString();
+                        HPValueChanged(ref AttackEnemy.CurrentHP, AttackEnemy.MaxHP, m_AbiilityEffectValue, UIAttackEnemy.CurrentHP_Txt, UIAttackEnemy.HP_Sli, AttackInfos[i].EffectType);
                     }
-                    
-                    m_ReportScript.m_DateTime_Txt.text = DateTime.Now.ToString();
-
-                    m_ReportGo.SetActive(true);
                     break;
                 default:
                     if (m_AbilityName == "" || m_AbilityName == String.Empty)
@@ -319,49 +318,25 @@ public class UIBattleRoomView : BaseUIForm
                     }
                     if (DefendsCharacter != null)
                     {
-                        DefendsCharacter.CurrentHP -= m_AbiilityEffectValue;
-                        if (DefendsCharacter.CurrentHP < 0)
-                        {
-                            DefendsCharacter.CurrentHP = 0;
-                        }
-                        UIDefendsCharacter.CurrentHP_Txt.text = DefendsCharacter.CurrentHP.ToString();
+                        HPValueChanged(ref DefendsCharacter.CurrentHP, DefendsCharacter.MaxHP, m_AbiilityEffectValue, UIDefendsCharacter.CurrentHP_Txt, UIDefendsCharacter.HP_Sli, AttackInfos[i].EffectType);
                     }
                     else
                     {
-                        DefendsEnemy.CurrentHP -= m_AbiilityEffectValue;
-                        if (DefendsEnemy.CurrentHP < 0)
-                        {
-                            DefendsEnemy.CurrentHP = 0;
-                        }
-                        UIDefendsEnemy.CurrentHP_Txt.text = DefendsEnemy.CurrentHP.ToString();
+                        HPValueChanged(ref DefendsEnemy.CurrentHP, DefendsEnemy.MaxHP, m_AbiilityEffectValue, UIDefendsEnemy.CurrentHP_Txt, UIDefendsEnemy.HP_Sli, AttackInfos[i].EffectType);
                     }
-              
-                    m_ReportScript.m_DateTime_Txt.text = DateTime.Now.ToString();
                     break;
-            }
-            m_ReportGo.SetActive(true);
-        }
-        yield return new WaitForSeconds(3f);
 
-        var m_ResultReport = Instantiate(m_BattleReport_Txt);
-        m_ResultReport.text = "";
-
-        if (m_ViewModel.BattleReportList.IsWin)
-        {
-            m_ResultReport.text = m_SuccessResult;
-            for (int i = 0; i < m_ViewModel.BattleReportList.ItemRewards.Count; i++)
-            {
-                m_ResultReport.text += m_ViewModel.BattleReportList.ItemRewards[i] + "\n";
             }
+            m_ReportScript.m_DateTime_Txt.text = DateTime.Now.ToString();
+            yield return new WaitForSeconds(3f);
         }
-        else
-        {
-            m_ResultReport.text = string.Format(m_FailureResult,
-                                                   m_ViewModel.BattleReportList.TeamName);
-        }
-        m_ResultReport.gameObject.SetActive(true);
     }
-
+    /// <summary>
+    /// 倒计时
+    /// </summary>
+    /// <param name="time"></param>
+    /// <param name="txt"></param>
+    /// <returns></returns>
     private IEnumerator CountDown(float time,Text txt)
     {
         while (time > 0)
@@ -370,31 +345,20 @@ public class UIBattleRoomView : BaseUIForm
             txt.text = string.Format(m_FindEnemy, (int)time);
             time-= Time.deltaTime;
         }
-        InitEnemyInfo();
-        List<UIBattleRoomViewModel.AttackInfos> AttackInfos = m_ViewModel.BattleReportList.AttackInfoList;
-        StartCoroutine(PlayAttackInfo(AttackInfos));
+        Log("倒计时结束");
+        yield return new WaitForSeconds(1f);
+        PrepareBattle();
     }
-    private IEnumerator BattleReportUpdate(int index)
-    {
-        yield return new WaitForSeconds(4);
-        GameObject m_ReportGo = Instantiate(m_AttackBattleReport.gameObject);
-        UIBattleReportScript m_ReportScript = m_ReportGo.GetComponent<UIBattleReportScript>();
-        m_ReportScript.m_DateTime_Txt.text = m_BattleReportInfo_List[index].m_DateTime;
-        m_ReportScript.m_Info_Txt.text = m_BattleReportInfo_List[index].m_Info;
-        m_ReportGo.transform.parent = m_AttackBattleReport.gameObject.transform;
-        m_ReportGo.SetActive(true);
-    }
-
     /// <summary>
     /// 角色初始化
     /// </summary>
     /// <param name="model"></param>
     private void InitCharcterInfo()
     {
-        //if (m_ViewModel.characterList.Count <= 0)
-        //{
-        //    return;
-        //}
+        if (m_ViewModel.characterList.Count <= 0)
+        {
+            return;
+        }
         for (int i = 0; i < m_ViewModel.characterList.Count; i++)
         {
             m_CharacterUIInfoList[i].Name_Txt.text = m_ViewModel.characterList[i].Name;
@@ -405,12 +369,8 @@ public class UIBattleRoomView : BaseUIForm
             m_CharacterUIInfoList[i].EXP_Sli.value = Mathf.Clamp(m_ViewModel.characterList[i].MaxEXP, 0, m_ViewModel.characterList[i].MaxEXP) / (float)m_ViewModel.characterList[i].MaxEXP;
             m_CharacterUIInfoList[i].CurrentHP_Txt.text = m_ViewModel.characterList[i].MaxHP.ToString();
             m_CharacterUIInfoList[i].MaxHP_Txt.text = m_ViewModel.characterList[i].MaxHP.ToString();
-            //m_CharacterUIInfoList[i].CurrentEXP_Txt.text = m_ViewModel.characterList[i].CurrentEXP.ToString();
-            //m_CharacterUIInfoList[i].MaxEXP_Txt.text = m_ViewModel.characterList[i].MaxEXP.ToString();
-
             m_CharacterUIInfoList[i].ID = i * 2 + 1;
             m_ViewModel.characterList[i].HeroID = i * 2 + 1;
-
             Log("玩家名称：" + m_ViewModel.characterList[i].Name + "\n" +
                 "种族名称：" + m_ViewModel.characterList[i].RaceName + "\n" +
                 "职业名称：" + m_ViewModel.characterList[i].CareerName + "\n" +
@@ -437,147 +397,16 @@ public class UIBattleRoomView : BaseUIForm
             m_EnemyUIInfoList[i].HP_Sli.value = Mathf.Clamp(m_ViewModel.enemyList[i].MaxHP, 0, m_ViewModel.enemyList[i].MaxHP) / (float)m_ViewModel.enemyList[i].MaxHP; ;
             m_EnemyUIInfoList[i].CurrentHP_Txt.text = m_ViewModel.enemyList[i].MaxHP.ToString();
             m_EnemyUIInfoList[i].MaxHP_Txt.text = m_ViewModel.enemyList[i].MaxHP.ToString();
-            for (int j = 0; j < m_ViewModel.enemyList[i].AbilityInfoList.Count; j++)
-            {
-                //m_EnemyUIInfoList[i].AbilityNameAndType.text += m_ViewModel.enemyList[i].AbilityInfoList[i].AbilityType + m_ViewModel.enemyList[i].AbilityInfoList[i].Name;
-                if (j < m_ViewModel.enemyList[i].AbilityInfoList.Count)
-                {
-                    //m_EnemyUIInfoList[i].AbilityNameAndType.text += "\n";
-                }
-            }
             m_EnemyUIInfoList[i].ID = i * 2 + 2;
             m_ViewModel.enemyList[i].ID = i * 2 + 2;
-
         }
     }
-
-    #region
-    //public override void UpdatePanel(object viewModel)
-    //{
-    //    m_ViewModel = viewModel as UIBattleRoomViewModel;
-    //    if (m_ViewModel != null)
-    //    {
-    //        InitCharcterInfo();
-
-    //        for (int i = 0; i < m_ViewModel.BattleReportList.Count; i++)
-    //        {
-    //            List<UIBattleRoomViewModel.AttackInfos> infos = m_ViewModel.BattleReportList[i].AttackInfoList;
-    //            int FindEnemyTime = m_ViewModel.BattleReportList[i].FindEnemyTime;
-    //            for (int j = 0; j < infos.Count; j++)
-    //            {
-    //                if (FindEnemyTime > 0)
-    //                {
-    //                    m_BattleReportInfo_List[j].m_Info = string.Format(m_FindEnemy, FindEnemyTime);
-    //                    m_BattleReportInfo_List[j].m_DateTime = "";
-    //                    m_BattleReportInfo_List[j].m_RoundNum = i;
-    //                    continue;
-    //                }
-    //                if (m_RoundNum != 0 && m_RoundNum == i + 1 && i + 1 <= m_ViewModel.BattleReportList.Count)
-    //                {
-    //                    if (m_ViewModel.BattleReportList[i].IsWin)
-    //                    {
-    //                        if (m_ViewModel.BattleReportList[i].ItemRewards.Count > 0)
-    //                        {
-    //                            for (int reward = 0; reward < m_ViewModel.BattleReportList[reward].ItemRewards.Count; reward++)
-    //                            {
-    //                                m_BattleReportInfo_List[j].m_Info = m_ViewModel.BattleReportList[reward].ItemRewards[i] + "\n";
-    //                            }
-    //                            m_BattleReportInfo_List[j].m_Info += m_SuccessResult;
-    //                        }
-    //                        m_BattleReportInfo_List[j].m_Info = m_SuccessResult;
-    //                    }
-    //                    else
-    //                    {
-    //                        m_BattleReportInfo_List[j].m_Info = string.Format(m_FailureResult,
-    //                                                               m_ViewModel.BattleReportList[i].TeamName);
-    //                    }
-    //                    continue;
-    //                }
-    //                m_BattleReportInfo_List = new List<BattleReportInfo>();
-    //                m_AttackName = m_ViewModel.characterList[infos[j].AttakPos].Name;
-    //                m_DefendsName = m_ViewModel.characterList[infos[j].DefendsPos].Name;
-    //                m_AbiilityEffectValue = infos[j].AbiilityEffectValue;
-    //                m_AbilityName = infos[j].AbilityName;
-    //                if (m_AbiilityEffectValue > 0)
-    //                {
-    //                    if (m_AbilityName == "" || m_AbilityName == String.Empty)
-    //                    {
-    //                        m_BattleReportInfo_List[j].m_Info = string.Format(m_NormalAttack,
-    //                                                                        i,
-    //                                                                        m_AttackName,
-    //                                                                        m_DefendsName);
-    //                        m_BattleReportInfo_List[j].m_Info += string.Format(m_Damage,
-    //                                                                        m_AbiilityEffectValue);
-    //                        m_BattleReportInfo_List[j].m_DateTime = DateTime.Now.ToString();
-    //                        m_BattleReportInfo_List[j].m_RoundNum = i;
-    //                    }
-    //                    else
-    //                    {
-    //                        m_BattleReportInfo_List[j].m_Info = string.Format(m_AbilityAttack,
-    //                                             i,
-    //                                             m_AttackName,
-    //                                             m_AbilityName,
-    //                                             m_DefendsName);
-    //                        m_BattleReportInfo_List[j].m_Info += string.Format(m_Damage,
-    //                                                                        m_AbiilityEffectValue);
-    //                        m_BattleReportInfo_List[j].m_DateTime = DateTime.Now.ToString();
-    //                        m_BattleReportInfo_List[j].m_RoundNum = i;
-    //                    }
-    //                }
-    //                else if (m_AbiilityEffectValue < 0)
-    //                {
-    //                    m_BattleReportInfo_List[j].m_Info = string.Format(m_Recovery,
-    //                    i,
-    //                    m_AttackName,
-    //                    m_AbilityName,
-    //                    m_AbiilityEffectValue,
-    //                    m_DefendsName);
-    //                    m_BattleReportInfo_List[j].m_DateTime = DateTime.Now.ToString();
-    //                    m_BattleReportInfo_List[j].m_RoundNum = i;
-    //                }
-    //                else
-    //                {
-    //                    if (m_AbilityName == "" || m_AbilityName == String.Empty)
-    //                    {
-    //                        m_BattleReportInfo_List[j].m_Info = string.Format(m_NormalAttack,
-    //                                                                        i,
-    //                                                                        m_AttackName,
-    //                                                                        m_DefendsName);
-    //                        m_BattleReportInfo_List[j].m_Info += string.Format(m_Dodge,
-    //                                                                        m_DefendsName);
-    //                        m_BattleReportInfo_List[j].m_DateTime = DateTime.Now.ToString();
-    //                        m_BattleReportInfo_List[j].m_RoundNum = i;
-    //                    }
-    //                    else
-    //                    {
-    //                        m_BattleReportInfo_List[j].m_Info = string.Format(m_AbilityAttack,
-    //                                             i,
-    //                                             m_AttackName,
-    //                                             m_AbilityName,
-    //                                             m_DefendsName);
-    //                        m_BattleReportInfo_List[j].m_Info += string.Format(m_Dodge,
-    //                                                                        m_DefendsName);
-    //                        m_BattleReportInfo_List[j].m_DateTime = DateTime.Now.ToString();
-    //                        m_BattleReportInfo_List[j].m_RoundNum = i;
-    //                    }
-    //                }
-    //                m_RoundNum = i;
-    //            }
-    //        }
-    //        while (m_BattleReportInfo_List.Count > 0)
-    //        {
-    //            m_BattleReportInfo_List.RemoveAt(0);
-    //            StartCoroutine(BattleReportUpdate(m_AttackNum));
-    //            m_AttackNum++;
-    //        }
-    //        InitEnemyInfo();
-
-    //    }
-    //}
-    #endregion
 }
 public class UIBattleRoomViewModel
 {
+    /// <summary>
+    /// 战斗角色信息
+    /// </summary>
     public class BattleCharacter
     {
         /// <summary>
@@ -617,6 +446,9 @@ public class UIBattleRoomViewModel
         /// </summary>
         public uint CurrentEXP;
     }
+    /// <summary>
+    /// 战斗敌人信息
+    /// </summary>
     public class BattleEnemy
     {
         public class AbilityInfo
@@ -640,19 +472,14 @@ public class UIBattleRoomViewModel
         /// 敌人血量
         /// </summary>
         public int MaxHP;
-
+        /// <summary>
+        /// 当前血量
+        /// </summary>
         public int CurrentHP;
         /// <summary>
         /// 敌人技能信息
         /// </summary>
         public List<AbilityInfo> AbilityInfoList = new List<AbilityInfo>();
-    }
-
-    public enum ReportType
-    {
-        Attack,
-        Rest,
-        Result
     }
     /// <summary>
     /// 一条战报信息

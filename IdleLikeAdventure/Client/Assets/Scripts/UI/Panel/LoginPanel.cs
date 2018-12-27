@@ -24,7 +24,7 @@ public class LoginPanel : BaseUIForm
     //邮箱格式集合
     private List<string> m_EmailFormatList = new List<string>();
     private LoginViewModel m_LoginViewModel = null;
-    private bool m_IsRegisterSuccess = true;
+    private bool m_IsRegisterFail = false;
 
     private void Start()
     {
@@ -43,9 +43,9 @@ public class LoginPanel : BaseUIForm
     {
         ArrayList m_ListMessage = kv.Values as ArrayList;
         Log("m_IsRegisterSuccess = " + (Convert.ToBoolean(m_ListMessage[1])) + m_ListMessage[0].GetType() + m_ListMessage[1].GetType());
-        m_IsRegisterSuccess = !Convert.ToBoolean(m_ListMessage[1]);
+        m_IsRegisterFail = Convert.ToBoolean(m_ListMessage[1]);
 
-        if (!m_IsRegisterSuccess)
+        if (m_IsRegisterFail)
         {
             switch (kv.Key)
             {
@@ -53,11 +53,13 @@ public class LoginPanel : BaseUIForm
                 case "LoginPasswordError":
                     m_Text_EmailNullOrError.text = m_ListMessage[0].ToString();
                     StartCoroutine(DisableAfterTwoSeconds(m_Text_EmailNullOrError));
-                    m_IsRegisterSuccess = false;
+                    Log("登录失败——服务端检查——" + m_ListMessage[0].ToString());
                     break;
                 default:
                     break;
             }
+            Log("登录失败——服务端检查");
+            ClearData();
         }
     }
 
@@ -73,19 +75,11 @@ public class LoginPanel : BaseUIForm
             ClearData();
             return;
         }
-
        
        m_LoginViewModel.LoginCallBack(m_Input_Email.text, m_Input_Password.text);
        Log(m_Input_Email.text + " " + m_Input_Password.text);
-        
 
-        if (!m_IsRegisterSuccess)
-        {
-            Log("登录失败——服务端检查");
-            ClearData();
-            return;
-        }
-        Log("登录成功");
+        Log("登录成功 + m_IsRegisterSuccess = " + m_IsRegisterFail);
     }
 
     void ClearData()

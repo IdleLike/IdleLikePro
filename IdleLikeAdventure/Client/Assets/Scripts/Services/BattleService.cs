@@ -90,6 +90,7 @@ namespace Service
                         character.CurrentEXP = hero.Exp - StaticDataMgr.mInstance.mLevelDataMap[hero.Level].CurrentLevelNeedExp;
                         character.Level = hero.Level;
                         character.MaxHP = hero.MaxHP;
+                        character.CurrentHP = hero.MaxHP;
                         character.Name = hero.Name;
                         character.RaceName = hero.RaceData.Name;
                         battleViewModel.characterList.Add(character);
@@ -103,6 +104,7 @@ namespace Service
                         UIBattleRoomViewModel.BattleEnemy enemy = new UIBattleRoomViewModel.BattleEnemy();
                         enemy.Level = monsterData.Level;
                         enemy.MaxHP = monsterData.HP;
+                        enemy.CurrentHP = monsterData.HP;
                         enemy.Name = monsterData.Name;
                         for (int j = 0; j < monsterData.AbilityList.Count; j++)
                         {
