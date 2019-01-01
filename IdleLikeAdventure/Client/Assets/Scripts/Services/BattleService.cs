@@ -48,6 +48,7 @@ namespace Service
         private void BattleHander(BaseMsgData data)
         {
             BattleRespondeMsgData msgData = data as BattleRespondeMsgData;
+            battleViewModel = new UIBattleRoomViewModel();
             if (msgData != null)
             {
                 if (msgData.IsError)
@@ -56,17 +57,6 @@ namespace Service
                 }
                 else
                 {
-                
-                    //if (GameService.Instance.userService.battleRoomModel != null)
-                    //{
-                    //    battleViewModel = GameService.Instance.userService.battleRoomModel;
-                    //}
-                    //else
-                    //{
-                    //    Log("battleRoomModel == null");
-                    //}
-                    //battleView = GameService.Instance.userService.battleRoomPanel as UIBattleRoomView;
-
 
                     //角色列表
                     List<ActorMsgData> ActorDataList = new List<ActorMsgData>();
@@ -123,17 +113,16 @@ namespace Service
 
                     //获取战报
                     BattleMsgData BattleData = msgData.BattleInfo;
-                    for (int i = 0; i < BattleData.ItemRewards.Count; i++)
+                    battleViewModel.BattleReportList.ExpRewards = BattleData.Exps;
+                    //获取奖励
+                    List<uint> ItemRewards = BattleData.ItemRewards;
+                    for (int j = 0; j < ItemRewards.Count; j++)
                     {
-                        //获取奖励
-                        List<uint> ItemRewards = BattleData.ItemRewards;
-                        for (int j = 0; j < ItemRewards.Count; j++)
-                        {
-                            EquipmentData equipmentData = new EquipmentData();
-                            equipmentData = (StaticDataHelper.GetEquipmentByID(msgData.BattleInfo.ItemRewards[j]));
-                            battleViewModel.BattleReportList.ItemRewards.Add(equipmentData.Name);
-                        }
+                        EquipmentData equipmentData = new EquipmentData();
+                        equipmentData = (StaticDataHelper.GetEquipmentByID(msgData.BattleInfo.ItemRewards[j]));
+                        battleViewModel.BattleReportList.ItemRewards.Add(equipmentData.Name);
                     }
+
                     for (int i = 0; i < BattleData.Rounds.Count; i++)
                     {
                         RoundInfoMsgData RoundData = BattleData.Rounds[i];
@@ -158,12 +147,11 @@ namespace Service
                     battleViewModel.BattleReportList.GoldRewards = msgData.BattleInfo.GoldRewards;
                     //输赢
                     battleViewModel.BattleReportList.IsWin = msgData.BattleInfo.IsWin;
-
-
+                    //委托请求战斗
+                    battleViewModel.OnRequestBattle = BattleRequest;
+                    //打开战斗界面
                     battleView = OpenUIForm("BattleRoom", battleViewModel) as UIBattleRoomView;
                     battleView.gameObject.SetActive(true);
-
-                    //battleView.UpdatePanel(battleViewModel);
 
                 }
             }
