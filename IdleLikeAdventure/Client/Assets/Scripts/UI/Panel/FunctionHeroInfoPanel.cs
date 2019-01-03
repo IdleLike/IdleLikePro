@@ -49,7 +49,7 @@ public class FunctionHeroInfoPanel : BaseUIForm
     public Text m_Attack_Txt;
     public Text m_Defense_Txt;
     public Text m_Exp_Txt;
-    public List<Text> m_AbilityGroup_List_Txt;
+    //public List<Text> m_AbilityGroup_List_Txt;
     public List<Text> m_AllPassiveAbility_List_Txt;
     public List<Text> m_WearerEquipment_List_Txt;
     public List<Image> m_WearerEquipment_List_Sprite;
@@ -57,6 +57,8 @@ public class FunctionHeroInfoPanel : BaseUIForm
     public Slider m_Exp_Slider;
 
     public Text m_PassiveAbility_Txt;
+    public Text m_ActiveAbility_Txt;
+    public Toggle m_AbilityGroup_Toggle;
 
     #endregion
     FunctionHeroInfoViewModel m_ViewModel = new FunctionHeroInfoViewModel();
@@ -88,9 +90,15 @@ public class FunctionHeroInfoPanel : BaseUIForm
 
             m_Exp_Slider.value = Mathf.Clamp(m_ViewModel.MinExp,0,m_ViewModel.MaxExp) / m_ViewModel.MaxExp;
 
-            for (int i = 0; i < m_AbilityGroup_List_Txt.Count; i++)
+            
+            for (int i = 0; i < m_ViewModel.AbilityGroupList.Count; i++)
             {
-                m_AbilityGroup_List_Txt[i].text = m_ViewModel.AbilityGroupList[i];
+                GameObject go = CreateGameObject(m_AbilityGroup_Toggle.gameObject, m_AbilityGroup_Toggle.transform.parent.gameObject);
+                Toggle toggle = go.GetComponent<Toggle>();
+                GameObject go_Txt = CreateGameObject(m_ActiveAbility_Txt.gameObject, m_ActiveAbility_Txt.transform.parent.gameObject);
+                Text text = go_Txt.GetComponent<Text>();
+                text.text = m_ViewModel.AbilityGroupList[i];
+                toggle.graphic = text;
             }
 
             for (int i = 0; i < m_ViewModel.WearerEquipmentList.Count; i++)
